@@ -1,0 +1,59 @@
+$maxWidth : 1920px;
+$minWidth : 1280px;
+$boxShadow: 0px 4px 60px 0px rgba(0,38,115,0.08);
+$textWidth : 1180px;
+$innerWidth : 1254px;
+$transition : 0.2s;
+$tableRadius : 6px;
+$modalShadow:0px 2px 18px 0px rgba(77,87,94,0.54);
+$tipColor: #394565;
+$tableBorder:1px solid rgba(208,213,227,1);
+
+body{
+  background-color: #F7F7F7;
+}
+
+ul,h1,h2,h3,h4,h5,h6{
+  padding: 0;
+  margin: 0;
+}
+h1,h2,h3,h4,h5,h6{
+  font-weight:bold;
+}
+
+@media screen and (max-width:1480px) { html { font-size: 13px }}
+@media screen and (min-width:1480px) and (max-width:1680px) { html { font-size: 14px }}
+@media screen and (min-width:1660px) and (max-width:1880px) { html { font-size: 15px }}
+@media screen and (min-width:1880px) { html { font-size: 16px }}
+
+//  div上下居中公用
+@mixin display-flex{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@mixin ell-word{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
+// 通用图标样式
+.icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.svg-point{
+  cursor: pointer;
+}
+
+.underline{
+  text-decoration: underline;
+  cursor: pointer;
+}

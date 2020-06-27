@@ -1,0 +1,547 @@
+@import "config";
+
+@mixin border-radius() {
+  border-radius: 2rem;
+}
+
+// 账号密码输入框样式修改
+.account-input, .password-input, .login-button {
+  width: 55.91%;
+  height: 7.85%;
+
+  input {
+    text-indent: 20px;
+    font-size: 1.0625rem;
+  }
+
+  @include border-radius;
+
+  .svg-icon {
+    height: 1.8125rem;
+    width: 1.625rem;
+  }
+
+  .ant-input-prefix, .ant-input-suffix {
+    @include display-flex;
+  }
+
+  p {
+    cursor: pointer;
+    font-size: 1.0625rem;
+    font-family: AppleSystemUIFont;
+    color: #006DFF;
+    margin: 0 10px 0 0;
+    transform: translate(0, -2.5%);
+  }
+}
+
+.login-button {
+  background-image: linear-gradient(to right, #3494FF, #006DFF);
+  font-size: 1.0625rem;
+}
+
+// 手风琴插件修改
+.ant-collapse-content-box {
+  background-color: #F7F7F7;
+  font-size: 14px;
+  color: rgba(121, 136, 173, 1);
+  line-height: 28px;
+  padding: 0 !important;
+
+  p {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    padding: 0px 50px !important;
+  }
+}
+
+.ant-collapse-borderless > .ant-collapse-item {
+  border: none;
+  background-color: #FAFAFB;
+}
+
+.ant-collapse-borderless > .ant-collapse-item:nth-child(2n) {
+  background-color: white;
+}
+
+.ant-collapse-borderless > .ant-collapse-item:hover {
+  background-color: #EBF1F5;
+}
+
+.ant-collapse-header {
+  height: 48px;
+  padding-left: 50px !important;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header .ant-collapse-arrow {
+  left: 1120px;
+}
+
+.ant-collapse-content-active {
+  background-color: #F7F7F7 !important;
+}
+
+.grey > .ant-collapse-header {
+  color: #A7B1CA !important;
+}
+
+
+// 矿池首页的按钮样式
+.operation-center {
+  button {
+    width: 48px;
+    height: 30px;
+    background: rgba(255, 255, 255, 1);
+    border-radius: 15px;
+    border: 1px solid rgba(121, 136, 173, 1);
+    font-size: 12px;
+    color: rgba(57, 69, 101, 1);
+    padding-left: 10px;
+    position: absolute;
+    top: 22px;
+  }
+
+  .but1 {
+    left: 195px;
+  }
+
+  .but2 {
+    left: 251px;
+  }
+
+  .but3 {
+    padding-left: 8px;
+    left: 306px;
+  }
+
+  .ant-btn > .anticon + span, .ant-btn > span + .anticon {
+    margin-left: -2px;
+  }
+}
+
+//下拉列表样式修改
+
+.ant-dropdown-menu {
+  padding: 0;
+}
+
+.ant-dropdown-menu-item > a, .ant-dropdown-menu-submenu-title > a {
+  font-size: 12px;
+  color: #2E2E2E;
+}
+
+.ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
+  padding: 7px 14px;
+}
+
+.ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+  background-color: #D1E5FF;
+}
+
+.ant-dropdown-menu-item > a:hover {
+  color: #006DFF;
+}
+
+.user-oper-panel{
+  margin: 10px;
+  .ant-dropdown-menu-item{
+    text-align: center;
+  }
+  .ant-dropdown-menu-item, .ant-dropdown-menu-submenu-title {
+    padding: 8px 10px;
+  }
+  .ant-dropdown-menu-item > a, .ant-dropdown-menu-submenu-title > a {
+    font-size: 16px;
+    text-align: center;
+  }
+  .ant-dropdown-menu-item:hover, .ant-dropdown-menu-submenu-title:hover {
+    background:linear-gradient(90deg,rgba(52,148,255,1) 0%,rgba(0,109,255,1) 100%);
+    color:rgba(255,255,255,1);
+  }
+}
+
+// 运维页首页的输入框样式重写
+.pool-index-miner-search {
+  position: absolute;
+  width: 254px;
+  height: 42px;
+  left: 564px;
+  top: 16px;
+  border-radius: 3px;
+  border: 2px solid #A7B1CA;
+}
+
+.ant-input-suffix > img {
+  margin-top: 3px;
+}
+
+.clear-condition {
+  position: absolute;
+  left: 829px;
+  top: 16px;
+  border-radius: 3px;
+  width: 71px;
+  height: 42px;
+  border: 2px solid #A7B1CA;
+  font-size: 16px;
+}
+.clear-condition:hover{
+  background-color: #D1E5FF;
+}
+
+// 这里是分页样式的重写
+.ant-pagination-options-size-changer{
+  display: none !important;
+}
+
+//[class ^= ant-pagination-item]{
+//  margin-top: -5px !important;
+//}
+
+//.anticon{
+//  margin-top: -5px !important;
+//}
+.ant-pagination-prev, .ant-pagination-next, .ant-pagination-jump-prev, .ant-pagination-jump-next{
+  line-height: 22px !important;
+}
+
+.ant-pagination-item {
+  width: 24px;
+  min-width: 24px;
+  height: 22px;
+  min-height: 22px;
+  line-height: 22px;
+  border: none;
+  padding-left: 2px;
+}
+
+.ant-pagination-item-active {
+  background: rgba(235, 241, 245, 1);
+}
+
+.ant-pagination-item a {
+  padding-left: 3px;
+}
+
+.ant-pagination-prev, .ant-pagination-next, .ant-pagination-jump-prev, .ant-pagination-jump-next {
+  width: 24px;
+  min-width: 24px;
+  height: 22px;
+  min-height: 22px;
+}
+
+.ant-pagination-prev .ant-pagination-item-link, .ant-pagination-next .ant-pagination-item-link {
+  border: none;
+}
+
+.ant-pagination-options-quick-jumper input {
+  width: 50px;
+  height: 26px;
+}
+
+// 这里是上传图片组件的样式
+
+.ant-upload-list-picture .ant-upload-list-item, .ant-upload-list-picture-card .ant-upload-list-item{
+  padding: 0;
+}
+.ant-upload-list-picture-card .ant-upload-list-item,.ant-upload-list-picture-card-container,.ant-upload.ant-upload-select-picture-card{
+  width: 68px;
+  height: 68px;
+  margin-right: 16px;
+}
+.upload-modal {
+  .ant-modal-content{
+    margin-top: 50%!important;
+    transform: translate(0,-30%);
+  }
+  .ant-modal-header,.ant-modal-close-x{
+    display: none !important;
+  }
+  .ant-modal-body{
+    padding: 25px;
+  }
+}
+.add-picture-area {
+  .ant-upload-text{
+    display: none;
+  }
+  .ant-upload-list-item-thumbnail{
+    color: #fafafa;
+  }
+}
+
+@mixin modal_common{
+  width: 356px !important;
+  .ant-btn{
+    //position: absolute;
+    width:148px;
+    height:38px;
+    border-radius:3px;
+    font-size:14px;
+    border:1px solid rgba(151,151,151,1);
+    //top:198px;
+    //left:22px;
+    color: #394565;
+    float: left;
+  }
+  .ant-btn:hover{
+    border:1px solid rgba(0,109,255,1);
+    color: #006DFF;
+  }
+  .ant-btn-primary{
+    //left: 186px;
+    background-color: #006DFF;
+    color: white;
+    border: none;
+    margin-left: 0;
+    float: right;
+  }
+  .ant-btn-primary:hover{
+    background-color: #3494FF;
+    color: white;
+    border: none;
+  }
+}
+
+// 这里是弹窗组件的样式修改
+.common-modal{
+  @include modal_common;
+}
+
+.ant-modal-content{
+  border-radius: 6px;
+  overflow: hidden;
+}
+.ant-modal-header{
+  height: 63px;
+  padding: 22px 18px;
+  border-bottom: none;
+}
+.ant-modal-body{
+  padding-top: 14px;
+  padding-bottom: 36px;
+  h6{
+    font-size:15px;
+    text-align: center;
+    margin-top: 12px;
+  }
+}
+.ant-modal-title{
+  font-size: 14px;
+}
+.ant-modal-close-x{
+  margin-top: 4px;
+}
+.ant-modal-footer{
+  border-top: none;
+  height: 60px;
+  padding-top: 0;
+  padding-bottom: 22px;
+}
+
+.modal-icon{
+  width: 32px !important;
+  height: 32px !important;
+  display: block;
+  margin: 0 auto;
+}
+
+.ant-modal-body{
+  .ant-select-selector{
+    height: 42px !important;
+    border:1px solid rgba(203,203,203,1) !important;
+  }
+  .ant-select-selection-item{
+    font-size:14px !important;
+    line-height: 38px !important;
+  }
+  .ant-select-selection-search-input{
+    height: 40px !important;
+  }
+}
+
+.pass-modal{
+  width: 402px !important;
+  //box-shadow: $modalShadow;
+  .ant-modal-header{
+    height: 55px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    .ant-modal-title{
+      text-align: center;
+    }
+  }
+  .ant-modal-close-x{
+    margin-top: 0px;
+  }
+  .ant-btn{
+    display: none;
+  }
+  .ant-btn-primary{
+    display: block;
+    height: 38px;
+    width: 358px;
+    margin: 0 auto;
+    font-size:14px;
+    background-color: #1E87F0;
+  }
+  .ant-modal-body{
+    padding: 2px 22px 20px;
+  }
+}
+
+.device-panel{
+  width: 757px !important;
+  height: 662px;
+  background-color: white;
+  border-radius: 6px;
+  .ant-modal-header{
+    height: 55px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    .ant-modal-title{
+      text-align: center;
+    }
+  }
+  .ant-modal-close-x{
+    margin-top: 0px;
+  }
+  .ant-modal-body{
+    height: 607px;
+    padding: 0;
+  }
+  .ant-modal-footer{
+    display: none;
+  }
+}
+
+.bill-detail-pic{
+  width: auto !important;
+  .ant-modal-header{
+    display: none;
+  }
+  .ant-modal-footer{
+    display: none;
+  }
+  .ant-modal-close-x{
+    display: none;
+  }
+}
+
+.staff-new-modify{
+  width: 402px !important;
+  height: 440px;
+  background-color: white;
+  border-radius: 6px;
+  .ant-modal-header{
+    height: 55px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    .ant-modal-title{
+      text-align: center;
+    }
+  }
+  .ant-modal-close-x{
+    margin-top: 0px;
+  }
+  .ant-modal-body{
+    height: 325px;
+    padding: 0;
+    position: relative;
+  }
+  .ant-btn{
+    display: none;
+  }
+  .ant-btn-primary{
+    display: block;
+    height: 38px;
+    width: 358px;
+    margin: 0 auto;
+    font-size:14px;
+    background-color: #1E87F0;
+  }
+}
+
+.role-new-modify{
+  width: 356px !important;
+  height: 258px;
+  .ant-modal-header{
+    height: 55px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+  }
+  .ant-modal-close-x{
+    margin-top: 0px;
+  }
+  .ant-modal-body{
+    height: 143px;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+    input{
+      display: block;
+      width: 280px;
+      margin: 19px auto 0;
+      height: 40px;
+    }
+  }
+  @include modal_common;
+}
+
+.create-bill{
+  width: 550px !important;
+  height: 469px;
+  border-radius: 6px;
+  .ant-modal-header{
+    height: 55px;
+    padding-top: 17px;
+    padding-bottom: 17px;
+    .ant-modal-title{
+      text-align: center;
+    }
+  }
+  .ant-modal-close-x{
+    margin-top: 0px;
+  }
+  .ant-modal-body{
+    height: 346px;
+    padding: 0;
+  }
+  .ant-modal-footer{
+    height: 68px;
+    .ant-btn{
+      display: none;
+    }
+    .ant-btn-primary{
+      display: block;
+      width:245px;
+      height:38px;
+      background:rgba(0,109,255,1);
+      border-radius:3px;
+      margin: 0 auto!important;
+    }
+  }
+}
+
+//表格的样式重写
+
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td, .ant-table tfoot > tr > th, .ant-table tfoot > tr > td{
+  padding: 10px 16px;
+}
+
+.ant-table{
+  word-break: break-all;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
