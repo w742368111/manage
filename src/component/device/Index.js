@@ -41,6 +41,10 @@ class DevicePanelMenu extends React.Component {
         CommonAction.changeCommonStatus(key, Key.changeControlPanelMenu)
     }
 
+    componentWillUnmount() {
+        this.changeMenu(0)
+    }
+
     render() {
         const inner = [
             ['#iconpanel_ico_info_nor', '#iconpanel_ico_info_selected', 'SYSTEM_INFO'],
@@ -121,7 +125,6 @@ class SystemInfoMain extends Component {
     }
 
     componentWillUnmount() {
-        console.log(`矿机基本信息销毁`);
         this.setState = (state, callback) => {
             return
         }
@@ -138,8 +141,8 @@ class SystemInfoMain extends Component {
                     <p className={"bold"} style={{top: "150px"}}>{intl.get("SYSTEM")}</p>
                     <p style={{top: "189px"}}>{intl.get("PROCESSOR")}：{cpu}</p>
                     <p style={{top: "228px"}}>{intl.get("MEMORY")}：{memory}</p>
-                    <p style={{top: "267px"}}>{intl.get("GPU")}：{gpu}</p>
-                    <p style={{top: "306px"}}>{intl.get("TEMPERATURE")}：{temp}</p>
+                    {/*<p style={{top: "267px"}}>{intl.get("GPU")}：{gpu}</p>*/}
+                    <p style={{top: "267px"}}>{intl.get("TEMPERATURE")}：{temp}</p>
                     <p className={"bold"} style={{top: "373px"}}>{intl.get("CONFIGURATION")}</p>
                     <p style={{top: "412px"}}>{intl.get("DEVICE_NAME")}：{name}</p>
                     <p style={{top: "451px"}}>{intl.get("IP_ADDRESS")}：{ip}</p>
