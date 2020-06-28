@@ -863,7 +863,7 @@ nav {
 
 .base-info-area {
   @include widthRle;
-  height: 310px;
+  height: 240px;
 
   .name {
     position: absolute;
@@ -884,28 +884,28 @@ nav {
 
   p {
     position: absolute;
-    font-size: 20px;
+    font-size: 14px;
     color: $tipColor;
   }
 
   p:nth-child(1), p:nth-child(3), p:nth-child(5) {
-    left: 235px;
+    left: 93px;
   }
 
   p:nth-child(2), p:nth-child(4), p:nth-child(6) {
-    left: 348px;
+    left: 157px;
   }
 
   p:nth-child(1), p:nth-child(2) {
-    top: 72px;
+    top: 44px;
   }
 
   p:nth-child(3), p:nth-child(4) {
-    top: 152px;
+    top: 104px;
   }
 
   p:nth-child(5), p:nth-child(6) {
-    top: 236px;
+    top: 164px;
   }
 
   button {
@@ -914,33 +914,33 @@ nav {
   }
 
   .but1 {
-    left: 535px;
-    top: 72px;
+    left: 376px;
+    top: 40px;
   }
 
   .but2 {
-    top: 236px;
-    left: 600px;
+    top: 160px;
+    left: 376px;
   }
 }
 
 .user-safe-model {
-  height: 164px;
+  height: 124px;
   @include widthRle;
 
   p {
     position: absolute;
-    font-size: 20px;
+    font-size: 14px;
     color: $tipColor;
-    left: 233px;
-    top: 70px;
+    left: 93px;
+    top: 44px;
   }
 
   button {
     @include but-com;
     position: absolute;
-    top: 70px;
-    left: 400px;
+    top: 40px;
+    left: 376px;
   }
 }
 
