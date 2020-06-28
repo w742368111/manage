@@ -13,6 +13,8 @@ import cookie from "react-cookies";
 import {message} from "antd";
 import * as Key from "../../store/config/config";
 import TopTips from "../common/Href";
+import {connect} from "react-redux";
+import * as CommonAction from "../../action/common";
 
 const IncomeTitleRight = () => {
     return (
@@ -237,6 +239,15 @@ class Index extends Component {
         }
     }
 
+    goBill = () => {
+        this.props.history.push("/billweb/index/")
+    }
+
+    goWarn = () => {
+        this.props.commonUpdateUser(3,Key.changeUserIndexMenu);
+        this.props.history.push("/userweb/index/")
+    }
+
     render() {
         let billRecord = Func.changeName(Rows.IndexBill());
         const collapseText = this.state.warning;
@@ -254,27 +265,57 @@ class Index extends Component {
                                    set={Key.changeUserIndexMenu} int={2}/>}
                     type={"collapse"}
                     text={collapseText}
+                    more={<SeeMore click={this.goWarn}/>}
                 />
                 <Table.TableCommon
                     icon={<Icon.MyBillHomeIcon/>}
                     class={"index-bill-main"}
                     style={{marginBottom: "100px"}}
                     title={intl.get("MY_BILL")}
-                    name={<TopTips history={this.props.history} go={"/billweb/index"} warning={intl.get("SEE_MORE")}/>}
                     row={billRecord}
                     type={"table"}
                     text={tableText}
+                    more={<SeeMore click={this.goBill}/>}
                 />
             </React.Fragment>
         )
     }
 }
 
+
+const commonStateToProps = (state) => {
+    return {value: state};
+}
+
+const commonDispatchToProps = (dispatch) => {
+    return {
+        commonUpdateUser: (gid, key) => {
+            dispatch(CommonAction.makeActionObject(gid, key))
+        }
+    }
+}
+
+const IndexApp = connect(
+    commonStateToProps,
+    commonDispatchToProps
+)(Index)
+
+
+const SeeMore = (props) => {
+    return (
+        <p onClick={props.click}
+           style={{margin: "10px auto 0", textAlign: "center", cursor: "pointer", fontSize: "12px", color: "#A7B1CA"}}>
+            {intl.get("SEE_MORE")}
+        </p>
+    )
+}
+
+
 export default class Back extends Component {
     render() {
         return (
             <Initialize history={this.props.history}>
-                <Index history={this.props.history}/>
+                <IndexApp history={this.props.history}/>
             </Initialize>
         )
     }
