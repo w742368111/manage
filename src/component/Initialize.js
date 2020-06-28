@@ -37,8 +37,8 @@ class Initialize extends Component {
 
     initWebsocket = () => {
         const {uid, token} = cookie.loadAll();
-        // window.ws = new ReconnectingWebSocket('ws://192.168.1.212:8081/ws');
-        window.ws = new ReconnectingWebSocket('wss://devppool.arsyun.com/ws');
+        window.ws = new ReconnectingWebSocket('ws://192.168.1.212:8081/ws');
+        // window.ws = new ReconnectingWebSocket('wss://devppool.arsyun.com/ws');
         window.ws.onopen = () => {
             console.log(`{"from":"html","act":"start","act_code":"codeNew","user_id":${uid},"token":"${token}"}`);
             window.ws.send(`{"from":"html","act":"start","act_code":"codeNew","user_id":${uid},"token":"${token}"}`);

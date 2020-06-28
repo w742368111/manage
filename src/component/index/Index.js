@@ -44,11 +44,11 @@ const IncomeDetail = (props) => {
             {/*<h3 style={{left: "781px"}}>{myTotal}</h3>*/}
             {/*<h3 style={{left: "1004px"}}>{myBalance}</h3>*/}
 
-            <h4 style={{left: "183px"}}>{intl.get('INCOME_BALANCE')}</h4>
-            <h4 style={{left: "1004px"}}>{intl.get('MY_TOTAL_INCOME')}</h4>
+            <h4 style={{left: "321px"}}>{intl.get('INCOME_BALANCE')}</h4>
+            <h4 style={{left: "800px"}}>{intl.get('MY_TOTAL_INCOME')}</h4>
 
-            <h3 style={{left: "183px"}}>{incomeBalance}</h3>
-            <h3 style={{left: "1004px"}}>{myTotal}</h3>
+            <h3 style={{left: "321px"}}>{incomeBalance}</h3>
+            <h3 style={{left: "800px"}}>{myTotal}</h3>
 
         </DetailCommon>
     );
@@ -84,7 +84,7 @@ const MinerDetail = (props) => {
 
 const MainArea = (props) => {
     return (
-        <div className={`main-panel ${props.className}`}>
+        <div className={`main-panel ${props.className}`} style={props.style}>
             <svg className="icon svg-icon" aria-hidden="true">
                 <use xlinkHref={`#${props.icon}`}></use>
             </svg>
@@ -151,19 +151,22 @@ class MainAreaList extends Component {
                     <MainArea className={"income-panel"}
                               title={intl.get('INCOME')}
                               right={<IncomeTitleRight/>}
-                              icon={"iconhome_icon_earnings"}>
+                              icon={"iconhome_icon_earnings"}
+                              style={{marginTop: "78px"}}>
                         <IncomeDetail
                             inner={[this.state.income, this.state.balance, this.state.income, this.state.balance]}/>
                     </MainArea>
                 </Link>
                 <MainArea className={"power-panel"}
                           title={intl.get('POWER')}
-                          icon={"iconhome_icon_power"}>
+                          icon={"iconhome_icon_power"}
+                          style={{marginTop: "26px"}}>
                     <PowerDetail inner={[this.state.diskAll, this.state.powerAll, this.state.diskUsed]}/>
                 </MainArea>
                 <MainArea className={"miner-panel"}
                           title={intl.get('MINER')}
-                          icon={"iconhome_icon_miner"}>
+                          icon={"iconhome_icon_miner"}
+                          style={{marginTop: "26px"}}>
                     <MinerDetail inner={[this.state.deviceOn, this.state.deviceAll, this.state.deviceOff]}/>
                 </MainArea>
             </React.Fragment>
@@ -247,7 +250,8 @@ class Index extends Component {
                     style={{marginTop: "79px"}}
                     icon={<Icon.WarningHomeIcon/>}
                     title={intl.get("WARNING")}
-                    name={<TopTips history={this.props.history} go={"/userweb/index"} warning={intl.get("WARNING_SET")} set={Key.changeUserIndexMenu} int={2} />}
+                    name={<TopTips history={this.props.history} go={"/userweb/index"} warning={intl.get("WARNING_SET")}
+                                   set={Key.changeUserIndexMenu} int={2}/>}
                     type={"collapse"}
                     text={collapseText}
                 />
