@@ -94,7 +94,7 @@ export const CollapsePanel = (props) => {
                 <div className={"empty-table"} style={props.emptyStyle}>
                     <p>{intl.get("EMPTY_TIPS")}</p>
                 </div>:
-                <Collapse accordion bordered={false} defaultActiveKey={active}>
+                <Collapse accordion bordered={false} defaultActiveKey={active} onChange={props.onChange}>
                     {single}
                 </Collapse>
             }

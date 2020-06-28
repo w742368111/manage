@@ -59,7 +59,7 @@ class WarningSet extends React.Component {
         list: [],
         pid: 0,
         rate: 0,
-        warning:0
+        warning: 0
     }
 
     componentDidMount() {
@@ -129,19 +129,19 @@ class WarningSet extends React.Component {
         this.updateWarning(true)
     }
 
-    updateWarning = (status) =>{
-        const {warning,rate,pid} = this.state;
+    updateWarning = (status) => {
+        const {warning, rate, pid} = this.state;
         const {uid, token} = cookie.loadAll();
         Func.axiosPost("/pool/pool/editWarning", {
             user_id: uid,
             token: token,
-            pool_id:pid,
-            warning:warning,
-            warning_rate:rate,
-        }, this.warnUpCallBack,status)
+            pool_id: pid,
+            warning: warning,
+            warning_rate: rate,
+        }, this.warnUpCallBack, status)
     }
 
-    warnUpCallBack = (data,arts) => {
+    warnUpCallBack = (data, arts) => {
         const {code, data: info, description} = data.data;
         if (code === 0) {
             const [status] = arts;
@@ -187,7 +187,13 @@ class WarningSet extends React.Component {
                             <Button onClick={this.showModal.bind(this, pid, rate, val)} className={"rate-but"}
                                     type="primary">{intl.get('MODIFY')}</Button>
                         </li>
-                        <div style={{marginLeft:"90px",marginTop:"20px",width:"662px",height:"2px",backgroundColor:"#EBF1F5"}}></div>
+                        <div style={{
+                            marginLeft: "90px",
+                            marginTop: "20px",
+                            width: "662px",
+                            height: "2px",
+                            backgroundColor: "#EBF1F5"
+                        }}></div>
 
                     </ul>
                 </div>
@@ -245,7 +251,7 @@ const AboutUs = (props) => {
 
 const MessageTitle = (props) => {
     return (
-        <div className={"message-title"} style={{display:"none"}}>
+        <div className={"message-title"} style={{display: "none"}}>
             <div className={"group-operation-panel"}>
                 <Button block className={"but-on"}>
                     {intl.get('WARNING_MESSAGE')}
@@ -360,7 +366,7 @@ class AccountBaseInfo extends Component {
     getInfoCallBack = (data) => {
         const {code, data: info, description} = data.data;
         if (code === 0) {
-            const {name, email,username:account} = info;
+            const {name, email, username: account} = info;
             this.state.name = name;
             this.state.account = account;
             this.state.email = email;
@@ -385,7 +391,7 @@ class AccountBaseInfo extends Component {
             Func.axiosPost("/user/user/edit", {
                 user_id: uid,
                 token: token,
-                to_user_id:uid,
+                to_user_id: uid,
                 name: this.state.name,
                 email: null
             }, this.setCallBack, name, 1, 2, 3)
@@ -397,7 +403,7 @@ class AccountBaseInfo extends Component {
             Func.axiosPost("/user/user/edit", {
                 user_id: uid,
                 token: token,
-                to_user_id:uid,
+                to_user_id: uid,
                 name: null,
                 email: this.state.email
             }, this.setCallBack, name, 6, 7, 8)
@@ -872,40 +878,60 @@ const MySetInner = () => {
     )
 }
 
-const SetTitle = () => {
+const SetTitle = (props) => {
     return (
         <React.Fragment>
             <p>{intl.get("USER_SET_CENTER")}</p>
-            <svg className="icon svg-icon detail-icon" aria-hidden="true">
-                <use xlinkHref="#iconico_arrow-down"></use>
-            </svg>
+            {props.step === 2?
+                <svg className="icon svg-icon detail-icon" aria-hidden="true">
+                    <use xlinkHref="#iconicon_more_norsvg"></use>
+                </svg>:
+                <svg className="icon svg-icon detail-icon" aria-hidden="true">
+                    <use xlinkHref="#iconico_arrow-down"></use>
+                </svg>
+            }
         </React.Fragment>
     )
 }
 
-const UserMenu = (props) => {
-    const collapseText = [
-        [
-            <SetTitle/>,
-            <MySetInner/>, 0
-        ]
-    ];
-    const {user: {userIndexMenuSelect: {current}}} = store.getState();
-    return (
-        <div className={"user-index-left-menu"}>
-            <Table.CollapsePanel text={collapseText} active={1}/>
-            {current === 3 ?
-                <div className={"set on"}>{intl.get("MESSAGE_CENTER")}</div> :
-                <div onClick={CommonAction.changeCommonStatus.bind(this, 3, Key.changeUserIndexMenu)}
-                     className={"set"}>{intl.get("MESSAGE_CENTER")}</div>
-            }
-            {current === 4 ?
-                <div className={"set on"}>{intl.get("ABOUT_US")}</div> :
-                <div onClick={CommonAction.changeCommonStatus.bind(this, 4, Key.changeUserIndexMenu)}
-                     className={"set"}>{intl.get("ABOUT_US")}</div>
-            }
-        </div>
-    )
+class UserMenu extends Component {
+    state = {
+        step: 0
+    }
+
+    onChange = (e) => {
+        if (e === "1") {
+            this.state.step = 1;
+        } else {
+            this.state.step = 2;
+        }
+        this.setState(this.state)
+    }
+
+    render() {
+        const {user: {userIndexMenuSelect: {current}}} = store.getState();
+        const collapseText = [
+            [
+                <SetTitle step={this.state.step} />,
+                <MySetInner/>, 0
+            ]
+        ];
+        return (
+            <div className={"user-index-left-menu"}>
+                <Table.CollapsePanel onChange={this.onChange} text={collapseText} active={1}/>
+                {current === 3 ?
+                    <div className={"set on"}>{intl.get("MESSAGE_CENTER")}</div> :
+                    <div onClick={CommonAction.changeCommonStatus.bind(this, 3, Key.changeUserIndexMenu)}
+                         className={"set"}>{intl.get("MESSAGE_CENTER")}</div>
+                }
+                {current === 4 ?
+                    <div className={"set on"}>{intl.get("ABOUT_US")}</div> :
+                    <div onClick={CommonAction.changeCommonStatus.bind(this, 4, Key.changeUserIndexMenu)}
+                         className={"set"}>{intl.get("ABOUT_US")}</div>
+                }
+            </div>
+        )
+    }
 }
 
 const UserMainBg = (props) => {
