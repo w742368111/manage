@@ -718,8 +718,8 @@ class DiskManageModel extends Component {
                 order: Func.get_disknum(serial),
                 mode: name,
                 number: number,
-                size: all,
-                used: used,
+                size: Func.powerUnitChange(all),
+                used: Func.powerUnitChange(used),
                 key: 1,
                 // operate: <OperateDisk id={name}/>,
             })
