@@ -1597,13 +1597,13 @@ nav {
 
   button {
     position: absolute;
-    font-size: 20px;
+    font-size: 16px;
     color: $tipColor;
-    width: 354px;
-    left: 282px;
+    width: 244px;
+    left: 440px;
     top: 85px;
-    height: 54px;
-    border-radius: 3px;
+    height: 44px;
+    border-radius: 22px;
     border: 1px solid rgba(121, 136, 173, 1);
   }
 }
@@ -1721,13 +1721,13 @@ nav {
 
     .block {
       float: left;
-      height: 95px;
+      height: 88px;
       width: 170px;
     }
   }
 
   .operate {
-    font-size: 20px;
+    font-size: 14px;
     color: $tipColor;
   }
 }
@@ -1742,17 +1742,18 @@ nav {
   }
 
   p {
-    font-size: 20px;
+    font-size: 14px;
     color: $tipColor;
+    margin: 0;
   }
 
   .icon {
     width: 4px;
-    height: 32px;
+    height: 16px;
     background: rgba(53, 164, 245, 1);
     border-radius: 3px;
     left: 0;
-    top: 0;
+    top: 6px;
   }
 
   .info1 {
@@ -1765,6 +1766,7 @@ nav {
   }
 
   .title {
+    font-size: 18px;
     left: 14px;
     font-weight: bold;
     position: absolute;

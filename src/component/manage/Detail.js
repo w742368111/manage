@@ -30,7 +30,7 @@ const OperateButtonPanel = (props) => {
         <React.Fragment>
             <div className={"power-button-area"}>
                 <h4>{intl.get("ROLE_DETAIL_NAME", {name: props.name})}</h4>
-                <Button onClick={props.click}>{intl.get("SAFE")}</Button>
+                <Button disabled={props.change} onClick={props.click}>{intl.get("SAFE")}</Button>
             </div>
         </React.Fragment>
     )
@@ -84,6 +84,7 @@ class BasePowerPanel extends Component {
 
     onChange = (value) => {
         this.state.info = value;
+        this.props.change();
     }
 
     getStateList = () => {
@@ -164,6 +165,7 @@ class OperatePower extends Component {
 
     onChange = (value) => {
         this.state.list = value;
+        this.props.change()
     }
 
     getStateList = () => {
@@ -193,7 +195,7 @@ class OperatePower extends Component {
 
         return (
             <React.Fragment>
-                <div className="operate-power-info">
+                <div className="operate-power-info" style={{display:"none"}}>
                     <h4>{intl.get("OPERATE_POWER")}</h4>
                     <div className={"inner"}>
                         <Checkbox.Group style={{width: '100%'}} onChange={this.onChange.bind(this)}
@@ -224,6 +226,7 @@ class PoolPowerPanel extends Component {
 
     onChange = (value) => {
         this.state.list = value;
+        this.props.change()
     }
 
     render() {
@@ -261,6 +264,7 @@ class PowerEditMain extends Component {
         pool: [],
         show: false,
         name:"",
+        change:true
     }
 
     componentDidMount() {
@@ -315,6 +319,12 @@ class PowerEditMain extends Component {
     onPool = (ref) => {
         this.pool = ref
     }
+    onChange = () => {
+        if(this.state.change){
+            this.state.change = false;
+            this.setState(this.state);
+        }
+    }
 
     uploadNewPower = () => {
         const base = this.base.getStateList();
@@ -346,10 +356,10 @@ class PowerEditMain extends Component {
             <div className={"power-edit-main"}>
                 {this.state.show ?
                     <React.Fragment>
-                        <OperateButtonPanel click={this.uploadNewPower} name={this.state.name} />
-                        <BasePowerPanel onRef={this.onBase} base={this.state.power} power={base}/>
-                        {/*<OperatePower onRef={this.onOper} base={this.state.power}/>*/}
-                        <PoolPowerPanel onRef={this.onPool} base={this.state.power} power={this.state.pool}/>
+                        <OperateButtonPanel change={this.state.change} click={this.uploadNewPower} name={this.state.name} />
+                        <BasePowerPanel change={this.onChange} onRef={this.onBase} base={this.state.power} power={base}/>
+                        <OperatePower change={this.onChange} onRef={this.onOper} base={this.state.power}/>
+                        <PoolPowerPanel change={this.onChange} onRef={this.onPool} base={this.state.power} power={this.state.pool}/>
                     </React.Fragment> : <React.Fragment></React.Fragment>
                 }
             </div>

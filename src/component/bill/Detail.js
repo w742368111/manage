@@ -97,29 +97,29 @@ class BillFormat extends Component {
                     <div className="info1">
                         <div className="icon"></div>
                         <p className="title">{intl.get("BASE_INFO")}</p>
-                        <p style={{top: "62px"}}>{intl.get("BILL_NUMBER_SHORT")}</p><p
+                        <p style={{top: "62px",left: "15px"}}>{intl.get("BILL_NUMBER_SHORT")}</p><p
                         style={{top: "62px", left: "80px"}}>:</p>
                         <p style={{top: "62px", left: "100px"}}>{number}</p>
 
-                        <p style={{top: "113px"}}>{intl.get("SUBMIT_MEMBER")}</p><p
-                        style={{top: "113px", left: "80px"}}>:</p>
-                        <p style={{top: "113px", left: "100px"}}>{name}</p>
+                        <p style={{top: "109px",left: "15px"}}>{intl.get("SUBMIT_MEMBER")}</p><p
+                        style={{top: "109px", left: "80px"}}>:</p>
+                        <p style={{top: "109px", left: "100px"}}>{name}</p>
 
-                        <p style={{top: "164px"}}>{intl.get("BILL_UPDATE_TIME")}</p><p
-                        style={{top: "164px", left: "80px"}}>:</p>
-                        <p style={{top: "164px", left: "100px"}}>{time}</p>
+                        <p style={{top: "156px",left: "15px"}}>{intl.get("BILL_UPDATE_TIME")}</p><p
+                        style={{top: "156px", left: "80px"}}>:</p>
+                        <p style={{top: "156px", left: "100px"}}>{time}</p>
 
-                        <p style={{top: "215px"}}>{intl.get("BILL_STATUS")}</p><p
-                        style={{top: "215px", left: "80px"}}>:</p>
-                        <p style={{top: "215px", left: "100px"}}>{status}</p>
+                        <p style={{top: "203px",left: "15px"}}>{intl.get("BILL_STATUS")}</p><p
+                        style={{top: "203px", left: "80px"}}>:</p>
+                        <p style={{top: "203px", left: "100px"}}>{status}</p>
 
-                        <p style={{top: "266px"}}>{intl.get("BILL_PEOPLE")}</p><p
-                        style={{top: "266px", left: "80px"}}>:</p>
-                        <p style={{top: "266px", left: "100px"}}>{this.state.contact}</p>
+                        <p style={{top: "250px",left: "15px"}}>{intl.get("BILL_PEOPLE")}</p><p
+                        style={{top: "250px", left: "80px"}}>:</p>
+                        <p style={{top: "250px", left: "100px"}}>{this.state.contact}</p>
 
-                        <p style={{top: "317px"}}>{intl.get("BILL_PHONE_NO")}</p><p
-                        style={{top: "317px", left: "80px"}}>:</p>
-                        <p style={{top: "317px", left: "100px"}}>{this.state.phone}</p>
+                        <p style={{top: "297px",left: "15px"}}>{intl.get("BILL_PHONE_NO")}</p><p
+                        style={{top: "297px", left: "80px"}}>:</p>
+                        <p style={{top: "297px", left: "100px"}}>{this.state.phone}</p>
 
                     </div>
                     <div className="info2">
