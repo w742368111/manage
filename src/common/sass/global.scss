@@ -766,11 +766,11 @@ nav {
 }
 
 .about_us_area {
-  height: 456px;
+  height: 356px;
   @include widthRle;
 
   p {
-    font-size: 20px;
+    font-size: 14px;
     color: $tipColor;
     position: absolute;
   }
@@ -784,30 +784,29 @@ nav {
   }
 
   p:nth-child(1), p:nth-child(2) {
-    top: 76px;
+    top: 66px;
   }
 
   p:nth-child(3), p:nth-child(4) {
-    top: 142px;
+    top: 112px;
   }
 
   p:nth-child(5), p:nth-child(6) {
-    top: 208px;
+    top: 158px;
   }
 
   p:nth-child(7), p:nth-child(8) {
-    top: 274px;
+    top: 204px;
   }
 
   p:nth-child(9), p:nth-child(10) {
-    top: 340px;
+    top: 250px;
   }
 }
 
 .message-title {
   height: 94px;
   @include widthRle;
-
 
   button {
     width: 93px;
@@ -828,8 +827,8 @@ nav {
   li {
     display: block;
     margin-left: 90px;
-    font-size: 20px;
-    height: 64px;
+    font-size: 14px;
+    height: 46px;
     line-height: 64px;
     color: $tipColor;
     position: relative;
@@ -841,6 +840,7 @@ nav {
 
   .tit {
     font-weight: bold;
+    font-size: 18px;
   }
 
   .switch {
@@ -857,6 +857,7 @@ nav {
     line-height: 20px;
     left: 367px;
     top: 18px;
+    box-shadow:0px 8px 30px 0px rgba(30,135,240,0.2);
   }
 }
 
@@ -1598,13 +1599,14 @@ nav {
   button {
     position: absolute;
     font-size: 16px;
-    color: $tipColor;
+    //color: $tipColor;
     width: 244px;
     left: 440px;
     top: 85px;
     height: 44px;
     border-radius: 22px;
-    border: 1px solid rgba(121, 136, 173, 1);
+    box-shadow:0px 6px 12px 0px rgba(35,113,255,0.29);
+    //border: 1px solid rgba(121, 136, 173, 1);
   }
 }
 

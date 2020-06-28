@@ -187,6 +187,8 @@ class WarningSet extends React.Component {
                             <Button onClick={this.showModal.bind(this, pid, rate, val)} className={"rate-but"}
                                     type="primary">{intl.get('MODIFY')}</Button>
                         </li>
+                        <div style={{marginLeft:"90px",marginTop:"20px",width:"662px",height:"2px",backgroundColor:"#EBF1F5"}}></div>
+
                     </ul>
                 </div>
             )

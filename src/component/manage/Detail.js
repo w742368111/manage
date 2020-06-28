@@ -30,7 +30,7 @@ const OperateButtonPanel = (props) => {
         <React.Fragment>
             <div className={"power-button-area"}>
                 <h4>{intl.get("ROLE_DETAIL_NAME", {name: props.name})}</h4>
-                <Button disabled={props.change} onClick={props.click}>{intl.get("SAFE")}</Button>
+                <Button type="primary" disabled={props.change} onClick={props.click}>{intl.get("SAFE")}</Button>
             </div>
         </React.Fragment>
     )
