@@ -830,8 +830,6 @@ class Index extends Component {
 
     componentDidMount() {
         let {pool: {poolIndexCurrentPid: {current}, currentOperateGid: {current: gid}}} = this.props.value;
-        console.log(1111111111);
-
         this.getPoolDevice(current, gid)
     }
 
