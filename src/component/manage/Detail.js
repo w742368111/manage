@@ -17,7 +17,7 @@ const LocationBanner = () => {
             <p>
                 <Link to={"/index/index"}>{intl.get("INDEX_PAGE")}</Link>
                 <span>></span>
-                <Link to={"/manage/index"}>{intl.get("MANAGE_PAGE")}</Link>
+                <Link to={"/manageweb/index"}>{intl.get("MANAGE_PAGE")}</Link>
                 <span>></span>
                 {intl.get("POWER_EDIT")}
             </p>

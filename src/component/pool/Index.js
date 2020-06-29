@@ -540,6 +540,10 @@ class MinerOperation extends React.Component {
         }
     }
     amountMove = () => {
+        if(this.props.choose.length === 0){
+            message.error(intl.get("MOVE_MACHINE_CANNOT_EMPTY"));
+            return
+        }
         const choose = this.props.choose.join(",");
         let {pool: {minerMoveGroupId: {current}}} = store.getState();
         const {uid, token} = cookie.loadAll();
@@ -569,7 +573,7 @@ class MinerOperation extends React.Component {
     render() {
         const hrefName = [
             [this.showModal.bind(this, 0), intl.get("BATCH_MOVE")],
-            [this.showModal.bind(this, 1), intl.get("BATCH_DELETE")],
+            // [this.showModal.bind(this, 1), intl.get("BATCH_DELETE")],
             // [this.showModal.bind(this, 2), intl.get("POINT_ROLE")],
         ];
         const modalSet = [

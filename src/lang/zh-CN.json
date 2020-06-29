@@ -311,6 +311,8 @@
     "USED_SPACE": "已用空间(GB)",
     "TOTAL_SPACE": "总空间(GB)",
 
+    "MOVE_MACHINE_CANNOT_EMPTY": "没有选中需要移动的矿机",
+
     "INFO_OF_THE_BILL_CANNOT_BE_EMPTY": "工单内容不能为空",
     "BILL_ADD_SUCCESS": "工单添加成功",
     "NO_OPERATE": "无",
