@@ -609,9 +609,10 @@ class MinerOperation extends React.Component {
                 <div className={"operation-center"}>
                     {/*<Button className={"but1"} onClick={this.showModal.bind(this, 3)}>{intl.get("RESTART")}</Button>*/}
                     {/*<Button className={"but2"} onClick={this.showModal.bind(this, 4)}>{intl.get("SHUT_DOWN")}</Button>*/}
-                    <DropDown inner={hrefName}>
-                        <Button style={{left:"200px"}} className={"but3"}>{intl.get("OPERATION")}<CaretDownOutlined/></Button>
-                    </DropDown>
+                    <Button style={{width:"70px"}} className={"but1"} onClick={this.showModal.bind(this, 0)}>{intl.get("BATCH_MOVE")}</Button>
+                    {/*<DropDown inner={hrefName}>*/}
+                    {/*    <Button style={{left:"200px"}} className={"but3"}>{intl.get("OPERATION")}<CaretDownOutlined/></Button>*/}
+                    {/*</DropDown>*/}
                 </div>
             </React.Fragment>
         )
