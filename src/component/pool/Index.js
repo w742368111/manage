@@ -817,6 +817,9 @@ class Index extends Component {
         pool: [],
         choose: [],
         minId: [],
+        checkedList: [],
+        indeterminate: true,
+        checkAll: false,
     }
 
     constructor(props) {
@@ -975,6 +978,12 @@ class Index extends Component {
                         <Table.RowName row={minerRow}/>
                         <Checkbox.Group style={{width: '100%'}} onChange={this.getCheckedMiner.bind(this)}>
                             <Table.TableInner row={minerRow} text={minerData}/>
+                            <Checkbox
+                                // indeterminate={this.state.indeterminate}
+                                // onChange={this.onCheckAllChange}
+                                // checked={this.state.checkAll}
+                                style={{position:"absolute",left:"40px",top:"85px",zIndex:3,display:"none"}}
+                            />
                         </Checkbox.Group>
                     </Table.TableCommon>
 
