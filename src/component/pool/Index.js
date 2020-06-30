@@ -331,9 +331,6 @@ class GroupList extends Component {
             let {pool: {currentOperateGid: {current}, poolIndexGroupTitle: {current: title}}} = this.props.value;
             let add = (status === current) ? `single on` : `single`;
             add = (title === 2 && status !== 0) ? `${add} operate` : add;
-
-            console.log(title);
-
             return (
                 <React.Fragment key={key}>
                     <div className={add} onClick={this.changeGroup.bind(this, status)}>
@@ -341,7 +338,7 @@ class GroupList extends Component {
                             <CoverInput group={status} value={name} edit={this.editGroupNameFuc}/> :
                             <p className={"name"}>{name}</p>
                         }
-                        {title === 2?
+                        {title === 2 && status !== 0?
                             <React.Fragment>
                                 <svg className="icon svg-icon oper-icon coin1" aria-hidden="true"
                                      onClick={this.openEditName.bind(this, status)}>
@@ -350,7 +347,8 @@ class GroupList extends Component {
                                 <svg className="icon svg-icon oper-icon coin2" aria-hidden="true" onClick={this.showModal}>
                                     <use xlinkHref="#icongroup_icon_del_nor"></use>
                                 </svg>
-                            </React.Fragment>:<p className={"count"}>{count}</p>
+                            </React.Fragment>:
+                            <p className={"count"}>{count}</p>
                         }
                     </div>
                 </React.Fragment>
@@ -826,9 +824,9 @@ class Index extends Component {
         pool: [],
         choose: [],
         minId: [],
-        // checkedList: defaultCheckedList,
-        // indeterminate: true,
-        // checkAll: false,
+        checkedList: defaultCheckedList,
+        indeterminate: true,
+        checkAll: false,
     }
 
     constructor(props) {
@@ -894,6 +892,7 @@ class Index extends Component {
                 this.state.all.push([name, poolName, address, ip, `${(spaceUsed / spaceAll).toFixed(2)}%`
                     , (online) ? intl.get("ONLINE") : intl.get("OFFLINE"),
                     <IconOpen device={deviceId}  id={id} point={this} open={this.openDevicePanel}/>, online])
+
                 this.state.pool.push([<Check
                     id={id}/>, name, address, ip, `${(spaceUsed / spaceAll).toFixed(2)}%`, (online) ? intl.get("ONLINE") : intl.get("OFFLINE"),
                     <IconOpen device={deviceId}   id={id} point={this} open={this.openDevicePanel}/>, online])
@@ -915,13 +914,13 @@ class Index extends Component {
         this.setState(this.state);
     }
 
-    // onCheckAllChange = (e) =>{
-    //     this.setState({
-    //         checkedList: e.target.checked ? plainOptions : [],
-    //         indeterminate: false,
-    //         checkAll: e.target.checked,
-    //     });
-    // }
+    onCheckAllChange = (e) =>{
+        this.setState({
+            checkedList: e.target.checked ? plainOptions : [],
+            indeterminate: false,
+            checkAll: e.target.checked,
+        });
+    }
 
     aaa = () =>{
         alert(123123123)
@@ -992,12 +991,12 @@ class Index extends Component {
                         emptyStyle={{margin: "170px auto 0"}}
                     >
                         <Table.RowName row={minerRow}/>
-                        <Checkbox.Group style={{width: '100%'}} onChange={this.getCheckedMiner.bind(this)} options={plainOptions} value={this.state.checkedList}>
+                        <Checkbox.Group style={{width: '100%'}} onChange={this.getCheckedMiner.bind(this)}>
                             <Table.TableInner row={minerRow} text={minerData}/>
                             <Checkbox
-                                // indeterminate={this.state.indeterminate}
-                                // onChange={this.onCheckAllChange}
-                                // checked={this.state.checkAll}
+                                indeterminate={this.state.indeterminate}
+                                onChange={this.onCheckAllChange}
+                                checked={this.state.checkAll}
                                 style={{position:"absolute",left:"40px",top:"85px",zIndex:3,display:"none"}}
                             />
                         </Checkbox.Group>
