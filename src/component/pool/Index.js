@@ -816,10 +816,7 @@ class Index extends Component {
         all: [],
         pool: [],
         choose: [],
-        minId: [],
-        checkedList: [],
-        indeterminate: true,
-        checkAll: false,
+        minId: []
     }
 
     constructor(props) {
