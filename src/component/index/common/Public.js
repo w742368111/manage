@@ -38,14 +38,14 @@ const MenuList = () => {
     const above = [
         ["/index/index/"],
         ["/poolweb/index/", "/poolweb/wallet/", "/poolweb/miner/"],
-        ["/testweb/index/"],
+        // ["/testweb/index/"],
         ["/billweb/index/", "/billweb/detail/"],
         ["/manageweb/index/", "/manageweb/detail/"]
     ];
     const link = [
         ["/index/index/", intl.get('INDEX_PAGE')],
         ["/poolweb/index/", intl.get('POOL_PAGE')],
-        ["/testweb/index/", intl.get('DEVICE_TEST_PAGE')],
+        // ["/testweb/index/", intl.get('DEVICE_TEST_PAGE')],
         ["/billweb/index/", intl.get('BILL_PAGE')],
         ["/manageweb/index/", intl.get('MANAGE_PAGE')],
     ];

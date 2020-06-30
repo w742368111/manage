@@ -904,6 +904,10 @@ class Index extends Component {
         this.setState(this.state);
     }
 
+    aaa = () =>{
+        alert(123123123)
+    }
+
     render() {
         let {pool: {poolIndexCurrentPid: {current: currentPid}}} = this.props.value;
         const AllMiner = this.state.all;
