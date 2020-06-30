@@ -518,6 +518,10 @@ class MinerOperation extends React.Component {
         this.child = ref
     }
     showModal = (e) => {
+        if(this.props.choose.length === 0){
+            message.error(intl.get("MOVE_MACHINE_CANNOT_EMPTY"));
+            return
+        }
         this.state.choose = e;
         this.setState(this.state)
         this.child.showModal()
@@ -544,10 +548,6 @@ class MinerOperation extends React.Component {
         }
     }
     amountMove = () => {
-        if(this.props.choose.length === 0){
-            message.error(intl.get("MOVE_MACHINE_CANNOT_EMPTY"));
-            return
-        }
         const choose = this.props.choose.join(",");
         let {pool: {minerMoveGroupId: {current}}} = store.getState();
         const {uid, token} = cookie.loadAll();

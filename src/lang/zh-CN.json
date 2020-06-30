@@ -311,7 +311,7 @@
     "USED_SPACE": "已用空间(GB)",
     "TOTAL_SPACE": "总空间(GB)",
 
-    "MOVE_MACHINE_CANNOT_EMPTY": "没有选中需要移动的矿机",
+    "MOVE_MACHINE_CANNOT_EMPTY": "没有选中需要操作的矿机",
 
     "INFO_OF_THE_BILL_CANNOT_BE_EMPTY": "工单内容不能为空",
     "BILL_ADD_SUCCESS": "工单添加成功",
@@ -360,7 +360,7 @@
     "YOU_SURE_RESTART_MINER": "你确定要重启矿机吗？",
     "YOU_SURE_SHUTDOWN_MINER": "你确定要关闭矿机吗？",
     "YOU_SURE_DELETE_MINER": "确定将这些矿机从矿池中删除吗？",
-    "YOU_SURE_DELETE_GROUP": "被删除分组的矿工将会返回<br/>未分组，确定删除分组吗？",
+    "YOU_SURE_DELETE_GROUP": "被删除分组的矿机将会返回<br/>未分组，确定删除分组吗？",
     "YOU_SURE_DELETE_STAFF": "你确定要删除该员工吗？",
     "YOU_SURE_DELETE_ROLE": "你确定要删除该角色吗？",
     "YOU_SURE_CLOSE_BILL": "你确定要关闭工单吗？",
