@@ -331,6 +331,9 @@ class GroupList extends Component {
             let {pool: {currentOperateGid: {current}, poolIndexGroupTitle: {current: title}}} = this.props.value;
             let add = (status === current) ? `single on` : `single`;
             add = (title === 2 && status !== 0) ? `${add} operate` : add;
+
+            console.log(title);
+
             return (
                 <React.Fragment key={key}>
                     <div className={add} onClick={this.changeGroup.bind(this, status)}>
@@ -338,14 +341,17 @@ class GroupList extends Component {
                             <CoverInput group={status} value={name} edit={this.editGroupNameFuc}/> :
                             <p className={"name"}>{name}</p>
                         }
-                        <p className={"count"}>{count}</p>
-                        <svg className="icon svg-icon oper-icon coin1" aria-hidden="true"
-                             onClick={this.openEditName.bind(this, status)}>
-                            <use xlinkHref="#icongroup_icon_edit_nor"></use>
-                        </svg>
-                        <svg className="icon svg-icon oper-icon coin2" aria-hidden="true" onClick={this.showModal}>
-                            <use xlinkHref="#icongroup_icon_del_nor"></use>
-                        </svg>
+                        {title === 2?
+                            <React.Fragment>
+                                <svg className="icon svg-icon oper-icon coin1" aria-hidden="true"
+                                     onClick={this.openEditName.bind(this, status)}>
+                                    <use xlinkHref="#icongroup_icon_edit_nor"></use>
+                                </svg>
+                                <svg className="icon svg-icon oper-icon coin2" aria-hidden="true" onClick={this.showModal}>
+                                    <use xlinkHref="#icongroup_icon_del_nor"></use>
+                                </svg>
+                            </React.Fragment>:<p className={"count"}>{count}</p>
+                        }
                     </div>
                 </React.Fragment>
             )
@@ -807,6 +813,9 @@ let IconOpen = (props) => {
 }
 
 
+let plainOptions = [];
+let defaultCheckedList = [];
+
 class Index extends Component {
     state = {
         miner: 0,
@@ -816,7 +825,10 @@ class Index extends Component {
         all: [],
         pool: [],
         choose: [],
-        minId: []
+        minId: [],
+        // checkedList: defaultCheckedList,
+        // indeterminate: true,
+        // checkAll: false,
     }
 
     constructor(props) {
@@ -882,7 +894,6 @@ class Index extends Component {
                 this.state.all.push([name, poolName, address, ip, `${(spaceUsed / spaceAll).toFixed(2)}%`
                     , (online) ? intl.get("ONLINE") : intl.get("OFFLINE"),
                     <IconOpen device={deviceId}  id={id} point={this} open={this.openDevicePanel}/>, online])
-
                 this.state.pool.push([<Check
                     id={id}/>, name, address, ip, `${(spaceUsed / spaceAll).toFixed(2)}%`, (online) ? intl.get("ONLINE") : intl.get("OFFLINE"),
                     <IconOpen device={deviceId}   id={id} point={this} open={this.openDevicePanel}/>, online])
@@ -903,6 +914,14 @@ class Index extends Component {
         this.state.choose = value;
         this.setState(this.state);
     }
+
+    // onCheckAllChange = (e) =>{
+    //     this.setState({
+    //         checkedList: e.target.checked ? plainOptions : [],
+    //         indeterminate: false,
+    //         checkAll: e.target.checked,
+    //     });
+    // }
 
     aaa = () =>{
         alert(123123123)
@@ -973,7 +992,7 @@ class Index extends Component {
                         emptyStyle={{margin: "170px auto 0"}}
                     >
                         <Table.RowName row={minerRow}/>
-                        <Checkbox.Group style={{width: '100%'}} onChange={this.getCheckedMiner.bind(this)}>
+                        <Checkbox.Group style={{width: '100%'}} onChange={this.getCheckedMiner.bind(this)} options={plainOptions} value={this.state.checkedList}>
                             <Table.TableInner row={minerRow} text={minerData}/>
                             <Checkbox
                                 // indeterminate={this.state.indeterminate}
@@ -983,13 +1002,14 @@ class Index extends Component {
                             />
                         </Checkbox.Group>
                     </Table.TableCommon>
-
                 </div>
                 <DeviceIndex/>
             </React.Fragment>
         );
     }
 }
+
+
 
 const indexDispatchToProps = (dispatch) => {
     return {
