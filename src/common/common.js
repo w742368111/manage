@@ -105,7 +105,7 @@ export const getWarningArray = (count, length = 6) => {
 }
 
 export const coinExchange = (coin) => {
-    return `${coin}FIL`
+    return `${coin} FIL`
 }
 
 export const offlineChange = (rate) => {

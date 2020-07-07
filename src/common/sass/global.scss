@@ -2018,6 +2018,122 @@ nav {
 }
 
 
+// 新首页的主区域
+.new-index-main{
+  width: $textWidth;
+  border-radius: 4px;
+  margin: 77px auto 0;
+  height: 388px;
+  background-color: white;
+  overflow: hidden;
+  .banner{
+    width: 100%;
+    height: 47px;
+    position: relative;
+    background-repeat: no-repeat;
+    .coin-top{
+      width: 24px;
+      height: 24px;
+      position: absolute;
+      left: 39px;
+      top: 12px;
+    }
+    h3{
+      font-size: 20px;
+      color: white;
+      position: absolute;
+      left: 69px;
+      top: 7px;
+    }
+  }
+  .text{
+    height: 341px;
+    width: 100%;
+    position: relative;
+    .hr{
+      width: 1042px;
+      height: 1px;
+      position: absolute;
+      top:196px;
+      left: 69px;
+      background-color: #D8D8D8;
+    }
+    .bold{
+      font-size:16px;
+      font-weight:bold;
+      color:$tipColor;
+      position: absolute;
+      left: 69px;
+    }
+    .thin{
+      position: absolute;
+      left: 69px;
+      color: $tipColor;
+      font-size:14px;
+    }
+    .but{
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      box-shadow:0px 8px 30px 0px rgba(30,135,240,0.2);
+      position: absolute;
+      left: 900px;
+      top: 44px;
+      //transition: 0.3s;
+      p{
+        position: relative;
+        left: 26px;
+        top: 44px;
+        color: $tipColor;
+        font-size: 15px;
+        font-weight:bold;
+        transition: 0.2s;
+      }
+    }
+    .but1:hover{
+      background:linear-gradient(180deg,rgba(64,188,249,1) 0%,rgba(30,135,240,1) 100%);
+    }
+    .but2:hover{
+      background:linear-gradient(180deg,rgba(250,160,90,1) 0%,rgba(201,124,64,1) 100%);
+    }
+    .but3:hover{
+      background:linear-gradient(180deg,rgba(50,210,150,1) 0%,rgba(32,144,115,1) 100%);
+    }
+    .but:hover >p{
+      color: white;
+    }
+  }
+  .bg1{
+    background-image: url("../image/new/home_img_bg1.png");
+  }
+  .bg2{
+    background-image: url("../image/new/home_img_bg2.png");
+  }
+  .bg3{
+    background-image: url("../image/new/home_img_bg3.png");
+  }
+  .icon-go{
+    width: 10px;
+    height: 15px;
+    position: relative;
+    left: 1026px;
+    top: 92px;
+    background-repeat: no-repeat;
+    background-size: 10px 15px;
+  }
+  .icon-go1{
+    background-image: url("../image/new/home_arrow.png");
+  }
+  .icon-go2{
+    background-image: url("../image/new/home_arrow2.png");
+  }
+  .icon-go3{
+    background-image: url("../image/new/home_arrow3.png");
+  }
+}
+
+
+
 
 
 
