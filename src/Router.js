@@ -8,7 +8,7 @@ import ReconnectingWebSocket from 'reconnecting-websocket';
 import LoginIndex from "./component/user/Login";
 import ResetIndex from "./component/user/Reset";
 import IndexIndex from "./component/index/Index";
-import PoolIndex from "./component/pool/Index";
+import PoolIndex from "./component/detail/Index";
 import MyWallet from "./component/pool/MyWallet";
 import UserIndex from "./component/user/Index";
 import BillIndex from "./component/bill/Index";

@@ -70,7 +70,7 @@ class MainAreaList extends Component {
                         <p style={{top: "40px", left: "528px"}} className={"bold"}>{intl.get('SEAL_COUNT',{count:sealCount})}</p>
                         <p style={{top: "84px", left: "528px"}} className={"bold"}>{intl.get('PROVE_COUNT',{count:proveCount})}</p>
                         <p style={{top: "128px", left: "528px"}} className={"bold"}>{intl.get('STORAGE_COUNT',{count:storageCount})}</p>
-                        <Link to={`/poolweb/index?id=${id}`}>
+                        <Link to={`/poolweb/index/?id=${id}`}>
                             <div className={`but but${left}`}><p>{intl.get("INCOME_POOL")}</p></div>
                         </Link>
                         <div className={`icon-go icon-go${left}`}></div>
