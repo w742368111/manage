@@ -251,6 +251,21 @@
     "NEXT_STEP": "下一步",
     "RESET_PASSWORD": "重置密码",
     "RESET_PASSWORD_SUCCESS": "密码重置成功，请登录",
+    "VALID_POWER": "有效算力",
+
+
+    "MINER_TOTAL": "矿机总数：{count}台",
+    "SEAL_COUNT": "算力机：{count}台",
+    "PROVE_COUNT": "证明机：{count}台",
+    "STORAGE_COUNT": "存储机：{count}台",
+    "NODE_ID": "节点ID",
+    "OWNER_ID": "Owner ID",
+    "CREATE_TIME": "创建时间",
+
+
+
+    "INCOME_POOL": "进入矿池",
+    "ADDRESS": "地址",
 
 
     "BASE_POWER":"基本权限",

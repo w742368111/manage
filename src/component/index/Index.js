@@ -64,20 +64,22 @@ class MainAreaList extends Component {
                         <h3>{miner}</h3>
                     </div>
                     <div className={"text"}>
-                        <p style={{top: "40px"}} className={"bold"}>总收益：{Func.coinExchange(income)}</p>
-                        <p style={{top: "84px"}} className={"bold"}>有效算力：{Func.powerUnitChange(power)}</p>
-                        <p style={{top: "128px"}} className={"bold"}>矿机总数：{count} 台</p>
-                        <p style={{top: "40px", left: "528px"}} className={"bold"}>算力机：{sealCount}台</p>
-                        <p style={{top: "84px", left: "528px"}} className={"bold"}>证明机：{proveCount}台</p>
-                        <p style={{top: "128px", left: "528px"}} className={"bold"}>存储机：{storageCount}台</p>
-                        <div className={`but but${left}`}><p>进入矿池</p></div>
+                        <p style={{top: "40px"}} className={"bold"}>{intl.get('TOTAL_INCOME')}：{Func.coinExchange(income)}</p>
+                        <p style={{top: "84px"}} className={"bold"}>{intl.get('VALID_POWER')}：{Func.powerUnitChange(power)}</p>
+                        <p style={{top: "128px"}} className={"bold"}>{intl.get('MINER_TOTAL',{count:count})}</p>
+                        <p style={{top: "40px", left: "528px"}} className={"bold"}>{intl.get('SEAL_COUNT',{count:sealCount})}</p>
+                        <p style={{top: "84px", left: "528px"}} className={"bold"}>{intl.get('PROVE_COUNT',{count:proveCount})}</p>
+                        <p style={{top: "128px", left: "528px"}} className={"bold"}>{intl.get('STORAGE_COUNT',{count:storageCount})}</p>
+                        <Link to={`/poolweb/index?id=${id}`}>
+                            <div className={`but but${left}`}><p>{intl.get("INCOME_POOL")}</p></div>
+                        </Link>
                         <div className={`icon-go icon-go${left}`}></div>
                         <div className={"hr"}></div>
-                        <p style={{top: "239px"}} className={"thin"}>地址：{xhAddress}</p>
+                        <p style={{top: "239px"}} className={"thin"}>{intl.get("ADDRESS")}：{xhAddress}</p>
                         <p style={{top: "278px"}}
-                           className={"thin"}>节点ID：{xhKey}</p>
-                        <p style={{top: "239px", left: "839px"}} className={"thin"}>Owner ID：{miner}</p>
-                        <p style={{top: "278px", left: "839px"}} className={"thin"}>创建时间：{addTime}</p>
+                           className={"thin"}>{intl.get("NODE_ID")}：{xhKey}</p>
+                        <p style={{top: "239px", left: "839px"}} className={"thin"}>{intl.get("OWNER_ID")}：{miner}</p>
+                        <p style={{top: "278px", left: "839px"}} className={"thin"}>{intl.get("CREATE_TIME")}：{addTime}</p>
                     </div>
                 </div>
             )
