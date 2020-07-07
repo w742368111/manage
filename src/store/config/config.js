@@ -22,7 +22,7 @@ export const openCreateBillOperate = Symbol();
 export const manageIndexTitleChange = Symbol();
 export const manageAddStaffShow = Symbol();
 export const manageAddRoleShow = Symbol();
-
 export const changeGlobalsSocket = Symbol();
-
 export const userStateForceUpdate = Symbol();
+
+export const changeIndexPoolId = Symbol();

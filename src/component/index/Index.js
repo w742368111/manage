@@ -15,6 +15,19 @@ import TopTips from "../common/Href";
 import {connect} from "react-redux";
 import * as CommonAction from "../../action/common";
 
+
+const commonStateToProps = (state) => {
+    return {value: state};
+}
+
+const commonDispatchToProps = (dispatch) => {
+    return {
+        commonUpdateUser: (gid, key) => {
+            dispatch(CommonAction.makeActionObject(gid, key))
+        }
+    }
+}
+
 class MainAreaList extends Component {
     state = {
         info: []
@@ -33,6 +46,10 @@ class MainAreaList extends Component {
         Func.axiosPost("/pool/pool/list", {user_id: uid, token: token}, this.syncCallBack)
     }
 
+    gotoPool = (id) =>{
+        this.props.commonUpdateUser(id,Key.changeIndexPoolId)
+        this.props.history.push("/poolweb/index")
+    }
 
     syncCallBack = (data) => {
         const {code, data: info, description} = data.data;
@@ -70,9 +87,9 @@ class MainAreaList extends Component {
                         <p style={{top: "40px", left: "528px"}} className={"bold"}>{intl.get('SEAL_COUNT',{count:sealCount})}</p>
                         <p style={{top: "84px", left: "528px"}} className={"bold"}>{intl.get('PROVE_COUNT',{count:proveCount})}</p>
                         <p style={{top: "128px", left: "528px"}} className={"bold"}>{intl.get('STORAGE_COUNT',{count:storageCount})}</p>
-                        <Link to={`/poolweb/index/?id=${id}`}>
+                        <a onClick={this.gotoPool.bind(this,id)}>
                             <div className={`but but${left}`}><p>{intl.get("INCOME_POOL")}</p></div>
-                        </Link>
+                        </a>
                         <div className={`icon-go icon-go${left}`}></div>
                         <div className={"hr"}></div>
                         <p style={{top: "239px"}} className={"thin"}>{intl.get("ADDRESS")}：{xhAddress}</p>
@@ -91,6 +108,11 @@ class MainAreaList extends Component {
         )
     }
 }
+
+const MainAreaListApp = connect(
+    commonStateToProps,
+    commonDispatchToProps
+)(MainAreaList)
 
 class Index extends Component {
     state = {
@@ -172,7 +194,7 @@ class Index extends Component {
         return (
             <React.Fragment>
                 <Common.TopBanner history={this.props.history}/>
-                <MainAreaList/>
+                <MainAreaListApp history={this.props.history}/>
                 <Table.TableCommon
                     style={{marginTop: "79px"}}
                     icon={<Icon.WarningHomeIcon/>}
@@ -195,19 +217,6 @@ class Index extends Component {
                 />
             </React.Fragment>
         )
-    }
-}
-
-
-const commonStateToProps = (state) => {
-    return {value: state};
-}
-
-const commonDispatchToProps = (dispatch) => {
-    return {
-        commonUpdateUser: (gid, key) => {
-            dispatch(CommonAction.makeActionObject(gid, key))
-        }
     }
 }
 
