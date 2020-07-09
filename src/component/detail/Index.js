@@ -896,7 +896,7 @@ const MinerManageApp = connect(
 
 class Index extends Component {
     state = {
-        menu: 2
+        menu: 1
     }
     onRef = (ref) => {
         this.child = ref
