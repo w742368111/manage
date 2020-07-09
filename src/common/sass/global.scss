@@ -2306,6 +2306,60 @@ nav {
   width: 1254px;
   margin: 18px auto 80px;
   position: relative;
+  .clear{
+    position: absolute;
+    border:2px solid rgba(165,175,201,1);
+    width: 71px;
+    height: 42px;
+    border-radius:3px;
+    left: 1149px;
+    top:19px
+  }
+  .tran{
+    .coin1{
+      display: none;
+    }
+  }
+  .tran:hover > .coin1{
+    display: inline-block !important;
+  }
+  .key{
+    width: 253px;
+    height: 42px;
+    position: absolute;
+    border-radius:3px;
+    left: 889px;
+    top: 19px;
+    border:2px solid rgba(165,175,201,1);
+  }
+  .mod{
+    width: 76px;
+    height: 26px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin-top: -4px;
+    font-size: 14px;
+    border:1px solid #AACEFF;
+  }
+  .coin{
+    width: 38px;
+    height: 38px;
+    position: absolute;
+    left: 40px;
+    top: 19px;
+    background-repeat: no-repeat;
+    background-image: url("../image/setcenter_icon_loginhistory.png");
+  }
+  .edit{
+    width: 79px;
+    height: 30px;
+    border-radius: 15px;
+    font-size: 12px;
+    color: $tipColor;
+    border:1px solid rgba(121,136,173,1);
+    left: 212px;
+    top: 23px;
+  }
   h3{
     position: absolute;
     left: 66px;
@@ -2348,6 +2402,17 @@ nav {
     }
     .list{
       width: 1198px;
+      .box{
+        width: 300px;
+        height: 30px;
+        position: absolute;
+        bottom: 32px;
+        p{
+          position: absolute;
+          font-size:13px;
+          top:5px;
+        }
+      }
       .single{
         width: 100%;
         height: 48px;

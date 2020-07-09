@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 
-// import pool from './pool'
+import pool from './pool'
 import user from "./user";
 import device from "./device";
 import test from "./test";
@@ -10,7 +10,7 @@ import socket from "./socket";
 import detail from "./detail";
 
 export default combineReducers({
-    // pool,
+    pool,
     user,
     device,
     test,

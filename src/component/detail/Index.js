@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import * as Common from "../index/common/Public";
-import {Menu, Dropdown, Button, message, Pagination} from 'antd';
+import {Menu, Dropdown, Button, message, Pagination, Input} from 'antd';
 import cookie from "react-cookies";
 import * as Func from "../../common/common";
 import {connect} from "react-redux";
@@ -8,6 +8,8 @@ import * as CommonAction from "../../action/common";
 import * as Key from "../../store/config/config";
 import {Line as LineChart} from "react-chartjs";
 import intl from "react-intl-universal";
+import DeviceIndex from "../device/Index";
+import Initialize from "../Initialize";
 
 const commonStateToProps = (state) => {
     return {value: state};
@@ -478,7 +480,7 @@ class IncomeIntoDetail extends Component {
         this.state.menu = n;
         this.setState(this.state);
     }
-    onChangePage = (e) =>{
+    onChangePage = (e) => {
         console.log(e);
     }
 
@@ -557,7 +559,8 @@ class IncomeIntoDetail extends Component {
                             <p style={{left: "883px"}}>t01001</p>
                             <p style={{left: "1034px"}}>104.123 FIL</p>
                         </div>
-                        <Pagination showQuickJumper defaultCurrent={2} total={500} onChange={this.onChangePage.bind(this)} />
+                        <Pagination showQuickJumper defaultCurrent={2} total={500}
+                                    onChange={this.onChangePage.bind(this)}/>
                     </div>
                 </div>
             </div>
@@ -565,122 +568,318 @@ class IncomeIntoDetail extends Component {
     }
 }
 
-class MinerManage extends Component{
-    onChangePage = (e) =>{
-        console.log(e);
+
+class MinerManage extends Component {
+    state = {
+        page: 1,
+        pageSize: 10,
+        keyword: "",
+        edit: 0,
+        online: -1,
+        role: -1,
+        info: [],
+        total: 0,
+        on: 0,
+        off: 0,
+        cAddress: "",
+        cLastId: 0,
+        uAddress: "",
+        uLastId: 0,
     }
+    componentDidMount() {
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        (current !== 0) && this.getPoolDevice(current);
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        let {detail: {poolIDCurrent: {current}}} = nextProps.value;
+        let {detail: {poolIDCurrent: {current: oldValue}}} = this.props.value;
+        if (current !== oldValue) {
+            this.getPoolDevice(current)
+        }
+    }
+
+    getPoolDevice = (n) => {
+        const {uid, token} = cookie.loadAll();
+        let data = {
+            user_id: uid,
+            token: token,
+            pool_id: n,
+            group_id: -1,
+            is_online: this.state.online,
+            page: this.state.page,
+            miner_type: this.state.role,
+            page_size: this.state.pageSize,
+            keyword: this.state.keyword
+        }
+        this.state.info = [];
+        this.setState(this.state);
+        Func.axiosPost("/pool/device/list", data, this.syncCallBack)
+    }
+
+    syncCallBack = (data) => {
+        const {code, data: info, description} = data.data;
+        if (code === 0) {
+            const {current_page: page, data: list, device_offline: offline, device_online: online, total} = info;
+            this.state.page = page;
+            this.state.total = total;
+            this.state.on = online;
+            this.state.off = offline;
+            this.state.info = list;
+            this.setState(this.state)
+        } else {
+            message.error(description);
+        }
+    }
+
+    onChangePage = (page, size) => {
+        this.state.page = page;
+        this.state.pageSize = size;
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.getPoolDevice(current)
+    }
+
+    changeEdit = (n) => {
+        this.state.edit = n;
+        this.setState(this.state)
+        if (n === 0) {
+            let {detail: {poolIDCurrent: {current}}} = this.props.value;
+            this.getPoolDevice(current)
+        }
+    }
+
+    openPanel = (id, hid) => {
+        this.props.commonUpdateUser(id, Key.currentOperateDevice);
+        this.props.commonUpdateUser(hid, Key.currentOperateHardware);
+    }
+
+    changeKeyWord = (e) => {
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.getPoolDevice(current)
+    }
+
+    changeValue = (e) => {
+        this.state.keyword = e.target.value;
+        this.setState(this.state);
+    }
+
+    clearKeyword = () => {
+        this.state.keyword = "";
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.setState(this.state);
+        this.getPoolDevice(current)
+    }
+
+    changeState = (key, value) => {
+        this.state[key] = value;
+        this.setState(this.state);
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.getPoolDevice(current)
+    }
+
+    changeAddressState = (name, id, e) => {
+        if (name === 'cAddress') {
+            this.state.cLastId = id;
+        } else if (name === 'uAddress') {
+            this.state.uLastId = id;
+        }
+        this.state[name] = e.target.value;
+    }
+
+    changeUAddress = (name, id, def) => {
+        if ((name === 'box' && id !== this.state.cLastId) || (name === 'box' && def === this.state.cAddress)) {
+            message.error("未作修改");
+            return;
+        }
+        if ((name === 'u' && id !== this.state.uLastId) || name === 'u' && def === this.state.uAddress) {
+            message.error("未作修改");
+            return;
+        }
+        const {uid, token} = cookie.loadAll();
+        const data = {
+            user_id: uid,
+            token: token,
+            device_id: id,
+            cabinet_address: (name === 'box') ? this.state.cAddress : "NULL",
+            u_address: (name === 'u') ? this.state.uAddress : "NULL",
+        }
+        Func.axiosPost("/pool/device/editCabinet", data, this.editCallBack)
+    }
+
+    editCallBack = (data) => {
+        const {code, data: info, description} = data.data;
+        if (code === 0) {
+            message.success("修改成功");
+        } else {
+            message.error(description);
+        }
+    }
+
     render() {
+        const title = (this.state.edit === 0) ? [22, 136, 225, 334, 415, 543, 639, 766, 910, 1053, 1151] :
+            [22, 128, 219, 356, 459, 580, 668, 788, 924, 1045, 1151];
+        const text = (this.state.edit === 0) ? [22, 136, 225, 334, 415, 543, 666, 766, 910, 1069, 1153] :
+            [22, 128, 211, 346, 459, 580, 694, 788, 924, 1063, 1153];
+        const role = (
+            <Menu>
+                <Menu.Item onClick={this.changeState.bind(this, "role", -1)}>
+                    全部
+                </Menu.Item>
+                <Menu.Item onClick={this.changeState.bind(this, "role", 1)}>
+                    密封
+                </Menu.Item>
+                <Menu.Item onClick={this.changeState.bind(this, "role", 3)}>
+                    存储
+                </Menu.Item>
+                <Menu.Item onClick={this.changeState.bind(this, "role", 10)}>
+                    wpost
+                </Menu.Item>
+            </Menu>
+        );
+
+        const online = (
+            <Menu>
+                <Menu.Item onClick={this.changeState.bind(this, "online", -1)}>
+                    全部
+                </Menu.Item>
+                <Menu.Item onClick={this.changeState.bind(this, "online", 1)}>
+                    在线
+                </Menu.Item>
+                <Menu.Item onClick={this.changeState.bind(this, "online", 0)}>
+                    离线
+                </Menu.Item>
+            </Menu>
+        );
+
+        const info = this.state.info.map((value, key) => {
+            const {
+                address, cabinet_address: cabinetAddress, disk_rate: diskRate, disk_space_all: spaceAll, disk_space_used: spaceUsed,
+                hardware_id: hardwareId, id, in_ip: inIp, ip_manage: ipManage, is_online: isOnline, last_offline: offline,
+                last_online: online, miner_type: type, name, pool_id: pid, pool_name: pName, u_address: uAddress
+            } = value;
+            return (
+                <div className={"single"} key={key}>
+                    <p style={{left: `${text[0]}px`}}>{name}</p>
+                    <p style={{left: `${text[1]}px`, transform: "none"}}>
+                        {(type === 1) ? "密封机" : <></>}
+                        {(type === 3) ? "存储机" : <></>}
+                        {(type === 10) ? "wpost机" : <></>}
+                    </p>
+                    {(this.state.edit === 0) ?
+                        <p className={"tran"} style={{left: `${text[2]}px`, transform: "none"}}>{cabinetAddress}</p> :
+                        <p className={"tran"} style={{left: `${text[2]}px`, transform: "none", width: "120px"}}>
+                            <Input onPressEnter={this.changeUAddress.bind(this, "box", id, cabinetAddress)}
+                                   // onBlur={this.changeUAddress.bind(this, "box", id, cabinetAddress)}
+                                   onClick={this.changeAddressState.bind(this, "cAddress", id)}
+                                   onChange={this.changeAddressState.bind(this, "cAddress", id)} className={"mod"}
+                                   defaultValue={cabinetAddress}/>
+                            <svg onClick={this.changeUAddress.bind(this, "box", id, cabinetAddress)}
+                                 style={{marginLeft: "10px"}}
+                                 className="icon svg-icon oper-icon coin1"
+                                 aria-hidden="true">
+                                <use xlinkHref="#iconicon_save"></use>
+                            </svg>
+                        </p>
+                    }
+                    {(this.state.edit === 0) ?
+                        <p className={"tran"} style={{left: `${text[3]}px`, transform: "none"}}>{uAddress}</p> :
+                        <p className={"tran"} style={{left: `${text[3]}px`, transform: "none", width: "80px"}}>
+                            <Input onPressEnter={this.changeUAddress.bind(this, "u", id, uAddress)}
+                                   // onBlur={this.changeUAddress.bind(this, "u", id, uAddress)}
+                                   onClick={this.changeAddressState.bind(this, "uAddress", id)}
+                                   onChange={this.changeAddressState.bind(this, "uAddress", id)} style={{width: "52px"}}
+                                   className={"mod"} defaultValue={uAddress}/>
+                            <svg onClick={this.changeUAddress.bind(this, "u", id, uAddress)}
+                                 style={{marginLeft: "10px"}}
+                                 className="icon svg-icon oper-icon coin1"
+                                 aria-hidden="true">
+                                <use xlinkHref="#iconicon_save"></use>
+                            </svg>
+                        </p>
+                    }
+                    <p style={{left: `${text[4]}px`, transform: "none"}}>{inIp}</p>
+                    <p style={{left: `${text[5]}px`, transform: "none"}}>{ipManage}</p>
+                    <p style={{left: `${text[6]}px`, transform: "none"}}>{(100 * spaceUsed / spaceAll).toFixed(2)}%</p>
+                    <p style={{left: `${text[7]}px`, transform: "none"}}>{offline}</p>
+                    <p style={{left: `${text[8]}px`, transform: "none"}}>{online}</p>
+                    <p style={{left: `${text[9]}px`, transform: "none"}}>
+                        {(isOnline === 1) ?
+                            <React.Fragment>在线</React.Fragment> : <span style={{color: "#F02C1E"}}>离线</span>
+                        }
+                    </p>
+                    <p style={{left: `${text[10]}px`, transform: "none"}}>
+                        <svg onClick={this.openPanel.bind(this, id, hardwareId)}
+                             className="icon svg-icon oper-icon coin1"
+                             aria-hidden="true">
+                            <use xlinkHref="#iconlist_icon_arrow_nor"></use>
+                        </svg>
+                    </p>
+                </div>
+            )
+        })
+
         return (
-            <div className={"income-new-table"} style={{overflow:"hidden"}}>
-                <h3>矿机管理</h3>
-                <div className={"table"} style={{marginTop:"86px",marginBottom:"0px"}}>
+            <div className={"income-new-table"} style={{overflow: "hidden"}}>
+                <div className={"coin"}></div>
+                <h3 style={{left: "91px", top: "21px"}}>矿机管理</h3>
+                {(this.state.edit === 0) ?
+                    <Button onClick={this.changeEdit.bind(this, 1)} className={"edit"}>机位编辑</Button> :
+                    <Button onClick={this.changeEdit.bind(this, 0)} className={"edit"}>退出编辑</Button>
+                }
+                <Input value={this.state.keyword} onChange={this.changeValue.bind(this)}
+                       onPressEnter={this.changeKeyWord.bind(this)} className={"key"} placeholder={"矿机名称/机柜"} suffix={
+                    <svg onClick={this.changeKeyWord.bind(this)} className="icon svg-icon oper-icon coin1"
+                         aria-hidden="true"
+                         style={{height: "25px", width: "25px", marginTop: "3px"}}>
+                        <use xlinkHref="#iconicon_search"></use>
+                    </svg>
+                }/>
+                <Button onClick={this.clearKeyword.bind(this, "")} className={"clear"}>清除</Button>
+                <div className={"table"} style={{marginTop: "50px", marginBottom: "0px"}}>
                     <div className={"title"}>
-                        <p style={{left: "22px"}}>矿机名称</p>
-                        <p style={{left: "136px"}}>角色</p>
-                        <p style={{left: "225px"}}>所在机柜</p>
-                        <p style={{left: "334px"}}>U位</p>
-                        <p style={{left: "415px"}}>管理IP</p>
-                        <p style={{left: "543px"}}>内网IP</p>
-                        <p style={{left: "639px"}}>存储使用占比</p>
-                        <p style={{left: "766px"}}>上线时间</p>
-                        <p style={{left: "910px"}}>离线时间</p>
-                        <p style={{left: "1053px"}}>矿机状态</p>
-                        <p style={{left: "1151px"}}>详情</p>
+                        <p style={{left: `${title[0]}px`}}>矿机名称</p>
+                        <p style={{left: `${title[1]}px`}}>
+                            <Dropdown overlay={role} trigger={['click']}>
+                                <a style={{color: "#394565"}} className="ant-dropdown-link"
+                                   onClick={e => e.preventDefault()}>
+                                    角色
+                                    <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
+                                        <use xlinkHref="#iconico_arrow_pull2"></use>
+                                    </svg>
+                                </a>
+                            </Dropdown>
+                        </p>
+                        <p style={{left: `${title[2]}px`}}>所在机柜</p>
+                        <p style={{left: `${title[3]}px`}}>U位</p>
+                        <p style={{left: `${title[4]}px`}}>管理IP</p>
+                        <p style={{left: `${title[5]}px`}}>内网IP</p>
+                        <p style={{left: `${title[6]}px`}}>存储使用占比</p>
+                        <p style={{left: `${title[7]}px`}}>上线时间</p>
+                        <p style={{left: `${title[8]}px`}}>离线时间</p>
+                        <p style={{left: `${title[9]}px`}}>
+                            <Dropdown overlay={online} trigger={['click']}>
+                                <a style={{color: "#394565"}} className="ant-dropdown-link"
+                                   onClick={e => e.preventDefault()}>
+                                    矿机状态
+                                    <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
+                                        <use xlinkHref="#iconico_arrow_pull2"></use>
+                                    </svg>
+                                </a>
+                            </Dropdown>
+                        </p>
+                        <p style={{left: `${title[10]}px`}}>详情</p>
                     </div>
                     <div className={"list"}>
-                        <div className={"single"}>
-                            <p style={{left: "22px"}}>ARS-098</p>
-                            <p style={{left: "136px",transform:"none"}}>证明机</p>
-                            <p style={{left: "225px",transform:"none"}}>C1-04-01</p>
-                            <p style={{left: "334px",transform:"none"}}>1+2U</p>
-                            <p style={{left: "415px",transform:"none"}}>211.10.11.02</p>
-                            <p style={{left: "543px",transform:"none"}}>10.0.0.2</p>
-                            <p style={{left: "639px",transform:"none"}}>1.2%</p>
-                            <p style={{left: "766px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "910px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "1053px",transform:"none"}}>在线</p>
-                            <p style={{left: "1151px",transform:"none"}}>
-                                <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
-                                    <use xlinkHref="#iconlist_icon_arrow_nor"></use>
-                                </svg>
-                            </p>
+                        {info}
+                        <div className={"box"}>
+                            <p style={{left: "10px"}}>总数：{this.state.total}台</p>
+                            <p style={{left: "102px"}}>在线：{this.state.on}台</p>
+                            <p style={{left: "192px"}}>离线：{this.state.off}台</p>
                         </div>
-                        <div className={"single"}>
-                            <p style={{left: "22px"}}>ARS-098</p>
-                            <p style={{left: "136px",transform:"none"}}>证明机</p>
-                            <p style={{left: "225px",transform:"none"}}>C1-04-01</p>
-                            <p style={{left: "334px",transform:"none"}}>1+2U</p>
-                            <p style={{left: "415px",transform:"none"}}>211.10.11.02</p>
-                            <p style={{left: "543px",transform:"none"}}>10.0.0.2</p>
-                            <p style={{left: "639px",transform:"none"}}>1.2%</p>
-                            <p style={{left: "766px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "910px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "1053px",transform:"none"}}>在线</p>
-                            <p style={{left: "1151px",transform:"none"}}>
-                                <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
-                                    <use xlinkHref="#iconlist_icon_arrow_nor"></use>
-                                </svg>
-                            </p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "22px"}}>ARS-098</p>
-                            <p style={{left: "136px",transform:"none"}}>证明机</p>
-                            <p style={{left: "225px",transform:"none"}}>C1-04-01</p>
-                            <p style={{left: "334px",transform:"none"}}>1+2U</p>
-                            <p style={{left: "415px",transform:"none"}}>211.10.11.02</p>
-                            <p style={{left: "543px",transform:"none"}}>10.0.0.2</p>
-                            <p style={{left: "639px",transform:"none"}}>1.2%</p>
-                            <p style={{left: "766px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "910px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "1053px",transform:"none"}}>在线</p>
-                            <p style={{left: "1151px",transform:"none"}}>
-                                <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
-                                    <use xlinkHref="#iconlist_icon_arrow_nor"></use>
-                                </svg>
-                            </p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "22px"}}>ARS-098</p>
-                            <p style={{left: "136px",transform:"none"}}>证明机</p>
-                            <p style={{left: "225px",transform:"none"}}>C1-04-01</p>
-                            <p style={{left: "334px",transform:"none"}}>1+2U</p>
-                            <p style={{left: "415px",transform:"none"}}>211.10.11.02</p>
-                            <p style={{left: "543px",transform:"none"}}>10.0.0.2</p>
-                            <p style={{left: "639px",transform:"none"}}>1.2%</p>
-                            <p style={{left: "766px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "910px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "1053px",transform:"none"}}>在线</p>
-                            <p style={{left: "1151px",transform:"none"}}>
-                                <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
-                                    <use xlinkHref="#iconlist_icon_arrow_nor"></use>
-                                </svg>
-                            </p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "22px"}}>ARS-098</p>
-                            <p style={{left: "136px",transform:"none"}}>证明机</p>
-                            <p style={{left: "225px",transform:"none"}}>C1-04-01</p>
-                            <p style={{left: "334px",transform:"none"}}>1+2U</p>
-                            <p style={{left: "415px",transform:"none"}}>211.10.11.02</p>
-                            <p style={{left: "543px",transform:"none"}}>10.0.0.2</p>
-                            <p style={{left: "639px",transform:"none"}}>1.2%</p>
-                            <p style={{left: "766px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "910px",transform:"none"}}>07-01 14:15:00</p>
-                            <p style={{left: "1053px",transform:"none"}}>在线</p>
-                            <p style={{left: "1151px",transform:"none"}}>
-                                <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
-                                    <use xlinkHref="#iconlist_icon_arrow_nor"></use>
-                                </svg>
-                            </p>
-                        </div>
-                        
 
-
-
-
-
-
-                        <Pagination showQuickJumper defaultCurrent={2} total={500} onChange={this.onChangePage.bind(this)} />
+                        <Pagination showQuickJumper defaultCurrent={1} total={this.state.total}
+                                    onShowSizeChange={this.onChangePage.bind(this)}
+                                    onChange={this.onChangePage.bind(this)}/>
                     </div>
                 </div>
             </div>
@@ -689,9 +888,15 @@ class MinerManage extends Component{
 }
 
 
-export default class Index extends Component {
+const MinerManageApp = connect(
+    commonStateToProps,
+    commonDispatchToProps
+)(MinerManage)
+
+
+class Index extends Component {
     state = {
-        menu: 1
+        menu: 2
     }
     onRef = (ref) => {
         this.child = ref
@@ -712,12 +917,21 @@ export default class Index extends Component {
                         <PowerTablePanelApp/>
                         <IncomeTablePanelApp/>
                         <IncomeIntoDetail/>
-                    </React.Fragment> : <React.Fragment>
-                        <MinerManage/>
-                    </React.Fragment>
+                    </React.Fragment> : <MinerManageApp/>
                 }
-
+                <DeviceIndex/>
             </React.Fragment>
+        )
+    }
+}
+
+
+export default class Back extends Component {
+    render() {
+        return (
+            <Initialize history={this.props.history}>
+                <Index history={this.props.history}/>
+            </Initialize>
         )
     }
 }
