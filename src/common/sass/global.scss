@@ -2337,7 +2337,6 @@ nav {
     height: 26px;
     padding-left: 4px;
     padding-right: 4px;
-    margin-top: -4px;
     font-size: 14px;
     border:1px solid #AACEFF;
   }
@@ -2421,6 +2420,8 @@ nav {
           position: absolute;
           top: 13px;
           color: #7988AD;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
         p:nth-child(1){
           left: 60px;

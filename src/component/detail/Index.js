@@ -211,6 +211,11 @@ class PoolPanel extends Component {
         info: {}
     }
 
+    componentDidMount() {
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        (current !== 0) && this.getPoolInfo(current)
+    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         let {detail: {poolIDCurrent: {current}}} = nextProps.value;
         let {detail: {poolIDCurrent: {current: oldValue}}} = this.props.value;
@@ -308,6 +313,11 @@ class PowerTablePanel extends Component {
         socket: [10, 20, 15, 45, 2, 23, 54, 12, 40, 20, 10, 50, 10, 20, 10, 30, 12, 40, 20, 10, 50, 10, 20, 10, 30],
     }
 
+    componentDidMount() {
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        (current !== 0) && this.getPowerPanel(current)
+    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         let {detail: {poolIDCurrent: {current}}} = nextProps.value;
         let {detail: {poolIDCurrent: {current: oldValue}}} = this.props.value;
@@ -392,6 +402,11 @@ class IncomeTablePanel extends Component {
         socket: [10, 20, 15, 45, 2, 23, 54, 12, 40, 20, 10, 50, 10, 20, 10, 30, 12, 40, 20, 10, 50, 10, 20, 10, 30],
     }
 
+    componentDidMount() {
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        (current !== 0) && this.getIncomeInfo(current)
+    }
+
     componentWillReceiveProps(nextProps, nextContext) {
         let {detail: {poolIDCurrent: {current}}} = nextProps.value;
         let {detail: {poolIDCurrent: {current: oldValue}}} = this.props.value;
@@ -474,18 +489,92 @@ const IncomeTablePanelApp = connect(
 
 class IncomeIntoDetail extends Component {
     state = {
-        menu: 2
+        menu: 1,
+        page:1,
+        pageSize:10,
+        total:0,
+        info:[]
     }
+
+    componentDidMount() {
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        (current !== 0) && this.getIncomeInfo(current)
+    }
+
+    componentWillReceiveProps(nextProps, nextContext) {
+        let {detail: {poolIDCurrent: {current}}} = nextProps.value;
+        let {detail: {poolIDCurrent: {current: oldValue}}} = this.props.value;
+        if (current !== oldValue) {
+            this.getIncomeInfo(current)
+        }
+    }
+
+    getIncomeInfo = (pid) =>{
+        const {uid, token} = cookie.loadAll();
+        let url = (this.state.menu === 1)?`/pool/miner/incomeList`:`/pool/miner/payList`;
+        const data = {
+            user_id: uid,
+            token: token,
+            pool_id: pid,
+            page:this.state.page,
+            page_size:this.state.pageSize,
+        }
+        Func.axiosPost(url,data, this.syncCallBack)
+    }
+
+    syncCallBack = (data) =>{
+        const {code, data: info, description} = data.data;
+        if (code === 0) {
+            const {total, data: list} = info;
+            this.state.total = total;
+            this.state.info = list;
+            this.setState(this.state)
+        } else {
+            message.error(description);
+        }
+    }
+
     changeMenu = (n) => {
         this.state.menu = n;
         this.setState(this.state);
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.getIncomeInfo(current)
+
     }
-    onChangePage = (e) => {
-        console.log(e);
+    onChangePage = (e,f) => {
+        this.state.page =(e === 0)?1:e;
+        this.state.pageSize = f
+        let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.getIncomeInfo(current)
     }
 
     render() {
         const style = (this.state.menu === 1) ? ["on", ""] : ["", "on"]
+        const info = this.state.info.map((value,key)=>{
+            if(this.state.menu === 1){
+                const {pay_id:pid,from_mining_address:from,to_mining_address:to,add_time:time,amount} = value;
+                return (
+                    <div className={"single"} >
+                        <p style={{left: "60px",width:"260px"}}>{pid}</p>
+                        <p style={{left: "439px"}}>{time}</p>
+                        <p style={{textAlign:"center",left: "671px",width:"270px"}}>{from}</p>
+                        <p style={{textAlign:"center",left: "883px",width:"137px"}}>{to}</p>
+                        <p style={{left: "1034px"}}>{amount} FIL</p>
+                    </div>
+                )
+            }else{
+                const {pay_id:pid,from_mining_id:from,to_mining_id:to,add_time:time,real_amount:amount} = value;
+                return (
+                    <div className={"single"} >
+                        <p style={{left: "60px",width:"260px"}}>{pid}</p>
+                        <p style={{left: "439px"}}>{time}</p>
+                        <p style={{textAlign:"center",left: "671px",width:"270px"}}>{from}</p>
+                        <p style={{textAlign:"center",left: "883px",width:"137px"}}>{to}</p>
+                        <p style={{left: "1034px"}}>{amount} FIL</p>
+                    </div>
+                )
+            }
+        })
         return (
             <div className={"income-new-table"}>
                 <h3>收益明细</h3>
@@ -503,64 +592,10 @@ class IncomeIntoDetail extends Component {
                         <p style={{left: "1020px"}}>金额</p>
                     </div>
                     <div className={"list"}>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <div className={"single"}>
-                            <p style={{left: "60px"}}>bafy2bzacea2n52y7r3vqixb2vfpny</p>
-                            <p style={{left: "439px"}}>2020-06-30 10:00:00</p>
-                            <p style={{left: "671px"}}>baffdsfj234dfjfk11111</p>
-                            <p style={{left: "883px"}}>t01001</p>
-                            <p style={{left: "1034px"}}>104.123 FIL</p>
-                        </div>
-                        <Pagination showQuickJumper defaultCurrent={2} total={500}
-                                    onChange={this.onChangePage.bind(this)}/>
+                        {info}
+                        <Pagination showQuickJumper defaultCurrent={1} total={this.state.total}
+                                    onChange={this.onChangePage.bind(this)}
+                                    onShowSizeChange={this.onChangePage.bind(this)}/>
                     </div>
                 </div>
             </div>
@@ -568,6 +603,10 @@ class IncomeIntoDetail extends Component {
     }
 }
 
+const IncomeIntoDetailApp = connect(
+    commonStateToProps,
+    commonDispatchToProps
+)(IncomeIntoDetail)
 
 class MinerManage extends Component {
     state = {
@@ -784,7 +823,8 @@ class MinerManage extends Component {
                     {(this.state.edit === 0) ?
                         <p className={"tran"} style={{left: `${text[3]}px`, transform: "none"}}>{uAddress}</p> :
                         <p className={"tran"} style={{left: `${text[3]}px`, transform: "none", width: "80px"}}>
-                            <Input onPressEnter={this.changeUAddress.bind(this, "u", id, uAddress)}
+                            <Input style={{height:"20px"}}
+                                   onPressEnter={this.changeUAddress.bind(this, "u", id, uAddress)}
                                    // onBlur={this.changeUAddress.bind(this, "u", id, uAddress)}
                                    onClick={this.changeAddressState.bind(this, "uAddress", id)}
                                    onChange={this.changeAddressState.bind(this, "uAddress", id)} style={{width: "52px"}}
@@ -916,7 +956,7 @@ class Index extends Component {
                         <PoolPanelApp/>
                         <PowerTablePanelApp/>
                         <IncomeTablePanelApp/>
-                        <IncomeIntoDetail/>
+                        <IncomeIntoDetailApp/>
                     </React.Fragment> : <MinerManageApp/>
                 }
                 <DeviceIndex/>
