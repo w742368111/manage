@@ -307,12 +307,13 @@ const chartOptions = {
     offsetGridLines: false
 };
 
+function add0(m){return m<10?'0'+m:m }
 
 class PowerTablePanel extends Component {
     state = {
-        socket: [10, 20, 15, 45, 2, 23, 54, 12, 40, 20, 10, 50, 10, 20, 10, 30, 12, 40, 20, 10, 50, 10, 20, 10, 30],
+        socket: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        title:[`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,],
     }
-
     componentDidMount() {
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         (current !== 0) && this.getPowerPanel(current)
@@ -332,41 +333,25 @@ class PowerTablePanel extends Component {
     }
 
     syncCallBack = (data) => {
-        console.log(data);
+        const {code, data: info, description} = data.data;
+        if (code === 0) {
+            info.reverse();
+            for(const key in info){
+                const {add_time:time,power} = info[key];
+                if(key > 23){continue;}
+                let date = new Date(time*1000)
+                this.state.socket[key] = power;
+                this.state.title[key] = `${add0(date.getHours())}-${add0(date.getMinutes())}`;
+            }
+        } else {
+            message.error(description);
+        }
+        this.setState(this.state);
     }
 
     render() {
         const chartData = {
-            labels: [
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00"
-            ],
+            labels: this.state.title,
             datasets: [
                 {
                     label: intl.get("CPU_USE_RATE"),
@@ -399,7 +384,8 @@ const PowerTablePanelApp = connect(
 
 class IncomeTablePanel extends Component {
     state = {
-        socket: [10, 20, 15, 45, 2, 23, 54, 12, 40, 20, 10, 50, 10, 20, 10, 30, 12, 40, 20, 10, 50, 10, 20, 10, 30],
+        socket: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        title:[`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`],
     }
 
     componentDidMount() {
@@ -421,42 +407,25 @@ class IncomeTablePanel extends Component {
     }
 
     syncCallBack = (data) => {
-        console.log(data);
+        const {code, data: info, description} = data.data;
+        if (code === 0) {
+            info.reverse();
+            for(const key in info){
+                if(key > 15){continue;}
+                const {add_time:time,income} = info[key];
+                let date = new Date(time*1000)
+                this.state.socket[key] = income;
+                this.state.title[key] = `${add0(date.getMonth()+1)}-${add0(date.getDate())}`;
+            }
+        } else {
+            message.error(description);
+        }
+        this.setState(this.state);
     }
 
     render() {
         const chartData = {
-            labels: [
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00",
-
-                "14:00",
-                "14:00",
-                "14:00",
-                "14:00"
-            ],
-
+            labels: this.state.title,
             datasets: [
                 {
                     label: intl.get("CPU_USE_RATE"),
@@ -490,10 +459,10 @@ const IncomeTablePanelApp = connect(
 class IncomeIntoDetail extends Component {
     state = {
         menu: 1,
-        page:1,
-        pageSize:10,
-        total:0,
-        info:[]
+        page: 1,
+        pageSize: 10,
+        total: 0,
+        info: []
     }
 
     componentDidMount() {
@@ -509,20 +478,20 @@ class IncomeIntoDetail extends Component {
         }
     }
 
-    getIncomeInfo = (pid) =>{
+    getIncomeInfo = (pid) => {
         const {uid, token} = cookie.loadAll();
-        let url = (this.state.menu === 1)?`/pool/miner/incomeList`:`/pool/miner/payList`;
+        let url = (this.state.menu === 1) ? `/pool/miner/incomeList` : `/pool/miner/payList`;
         const data = {
             user_id: uid,
             token: token,
             pool_id: pid,
-            page:this.state.page,
-            page_size:this.state.pageSize,
+            page: this.state.page,
+            page_size: this.state.pageSize,
         }
-        Func.axiosPost(url,data, this.syncCallBack)
+        Func.axiosPost(url, data, this.syncCallBack)
     }
 
-    syncCallBack = (data) =>{
+    syncCallBack = (data) => {
         const {code, data: info, description} = data.data;
         if (code === 0) {
             const {total, data: list} = info;
@@ -539,10 +508,10 @@ class IncomeIntoDetail extends Component {
         this.setState(this.state);
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         this.getIncomeInfo(current)
-
     }
-    onChangePage = (e,f) => {
-        this.state.page =(e === 0)?1:e;
+
+    onChangePage = (e, f) => {
+        this.state.page = (e === 0) ? 1 : e;
         this.state.pageSize = f
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         this.getIncomeInfo(current)
@@ -550,26 +519,26 @@ class IncomeIntoDetail extends Component {
 
     render() {
         const style = (this.state.menu === 1) ? ["on", ""] : ["", "on"]
-        const info = this.state.info.map((value,key)=>{
-            if(this.state.menu === 1){
-                const {pay_id:pid,from_mining_address:from,to_mining_address:to,add_time:time,amount} = value;
+        const info = this.state.info.map((value, key) => {
+            if (this.state.menu === 1) {
+                const {pay_id: pid, from_mining_address: from, to_mining_address: to, add_time: time, amount} = value;
                 return (
-                    <div className={"single"} >
-                        <p style={{left: "60px",width:"260px"}}>{pid}</p>
+                    <div className={"single"} key={key}>
+                        <p style={{left: "60px", width: "260px"}}>{pid}</p>
                         <p style={{left: "439px"}}>{time}</p>
-                        <p style={{textAlign:"center",left: "671px",width:"270px"}}>{from}</p>
-                        <p style={{textAlign:"center",left: "883px",width:"137px"}}>{to}</p>
+                        <p style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
+                        <p style={{textAlign: "center", left: "883px", width: "137px"}}>{to}</p>
                         <p style={{left: "1034px"}}>{amount} FIL</p>
                     </div>
                 )
-            }else{
-                const {pay_id:pid,from_mining_id:from,to_mining_id:to,add_time:time,real_amount:amount} = value;
+            } else {
+                const {pay_id: pid, from_mining_id: from, to_mining_id: to, add_time: time, real_amount: amount} = value;
                 return (
-                    <div className={"single"} >
-                        <p style={{left: "60px",width:"260px"}}>{pid}</p>
+                    <div className={"single"} key={key}>
+                        <p style={{left: "60px", width: "260px"}}>{pid}</p>
                         <p style={{left: "439px"}}>{time}</p>
-                        <p style={{textAlign:"center",left: "671px",width:"270px"}}>{from}</p>
-                        <p style={{textAlign:"center",left: "883px",width:"137px"}}>{to}</p>
+                        <p style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
+                        <p style={{textAlign: "center", left: "883px", width: "137px"}}>{to}</p>
                         <p style={{left: "1034px"}}>{amount} FIL</p>
                     </div>
                 )
@@ -625,6 +594,7 @@ class MinerManage extends Component {
         uAddress: "",
         uLastId: 0,
     }
+
     componentDidMount() {
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         (current !== 0) && this.getPoolDevice(current);
@@ -808,7 +778,7 @@ class MinerManage extends Component {
                         <p className={"tran"} style={{left: `${text[2]}px`, transform: "none"}}>{cabinetAddress}</p> :
                         <p className={"tran"} style={{left: `${text[2]}px`, transform: "none", width: "120px"}}>
                             <Input onPressEnter={this.changeUAddress.bind(this, "box", id, cabinetAddress)}
-                                   // onBlur={this.changeUAddress.bind(this, "box", id, cabinetAddress)}
+                                // onBlur={this.changeUAddress.bind(this, "box", id, cabinetAddress)}
                                    onClick={this.changeAddressState.bind(this, "cAddress", id)}
                                    onChange={this.changeAddressState.bind(this, "cAddress", id)} className={"mod"}
                                    defaultValue={cabinetAddress}/>
@@ -823,9 +793,9 @@ class MinerManage extends Component {
                     {(this.state.edit === 0) ?
                         <p className={"tran"} style={{left: `${text[3]}px`, transform: "none"}}>{uAddress}</p> :
                         <p className={"tran"} style={{left: `${text[3]}px`, transform: "none", width: "80px"}}>
-                            <Input style={{height:"20px"}}
+                            <Input style={{height: "20px"}}
                                    onPressEnter={this.changeUAddress.bind(this, "u", id, uAddress)}
-                                   // onBlur={this.changeUAddress.bind(this, "u", id, uAddress)}
+                                // onBlur={this.changeUAddress.bind(this, "u", id, uAddress)}
                                    onClick={this.changeAddressState.bind(this, "uAddress", id)}
                                    onChange={this.changeAddressState.bind(this, "uAddress", id)} style={{width: "52px"}}
                                    className={"mod"} defaultValue={uAddress}/>
