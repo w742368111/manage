@@ -384,8 +384,8 @@ const PowerTablePanelApp = connect(
 
 class IncomeTablePanel extends Component {
     state = {
-        socket: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        title:[`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`],
+        socket: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+        title:[`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`],
     }
 
     componentDidMount() {
@@ -411,7 +411,7 @@ class IncomeTablePanel extends Component {
         if (code === 0) {
             info.reverse();
             for(const key in info){
-                if(key > 15){continue;}
+                if(key > 14){continue;}
                 const {add_time:time,income} = info[key];
                 let date = new Date(time*1000)
                 this.state.socket[key] = income;
