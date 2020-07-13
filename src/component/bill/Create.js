@@ -81,12 +81,12 @@ class CreateInner extends Component {
         return (
             <div className="bill-create-main">
                 <p style={{top: "2px"}}>{intl.get("QUESTION_DETAIL")}</p>
-                <TextArea onChange={this.changeValue.bind(this, "info")} placeholder={intl.get("BILL_QUESTION_TIPS")}/>
+                <TextArea maxLength={300} style={{resize:"none"}} onChange={this.changeValue.bind(this, "info")} placeholder={intl.get("BILL_QUESTION_TIPS")}/>
                 <p style={{top: "152px"}}>{intl.get("ADD_QUESTION_PICTURE")}</p>
                 <AddPicture onRef={this.onRef}/>
                 <Input onChange={this.changeValue.bind(this, "contacts")} placeholder={intl.get("CONTACT_PEOPLE")}
                        className={"committer"}/>
-                <Input onChange={this.changeValue.bind(this, "phone")} placeholder={intl.get("CONTACT_PHONE_NO")}
+                <Input maxLength={11} onChange={this.changeValue.bind(this, "phone")} placeholder={intl.get("CONTACT_PHONE_NO")}
                        className={"committer"} style={{left: "230px"}}/>
             </div>
         )
@@ -138,6 +138,10 @@ export default class CreateBill extends Component {
         }
         if(Func.isEmpty(phone)){
             message.error(intl.get("CONTACT_PHONE_CANNOT_BE_EMPTY"));
+            return
+        }
+        if(Func.checkMobileNumber(phone)){
+            message.error(intl.get("MOBILE_NUMBER_CHECK_ERROR"));
             return
         }
 

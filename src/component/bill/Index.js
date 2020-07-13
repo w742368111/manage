@@ -101,11 +101,11 @@ class OperatePanel extends React.Component {
         const list = [
             [<h6>{intl.get("YOU_SURE_CLOSE_BILL")}</h6>,
                 <svg className="icon svg-icon modal-icon" aria-hidden="true">
-                    <use xlinkHref="#iconmsg_icon_restart_nor"></use>
+                    <use xlinkHref="#iconpop_icon_warning"></use>
                 </svg>],
             [<h6>{intl.get("YOU_SURE_DELETE_BILL")}</h6>,
                 <svg className="icon svg-icon modal-icon" aria-hidden="true">
-                    <use xlinkHref="#iconmsg_icon_restart_nor"></use>
+                    <use xlinkHref="#iconpop_icon_warning"></use>
                 </svg>],
         ]
 
