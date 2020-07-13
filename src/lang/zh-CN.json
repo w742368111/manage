@@ -125,6 +125,7 @@
     "ROOM_IS_LESS_THAN": "磁盘空间小于10G",
     "CPU_TEMP_TOO_HIGH": "CPU温度过高",
     "DISK_TEMP_TOO_HIGH": "硬盘温度过高",
+    "DISK_SIZE_GOING_FULL": "磁盘空间将满",
     "WARNING_RATE_SET": "频率设置",
     "SET": "设置",
     "ACCOUNT_SAFE": "账号安全",

@@ -180,6 +180,11 @@ class WarningSet extends React.Component {
                                     onChange={this.changeSet.bind(this, pid, 8)}/>
                         </li>
                         <li>
+                            <p>{intl.get("DISK_SIZE_GOING_FULL")}</p>
+                            <Switch className={"switch"} defaultChecked={switchArr[4]}
+                                    onChange={this.changeSet.bind(this, pid, 16)}/>
+                        </li>
+                        <li>
                             <p>{intl.get("WARNING_RATE_SET")}</p>
                             {/*<Switch className={"switch"} defaultChecked={switchArr[4]}*/}
                             {/*        onChange={this.changeSet.bind(this, pid, 16)}/>*/}

@@ -118,8 +118,8 @@ class SystemInfoMain extends Component {
         let {socket: {globalSocketBack: {current}}} = nextProps.value;
         const {act} = JSON.parse(current);
         if (act === "get_system_showinfo") {
-            const {version, CPU, memory, temperature} = JSON.parse(current)
-            this.state.socket = [version, CPU, memory, `GPU 2080S`, temperature]
+            const {version, CPU, memory, temperature,GPU} = JSON.parse(current)
+            this.state.socket = [version, CPU, memory, GPU, temperature]
             this.setState(this.state);
         }
     }
@@ -141,8 +141,8 @@ class SystemInfoMain extends Component {
                     <p className={"bold"} style={{top: "150px"}}>{intl.get("SYSTEM")}</p>
                     <p style={{top: "189px"}}>{intl.get("PROCESSOR")}：{cpu}</p>
                     <p style={{top: "228px"}}>{intl.get("MEMORY")}：{memory}</p>
-                    {/*<p style={{top: "267px"}}>{intl.get("GPU")}：{gpu}</p>*/}
-                    <p style={{top: "267px"}}>{intl.get("TEMPERATURE")}：{temp}</p>
+                    <p style={{top: "267px"}}>{intl.get("GPU")}：{gpu}</p>
+                    <p style={{top: "306px"}}>{intl.get("TEMPERATURE")}：{temp}</p>
                     <p className={"bold"} style={{top: "373px"}}>{intl.get("CONFIGURATION")}</p>
                     <p style={{top: "412px"}}>{intl.get("DEVICE_NAME")}：{name}</p>
                     <p style={{top: "451px"}}>{intl.get("IP_ADDRESS")}：{ip}</p>
