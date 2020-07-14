@@ -79,6 +79,12 @@ class PagingInfo extends Component {
         this.props.list(value);
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         return (
             <div className={"wallet-index-page"} style={{width: "100%", height: "34px", margin: "0 auto"}}>

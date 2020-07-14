@@ -47,6 +47,12 @@ export class WalletBlock extends React.Component{
         })
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         let {pool:{walletIndexPid:{current}}} = store.getState();
 

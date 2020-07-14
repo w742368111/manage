@@ -42,7 +42,10 @@ class DevicePanelMenu extends React.Component {
     }
 
     componentWillUnmount() {
-        this.changeMenu(0)
+        this.changeMenu(0);
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {
@@ -642,6 +645,12 @@ class OperateDisk extends Component {
         console.log(1111111111, this.state, 3333333333);
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -981,6 +990,12 @@ class DNSModel extends Component {
 
     dnsState = () => {
         return this.state.dns
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {

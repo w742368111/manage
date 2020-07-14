@@ -145,28 +145,27 @@ export const isEmpty = (obj) => {
 
 
 // 基础权限转换的函数
-export const getBaseInfoPower = (power) => {
+export const getBaseInfoPower = (power,status) => {
     let detail = [
         ["POWER_INCOME_INFO", 2, 0, 0, 0, 1, "INCOME_VIEW"],
-        ["POWER_GROUP_MANAGE", 2, 2, 2, 2, 2, "GROUP_VIEW", "GROUP_ADD", "GROUP_EDIT", "GROUP_DELETE"],
-        ["POWER_MINER_MANAGE", 2, 2, 2, 0, 3, "DEVICE_VIEW", "DEVICE_ADD", "DEVICE_EDIT"],
-        ["POWER_STAFF_MANAGE", 2, 2, 2, 2, 4, "USER_VIEW", "USER_ADD", "USER_EDIT", "USER_DELETE"],
-        ["POWER_ROLE_MANAGE", 2, 2, 2, 2, 5, "ROLE_VIEW", "ROLE_ADD", "ROLE_EDIT", "ROLE_DELETE"],
-        ["POWER_POWER_MANAGE", 2, 0, 2, 0, 6, "PERMISSION_VIEW", "", "PERMISSION_EDIT"],
-        ["POWER_WARNING_SET", 2, 0, 0, 0, 7, "WARNING_VIEW"],
-        ["POWER_BILL_MANAGE", 2, 2, 2, 2, 8, "WORKORDER_VIEW", "WORKORDER_ADD", "WORKORDER_EDIT", "WORKORDER_DELETE"],
+        ["POWER_MINER_MANAGE", 2, 0, 0, 0, 2, "DEVICE_VIEW"],
+        ["POWER_STAFF_MANAGE", 2, 2, 2, 2, 3, "USER_VIEW", "USER_ADD", "USER_EDIT", "USER_DELETE"],
+        ["POWER_ROLE_MANAGE", 2, 2, 2, 2, 4, "ROLE_VIEW", "ROLE_ADD", "ROLE_EDIT", "ROLE_DELETE"],
+        ["POWER_POWER_MANAGE", 2, 0, 2, 0, 5, "PERMISSION_VIEW", "", "PERMISSION_EDIT"],
+        ["POWER_WARNING_SET", 2, 0, 2, 0, 6, "WARNING_VIEW","","WARNING_EDIT"],
+        ["POWER_BILL_MANAGE", 2, 2, 2, 2, 7, "WORKORDER_VIEW", "WORKORDER_ADD", "WORKORDER_EDIT", "WORKORDER_DELETE"],
     ]
 
-    for (const key in detail) {
-        for (const dex in detail[key]) {
-            if (dex < 6 || detail[key][dex] === "") {
-                continue;
-            }
-            if (!power.includes(detail[key][dex])) {
-                detail[key][dex - 5] = 3;
-            }
-        }
-    }
+    // for (const key in detail) {
+    //     for (const dex in detail[key]) {
+    //         if (dex < 6 || detail[key][dex] === "") {
+    //             continue;
+    //         }
+    //         if (!power.includes(detail[key][dex])) {
+    //             detail[key][dex - 5] = 3;
+    //         }
+    //     }
+    // }
 
     return detail;
 }

@@ -299,6 +299,7 @@ class GroupList extends Component {
         this.state.nameShow = 0;
         this.setState(this.state);
     }
+
     editGroupNameFuc = (gid, oldName, newName) => {
         const {uid, token} = cookie.loadAll();
         if (oldName === newName || newName === '') {
@@ -431,6 +432,12 @@ class RoleList extends React.Component {
         CommonAction.changeCommonStatus(value, Key.changeMinerTypeOperate);
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         let {pool: {poolIndexDefaultType: {current}}} = store.getState()
         return (
@@ -517,6 +524,7 @@ class MinerOperation extends React.Component {
     onRef = (ref) => {
         this.child = ref
     }
+
     showModal = (e) => {
         if(this.props.choose.length === 0){
             message.error(intl.get("MOVE_MACHINE_CANNOT_EMPTY"));
@@ -633,6 +641,12 @@ class SearchArea extends Component {
         this.props.onRefKey(this);
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     getInput() {
         return this.state.value;
     }
@@ -724,6 +738,12 @@ class PagingInfo extends Component {
         return this.state.page;
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         return (
             <div className={"paging-area"} style={{left: "120px"}}>
@@ -775,6 +795,12 @@ class MinerListAppend extends Component {
 
     keywordInfo = () => {
         return this.childInput.getInput();
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {

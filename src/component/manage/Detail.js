@@ -36,8 +36,9 @@ const OperateButtonPanel = (props) => {
     )
 }
 
-const Item = (name, key, id, props) => {
+const Item = (name, key, id, props, status) => {
     let val;
+
     if (name === "check") {
         val = props[0]
     }
@@ -50,6 +51,17 @@ const Item = (name, key, id, props) => {
     if (name === "del") {
         val = props[3];
     }
+
+    if (status === 9) {
+        if(key === 2 || key === 3){
+            key = 1;
+        }
+    }else if(status === 5){
+        if((key === 2 || key === 3) && val !== 'INCOME_VIEW'){
+            key = 1;
+        }
+    }
+
     switch (key) {
         case 0:
             return <svg className="icon svg-icon" aria-hidden="true">
@@ -60,7 +72,7 @@ const Item = (name, key, id, props) => {
                 <use xlinkHref="#iconicon_gou"></use>
             </svg>
         case 2:
-            return <Checkbox value={val} style={{margin: "0px auto"}}></Checkbox>
+            return <Checkbox value={val} style={{margin: "0 auto"}}></Checkbox>
         case 3:
             return <Checkbox value={val} style={{margin: "0 auto"}}></Checkbox>
         default:
@@ -91,6 +103,12 @@ class BasePowerPanel extends Component {
         return this.state.info
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         const list = this.props.power.map((val, key) => {
             const [name, check, create, edit, del, id, ...oper] = val;
@@ -99,16 +117,16 @@ class BasePowerPanel extends Component {
                     <div style={{width: "113px"}} className="in">{intl.get(name)}</div>
                     <div className="right">
                         <div className="all">
-                            {Item("check", check, id, oper)}
+                            {Item("check", check, id, oper, this.props.status)}
                         </div>
                         <div className="all">
-                            {Item("create", create, id, oper)}
+                            {Item("create", create, id, oper, this.props.status)}
                         </div>
                         <div className="all">
-                            {Item("edit", edit, id, oper)}
+                            {Item("edit", edit, id, oper, this.props.status)}
                         </div>
                         <div className="all">
-                            {Item("del", del, id, oper)}
+                            {Item("del", del, id, oper, this.props.status)}
                         </div>
                     </div>
                 </div>
@@ -195,7 +213,7 @@ class OperatePower extends Component {
 
         return (
             <React.Fragment>
-                <div className="operate-power-info" style={{display:"none"}}>
+                <div className="operate-power-info" style={{display: "none"}}>
                     <h4>{intl.get("OPERATE_POWER")}</h4>
                     <div className={"inner"}>
                         <Checkbox.Group style={{width: '100%'}} onChange={this.onChange.bind(this)}
@@ -227,6 +245,12 @@ class PoolPowerPanel extends Component {
     onChange = (value) => {
         this.state.list = value;
         this.props.change()
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {
@@ -263,8 +287,9 @@ class PowerEditMain extends Component {
         power: "",
         pool: [],
         show: false,
-        name:"",
-        change:true
+        name: "",
+        change: true,
+        status: 1,
     }
 
     componentDidMount() {
@@ -280,7 +305,8 @@ class PowerEditMain extends Component {
     syncCallBack = (data) => {
         const {code, data: info, description} = data.data;
         if (code === 0) {
-            const {Permission: power,Name:name} = info;
+            const {Permission: power, Name: name, Status: status} = info;
+            this.state.status = status;
             this.state.power = power;
             this.state.name = name;
             this.setState(this.state);
@@ -310,6 +336,12 @@ class PowerEditMain extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     onBase = (ref) => {
         this.base = ref;
     }
@@ -320,7 +352,7 @@ class PowerEditMain extends Component {
         this.pool = ref
     }
     onChange = () => {
-        if(this.state.change){
+        if (this.state.change) {
             this.state.change = false;
             this.setState(this.state);
         }
@@ -341,7 +373,7 @@ class PowerEditMain extends Component {
         }, this.editCallBack)
     }
 
-    editCallBack = (data) =>{
+    editCallBack = (data) => {
         const {code, data: info, description} = data.data;
         if (code === 0) {
             message.success(intl.get("MODIFY_SUCCESS"));
@@ -356,10 +388,13 @@ class PowerEditMain extends Component {
             <div className={"power-edit-main"}>
                 {this.state.show ?
                     <React.Fragment>
-                        <OperateButtonPanel change={this.state.change} click={this.uploadNewPower} name={this.state.name} />
-                        <BasePowerPanel change={this.onChange} onRef={this.onBase} base={this.state.power} power={base}/>
+                        <OperateButtonPanel change={this.state.change} click={this.uploadNewPower}
+                                            name={this.state.name}/>
+                        <BasePowerPanel change={this.onChange} onRef={this.onBase} base={this.state.power} power={base}
+                                        status={this.state.status}/>
                         <OperatePower change={this.onChange} onRef={this.onOper} base={this.state.power}/>
-                        <PoolPowerPanel change={this.onChange} onRef={this.onPool} base={this.state.power} power={this.state.pool}/>
+                        <PoolPowerPanel change={this.onChange} onRef={this.onPool} base={this.state.power}
+                                        power={this.state.pool}/>
                     </React.Fragment> : <React.Fragment></React.Fragment>
                 }
             </div>

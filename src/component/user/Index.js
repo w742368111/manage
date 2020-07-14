@@ -33,6 +33,12 @@ class SelectTime extends React.Component {
         return this.state
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         const data = [
             [0, intl.get("PLEASE_SELECT_WARNING_RATE")],
@@ -289,6 +295,12 @@ class MessageCenter extends Component {
 
     componentDidMount() {
         this.getWarningInfo();
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     getWarningInfo = () => {
@@ -725,6 +737,12 @@ class AccountSafe extends React.Component {
         this.child.hideModal();
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         return (
             <Table.TableCommon
@@ -887,10 +905,10 @@ const SetTitle = (props) => {
     return (
         <React.Fragment>
             <p>{intl.get("USER_SET_CENTER")}</p>
-            {props.step === 2?
+            {props.step === 2 ?
                 <svg className="icon svg-icon detail-icon" aria-hidden="true">
                     <use xlinkHref="#iconicon_more_norsvg"></use>
-                </svg>:
+                </svg> :
                 <svg className="icon svg-icon detail-icon" aria-hidden="true">
                     <use xlinkHref="#iconico_arrow-down"></use>
                 </svg>
@@ -917,7 +935,7 @@ class UserMenu extends Component {
         const {user: {userIndexMenuSelect: {current}}} = store.getState();
         const collapseText = [
             [
-                <SetTitle step={this.state.step} />,
+                <SetTitle step={this.state.step}/>,
                 <MySetInner/>, 0
             ]
         ];

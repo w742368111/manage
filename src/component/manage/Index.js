@@ -454,6 +454,12 @@ class OperateStaff extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         return (
             <React.Fragment>
@@ -513,6 +519,11 @@ class OperateRole extends Component {
             this.props.get();
         } else {
             message.error(description);
+        }
+    }
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
         }
     }
 
@@ -730,6 +741,12 @@ class ManageContent extends Component {
     updateList = () => {
         (this.props.current === 1) && this.child.getStaffList();
         (this.props.current === 2) && this.role.getRoleList();
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {

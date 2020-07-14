@@ -14,6 +14,12 @@ export default class BannerTitle extends Component {
         (this.props.href === 1) && this.props.history.push('/manageweb/index/');
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         const name = (this.props.current === 1) ? ["but-on", ""] : ["", "but-on"];
         return (

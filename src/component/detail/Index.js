@@ -37,6 +37,12 @@ class TopBanner extends Component {
         this.getPoolList()
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     getPoolList = () => {
         const {uid, token} = cookie.loadAll();
         Func.axiosPost("/pool/pool/list", {user_id: uid, token: token}, this.syncCallBack)
@@ -239,6 +245,12 @@ class PoolPanel extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     render() {
         const {
             today_income: todayIncome, income_all: incomeAll, balance, income_poundage: incomePoundage, balance_free: balanceFree,
@@ -327,6 +339,12 @@ class PowerTablePanel extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
+    }
+
     getPowerPanel = (pid) => {
         const {uid, token} = cookie.loadAll();
         Func.axiosPost("/pool/miner/powerLine", {user_id: uid, token: token, pool_id: pid}, this.syncCallBack)
@@ -398,6 +416,12 @@ class IncomeTablePanel extends Component {
         let {detail: {poolIDCurrent: {current: oldValue}}} = this.props.value;
         if (current !== oldValue) {
             this.getIncomeInfo(current)
+        }
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
         }
     }
 
@@ -515,6 +539,12 @@ class IncomeIntoDetail extends Component {
         this.state.pageSize = f
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         this.getIncomeInfo(current)
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
+        }
     }
 
     render() {
@@ -721,6 +751,12 @@ class MinerManage extends Component {
             message.success("修改成功");
         } else {
             message.error(description);
+        }
+    }
+
+    componentWillUnmount() {
+        this.setState = (state, callback) => {
+            return
         }
     }
 
