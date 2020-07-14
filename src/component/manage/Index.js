@@ -78,6 +78,9 @@ class StaffInputInfo extends Component {
             const {total, data: list} = info;
             for (const val of list) {
                 const {Id: id, Info: info, Name: name, Status: status} = val;
+                if(status === 9 ){
+                    continue;
+                }
                 this.state.role.push([id, name])
             }
             this.setState(this.state)
