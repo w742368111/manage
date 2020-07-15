@@ -78,10 +78,7 @@ class StaffInputInfo extends Component {
             const {total, data: list} = info;
             for (const val of list) {
                 const {Id: id, Info: info, Name: name, Status: status} = val;
-                if(status === 9 ){
-                    continue;
-                }
-                this.state.role.push([id, name])
+                this.state.role.push([id, name, status])
             }
             this.setState(this.state)
         } else {
@@ -108,14 +105,19 @@ class StaffInputInfo extends Component {
     render() {
         const info = this.state.role;
         const inner = info.map((val, key) => {
-            const [id, name] = val;
-            return <Option key={key} value={id}>{name}</Option>
+            const [id, name, status] = val;
+            if (status === 9) {
+                return <Option disabled key={key} value={id}>{name}</Option>
+            } else {
+                return <Option key={key} value={id}>{name}</Option>
+            }
         });
         return (
             <React.Fragment>
                 <div className={"new-staff-list"}>
                     <p>{intl.get("STAFF_NAME")}：</p>
-                    <Input maxLength={40} onChange={this.changeInput.bind(this, "name")} className={"info"} value={this.state.name}/>
+                    <Input maxLength={40} onChange={this.changeInput.bind(this, "name")} className={"info"}
+                           value={this.state.name}/>
                 </div>
                 <div className={"new-staff-list"}>
                     <p>{intl.get("STAFF_SET_PHONE")}：</p>
@@ -524,6 +526,7 @@ class OperateRole extends Component {
             message.error(description);
         }
     }
+
     componentWillUnmount() {
         this.setState = (state, callback) => {
             return
@@ -593,7 +596,7 @@ class StaffContent extends Component {
             this.state.total = total;
             this.state.info = [];
             for (const val of list) {
-                const {email, username:account,name: staffName, role_name: roleName, user_id: uid, role_id: rid} = val;
+                const {email, username: account, name: staffName, role_name: roleName, user_id: uid, role_id: rid} = val;
                 this.state.info.push([
                     staffName, account, email, roleName, (rid === -1) ? intl.get("NO_OPERATE") :
                         <OperateStaff get={this.getStaffList} id={uid}/>, 1
