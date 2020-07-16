@@ -104,7 +104,7 @@ class SystemInfoMain extends Component {
     syncCallBack = (data) => {
         const {code, data: info, description} = data.data;
         if (code === 0) {
-            const {name, ip} = info;
+            const {name, in_ip:ip} = info;
             this.state.http = [name, ip, "计算"]
             this.setState(this.state)
         } else {
@@ -1006,7 +1006,7 @@ class DNSModel extends Component {
                         {(key === 0) ? `${intl.get("DNS_SERVER")}:` : <React.Fragment></React.Fragment>}
                     </div>
                     <div className={"right"}>
-                        <Input onChange={this.onChange.bind(this, key)} defaultValue={val} style={{height: 36}}/>
+                        <Input disabled={true} onChange={this.onChange.bind(this, key)} defaultValue={val} style={{height: 36}}/>
                     </div>
                 </div>
             )
