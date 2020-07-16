@@ -842,6 +842,7 @@ class MinerManage extends Component {
                         {(type === 1) ? "密封机" : <></>}
                         {(type === 3) ? "存储机" : <></>}
                         {(type === 10) ? "算力机" : <></>}
+                        {(type === 0) ? "未设定" : <></>}
                     </p>
                     {(this.state.edit === 0) ?
                         <p className={"tran"} style={{left: `${text[2]}px`, transform: "none"}}>{cabinetAddress}</p> :
