@@ -123,12 +123,12 @@ class OperatePanel extends React.Component {
                     cancelText={intl.get('CANCEL')}
                     icon={icon}
                 />
-                <span onClick={this.checkBill.bind(this)} className="operate">{intl.get("BILL_CHECK")}</span>
+                <span onClick={this.checkBill.bind(this)} className="operate opert3">{intl.get("BILL_CHECK")}</span>
                 {this.props.close === 1 ?
-                    <span onClick={this.closeBill.bind(this)} className="operate">{intl.get("BILL_CLOSE")}</span> :
+                    <span onClick={this.closeBill.bind(this)} className="operate opert3">{intl.get("BILL_CLOSE")}</span> :
                     <React.Fragment></React.Fragment>
                 }
-                <span onClick={this.deleteBill.bind(this)} className="operate">{intl.get("BILL_DELETE")}</span>
+                <span onClick={this.deleteBill.bind(this)} className="operate opert3">{intl.get("BILL_DELETE")}</span>
             </React.Fragment>
         )
     }

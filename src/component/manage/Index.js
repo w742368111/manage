@@ -538,7 +538,7 @@ class OperateRole extends Component {
             <React.Fragment>
                 <svg onClick={this.editRole.bind(this, this.props.id)} style={{marginRight: "10px"}}
                      className="icon svg-icon svg-point" aria-hidden="true">
-                    <use xlinkHref="#iconicon_edit"></use>
+                    <use xlinkHref="#icongroup_icon_edit_nor"></use>
                 </svg>
                 <svg onClick={this.deleteRole.bind(this, this.props.id)} className="icon svg-icon svg-point"
                      aria-hidden="true">

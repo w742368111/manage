@@ -162,7 +162,7 @@ class PanelPower extends Component {
 
 class PanelMiner extends Component {
     getMinerList = (n) => {
-        this.props.change(2,0,n);
+        this.props.change(2, 0, n);
     }
 
     render() {
@@ -182,7 +182,11 @@ class PanelMiner extends Component {
                             <p>{allOnline ? allOnline : 0}</p>
                             {(allOffline > 0) ?
                                 <p onClick={this.getMinerList.bind(this, -1)}
-                                   style={{color: "#F02C1E", textDecoration: "underline"}}>{allOffline}</p> :
+                                   style={{
+                                       cursor: "pointer",
+                                       color: "#F02C1E",
+                                       textDecoration: "underline"
+                                   }}>{allOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -191,7 +195,11 @@ class PanelMiner extends Component {
                             <p>{sealOnline ? sealOnline : 0}</p>
                             {(sealOffline > 0) ?
                                 <p onClick={this.getMinerList.bind(this, 1)}
-                                    style={{color: "#F02C1E", textDecoration: "underline"}}>{sealOffline}</p> :
+                                   style={{
+                                       cursor: "pointer",
+                                       color: "#F02C1E",
+                                       textDecoration: "underline"
+                                   }}>{sealOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -200,7 +208,11 @@ class PanelMiner extends Component {
                             <p>{proveOnline ? proveOnline : 0}</p>
                             {(proveOffline > 0) ?
                                 <p onClick={this.getMinerList.bind(this, 10)}
-                                    style={{color: "#F02C1E", textDecoration: "underline"}}>{proveOffline}</p> :
+                                   style={{
+                                       cursor: "pointer",
+                                       color: "#F02C1E",
+                                       textDecoration: "underline"
+                                   }}>{proveOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -209,7 +221,11 @@ class PanelMiner extends Component {
                             <p>{storageOnline ? storageOnline : 0}</p>
                             {(storageOffline > 0) ?
                                 <p onClick={this.getMinerList.bind(this, 3)}
-                                    style={{color: "#F02C1E", textDecoration: "underline"}}>{storageOffline}</p> :
+                                   style={{
+                                       cursor: "pointer",
+                                       color: "#F02C1E",
+                                       textDecoration: "underline"
+                                   }}>{storageOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -308,9 +324,9 @@ const chartOptions = {
     //Number - Tension of the bezier curve between points
     bezierCurveTension: 0.4,
     //Boolean - Whether to show a dot for each point
-    pointDot: false,
+    pointDot: true,
     //Number - Radius of each point dot in pixels
-    pointDotRadius: 4,
+    pointDotRadius: 2,
     //Number - Pixel width of point dot stroke
     pointDotStrokeWidth: 1,
     //Number - amount extra to add to the radius to cater for hit detection outside the drawn point
@@ -324,7 +340,7 @@ const chartOptions = {
     //String - A legend template
     legendTemplate: "<ul class=\"<%=name.toLowerCase()%>-legend\"><% for (var i=0; i<datasets.length; i++){%><li><span style=\"background-color:<%=datasets[i].strokeColor%>\"><%if(datasets[i].label){%><%=datasets[i].label%><%}%></span></li><%}%></ul>",
     //Boolean - Whether to horizontally center the label and point dot inside the grid
-    offsetGridLines: false
+    offsetGridLines: true
 };
 
 function add0(m) {
@@ -334,7 +350,7 @@ function add0(m) {
 class PowerTablePanel extends Component {
     state = {
         socket: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        title: [`00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`,],
+        title: ['','','','','','','','','','','','','','','','','','','','','','','',''],
     }
 
     componentDidMount() {
@@ -372,7 +388,7 @@ class PowerTablePanel extends Component {
                 }
                 let date = new Date(time * 1000)
                 this.state.socket[key] = power;
-                this.state.title[key] = `${add0(date.getHours())}-${add0(date.getMinutes())}`;
+                this.state.title[key] = `${add0(date.getHours())}:${add0(date.getMinutes())}`;
             }
         } else {
             message.error(description);
@@ -400,6 +416,7 @@ class PowerTablePanel extends Component {
             <div className={"pic-panel"}>
                 <h3>算力曲线</h3>
                 <div className={"svg"}>
+                    <p style={{position:"absolute",left:"42px",top:"69px"}}>GB</p>
                     <LineChart data={chartData} options={chartOptions} width={1122} height={320}/>
                 </div>
             </div>
@@ -416,7 +433,7 @@ const PowerTablePanelApp = connect(
 class IncomeTablePanel extends Component {
     state = {
         socket: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        title: [`00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`],
+        title: ['','','','','','','','','','','','','',''],
     }
 
     componentDidMount() {
@@ -482,6 +499,7 @@ class IncomeTablePanel extends Component {
             <div className={"pic-panel"}>
                 <h3>收益曲线</h3>
                 <div className={"svg"}>
+                    <p style={{position:"absolute",left:"42px",top:"69px"}}>FIL</p>
                     <LineChart data={chartData} options={chartOptions} width={1122} height={320}/>
                 </div>
             </div>
@@ -628,8 +646,8 @@ class MinerManage extends Component {
         pageSize: 10,
         keyword: "",
         edit: 0,
-        online: (this.props.online >= 0)?this.props.online:-1,
-        role: (this.props.type)?this.props.type:-1,
+        online: (this.props.online >= 0) ? this.props.online : -1,
+        role: (this.props.type) ? this.props.type : -1,
         info: [],
         total: 0,
         on: 0,
@@ -958,15 +976,15 @@ const MinerManageApp = connect(
 class Index extends Component {
     state = {
         menu: 1,
-        online:-1,
-        type:-1
+        online: -1,
+        type: -1
     }
 
     onRef = (ref) => {
         this.child = ref
     }
 
-    changeMenu = (n,online,type) => {
+    changeMenu = (n, online, type) => {
         this.state.menu = n;
         this.state.online = online;
         this.state.type = type;
@@ -980,7 +998,7 @@ class Index extends Component {
                 <TopBannerApp menu={this.state.menu} change={this.changeMenu} onRef={this.onRef}/>
                 {this.state.menu === 1 ?
                     <React.Fragment>
-                        <PoolPanelApp change={this.changeMenu} />
+                        <PoolPanelApp change={this.changeMenu}/>
                         <PowerTablePanelApp/>
                         <IncomeTablePanelApp/>
                         <IncomeIntoDetailApp/>
