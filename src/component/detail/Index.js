@@ -743,6 +743,9 @@ class MinerManage extends Component {
     }
 
     changeState = (key, value) => {
+        if(key === 'role'){
+            this.state.page = 1;
+        }
         this.state[key] = value;
         this.setState(this.state);
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
@@ -803,14 +806,14 @@ class MinerManage extends Component {
                 <Menu.Item onClick={this.changeState.bind(this, "role", -1)}>
                     全部
                 </Menu.Item>
+                <Menu.Item onClick={this.changeState.bind(this, "role", 10)}>
+                    证明机
+                </Menu.Item>
                 <Menu.Item onClick={this.changeState.bind(this, "role", 1)}>
-                    密封
+                    算力机
                 </Menu.Item>
                 <Menu.Item onClick={this.changeState.bind(this, "role", 3)}>
-                    存储
-                </Menu.Item>
-                <Menu.Item onClick={this.changeState.bind(this, "role", 10)}>
-                    算力
+                    存储机
                 </Menu.Item>
             </Menu>
         );
@@ -839,7 +842,7 @@ class MinerManage extends Component {
                 <div className={"single"} key={key}>
                     <p style={{left: `${text[0]}px`}}>{name}</p>
                     <p style={{left: `${text[1]}px`, transform: "none"}}>
-                        {(type === 1) ? "密封机" : <></>}
+                        {(type === 1) ? "算力机" : <></>}
                         {(type === 3) ? "存储机" : <></>}
                         {(type === 5) ? "证明机" : <></>}
                         {(type === 7) ? "证明机" : <></>}
