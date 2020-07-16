@@ -161,6 +161,10 @@ class PanelPower extends Component {
 }
 
 class PanelMiner extends Component {
+    getMinerList = (n) => {
+        this.props.change(2,0,n);
+    }
+
     render() {
         const [allOnline, allOffline, sealOnline, sealOffline, proveOnline, proveOffline, storageOnline, storageOffline] = this.props.data;
         return (
@@ -177,7 +181,8 @@ class PanelMiner extends Component {
                             <p style={{fontWeight: 600}}>矿机数：{(allOnline + allOffline) ? (allOnline + allOffline) : 0}</p>
                             <p>{allOnline ? allOnline : 0}</p>
                             {(allOffline > 0) ?
-                                <p style={{color: "#F02C1E", textDecoration: "underline"}}>{allOffline}</p> :
+                                <p onClick={this.getMinerList.bind(this, -1)}
+                                   style={{color: "#F02C1E", textDecoration: "underline"}}>{allOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -185,7 +190,8 @@ class PanelMiner extends Component {
                             <p>算力机：{(sealOnline + sealOffline) ? (sealOnline + sealOffline) : 0}</p>
                             <p>{sealOnline ? sealOnline : 0}</p>
                             {(sealOffline > 0) ?
-                                <p style={{color: "#F02C1E", textDecoration: "underline"}}>{sealOffline}</p> :
+                                <p onClick={this.getMinerList.bind(this, 1)}
+                                    style={{color: "#F02C1E", textDecoration: "underline"}}>{sealOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -193,7 +199,8 @@ class PanelMiner extends Component {
                             <p>证明机：{(proveOnline + proveOffline) ? (proveOnline + proveOffline) : 0}</p>
                             <p>{proveOnline ? proveOnline : 0}</p>
                             {(proveOffline > 0) ?
-                                <p style={{color: "#F02C1E", textDecoration: "underline"}}>{proveOffline}</p> :
+                                <p onClick={this.getMinerList.bind(this, 10)}
+                                    style={{color: "#F02C1E", textDecoration: "underline"}}>{proveOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -201,7 +208,8 @@ class PanelMiner extends Component {
                             <p>存储机：{(storageOnline + storageOffline) ? (storageOnline + storageOffline) : 0}</p>
                             <p>{storageOnline ? storageOnline : 0}</p>
                             {(storageOffline > 0) ?
-                                <p style={{color: "#F02C1E", textDecoration: "underline"}}>{storageOffline}</p> :
+                                <p onClick={this.getMinerList.bind(this, 3)}
+                                    style={{color: "#F02C1E", textDecoration: "underline"}}>{storageOffline}</p> :
                                 <p>0</p>
                             }
                         </li>
@@ -271,7 +279,7 @@ class PoolPanel extends Component {
             <div className={"panel-three"}>
                 <PanelIncome data={IncomeTotal}/>
                 <PanelPower data={powerTotal}/>
-                <PanelMiner data={minerTotal}/>
+                <PanelMiner data={minerTotal} change={this.props.change}/>
                 <div className={"clear"}></div>
             </div>
         )
@@ -319,13 +327,16 @@ const chartOptions = {
     offsetGridLines: false
 };
 
-function add0(m){return m<10?'0'+m:m }
+function add0(m) {
+    return m < 10 ? '0' + m : m
+}
 
 class PowerTablePanel extends Component {
     state = {
-        socket: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        title:[`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,],
+        socket: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        title: [`00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`,],
     }
+
     componentDidMount() {
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         (current !== 0) && this.getPowerPanel(current)
@@ -354,10 +365,12 @@ class PowerTablePanel extends Component {
         const {code, data: info, description} = data.data;
         if (code === 0) {
             info.reverse();
-            for(const key in info){
-                const {add_time:time,power} = info[key];
-                if(key > 23){continue;}
-                let date = new Date(time*1000)
+            for (const key in info) {
+                const {add_time: time, power} = info[key];
+                if (key > 23) {
+                    continue;
+                }
+                let date = new Date(time * 1000)
                 this.state.socket[key] = power;
                 this.state.title[key] = `${add0(date.getHours())}-${add0(date.getMinutes())}`;
             }
@@ -402,8 +415,8 @@ const PowerTablePanelApp = connect(
 
 class IncomeTablePanel extends Component {
     state = {
-        socket: [0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-        title:[`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`,`00:00`],
+        socket: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+        title: [`00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`, `00:00`],
     }
 
     componentDidMount() {
@@ -434,12 +447,14 @@ class IncomeTablePanel extends Component {
         const {code, data: info, description} = data.data;
         if (code === 0) {
             info.reverse();
-            for(const key in info){
-                if(key > 14){continue;}
-                const {add_time:time,income} = info[key];
-                let date = new Date(time*1000)
+            for (const key in info) {
+                if (key > 14) {
+                    continue;
+                }
+                const {add_time: time, income} = info[key];
+                let date = new Date(time * 1000)
                 this.state.socket[key] = income;
-                this.state.title[key] = `${add0(date.getMonth()+1)}-${add0(date.getDate())}`;
+                this.state.title[key] = `${add0(date.getMonth() + 1)}-${add0(date.getDate())}`;
             }
         } else {
             message.error(description);
@@ -613,8 +628,8 @@ class MinerManage extends Component {
         pageSize: 10,
         keyword: "",
         edit: 0,
-        online: -1,
-        role: -1,
+        online: (this.props.online >= 0)?this.props.online:-1,
+        role: (this.props.type)?this.props.type:-1,
         info: [],
         total: 0,
         on: 0,
@@ -777,7 +792,7 @@ class MinerManage extends Component {
                     存储
                 </Menu.Item>
                 <Menu.Item onClick={this.changeState.bind(this, "role", 10)}>
-                    wpost
+                    算力
                 </Menu.Item>
             </Menu>
         );
@@ -808,7 +823,7 @@ class MinerManage extends Component {
                     <p style={{left: `${text[1]}px`, transform: "none"}}>
                         {(type === 1) ? "密封机" : <></>}
                         {(type === 3) ? "存储机" : <></>}
-                        {(type === 10) ? "wpost机" : <></>}
+                        {(type === 10) ? "算力机" : <></>}
                     </p>
                     {(this.state.edit === 0) ?
                         <p className={"tran"} style={{left: `${text[2]}px`, transform: "none"}}>{cabinetAddress}</p> :
@@ -942,13 +957,19 @@ const MinerManageApp = connect(
 
 class Index extends Component {
     state = {
-        menu: 1
+        menu: 1,
+        online:-1,
+        type:-1
     }
+
     onRef = (ref) => {
         this.child = ref
     }
-    changeMenu = (n) => {
-        this.state.menu = n
+
+    changeMenu = (n,online,type) => {
+        this.state.menu = n;
+        this.state.online = online;
+        this.state.type = type;
         this.setState(this.state);
     }
 
@@ -959,11 +980,11 @@ class Index extends Component {
                 <TopBannerApp menu={this.state.menu} change={this.changeMenu} onRef={this.onRef}/>
                 {this.state.menu === 1 ?
                     <React.Fragment>
-                        <PoolPanelApp/>
+                        <PoolPanelApp change={this.changeMenu} />
                         <PowerTablePanelApp/>
                         <IncomeTablePanelApp/>
                         <IncomeIntoDetailApp/>
-                    </React.Fragment> : <MinerManageApp/>
+                    </React.Fragment> : <MinerManageApp online={this.state.online} type={this.state.type}/>
                 }
                 <DeviceIndex/>
             </React.Fragment>
