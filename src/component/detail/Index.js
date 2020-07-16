@@ -10,6 +10,7 @@ import {Line as LineChart} from "react-chartjs";
 import intl from "react-intl-universal";
 import DeviceIndex from "../device/Index";
 import Initialize from "../Initialize";
+import copy from 'copy-to-clipboard';
 
 const commonStateToProps = (state) => {
     return {value: state};
@@ -562,6 +563,7 @@ class IncomeIntoDetail extends Component {
 
     changeMenu = (n) => {
         this.state.menu = n;
+        this.state.page = 1;
         this.setState(this.state);
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         this.getIncomeInfo(current)
@@ -579,6 +581,9 @@ class IncomeIntoDetail extends Component {
             return
         }
     }
+    copyLong = (add) =>{
+        Func.success(add);
+    }
 
     render() {
         const style = (this.state.menu === 1) ? ["on", ""] : ["", "on"]
@@ -587,9 +592,9 @@ class IncomeIntoDetail extends Component {
                 const {pay_id: pid, from_mining_address: from, to_mining_address: to, add_time: time, amount} = value;
                 return (
                     <div className={"single"} key={key}>
-                        <p style={{left: "60px", width: "260px"}}>{pid}</p>
+                        <p onClick={this.copyLong.bind(this,pid)} title={pid} style={{left: "60px", width: "260px"}}>{pid}</p>
                         <p style={{left: "439px"}}>{time}</p>
-                        <p style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
+                        <p onClick={this.copyLong.bind(this,from)} title={from} style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
                         <p style={{textAlign: "center", left: "883px", width: "137px"}}>{to}</p>
                         <p style={{left: "1034px"}}>{amount} FIL</p>
                     </div>
@@ -598,9 +603,9 @@ class IncomeIntoDetail extends Component {
                 const {pay_id: pid, from_mining_id: from, to_mining_id: to, add_time: time, real_amount: amount} = value;
                 return (
                     <div className={"single"} key={key}>
-                        <p style={{left: "60px", width: "260px"}}>{pid}</p>
+                        <p onClick={this.copyLong.bind(this,pid)} title={pid} style={{left: "60px", width: "260px"}}>{pid}</p>
                         <p style={{left: "439px"}}>{time}</p>
-                        <p style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
+                        <p onClick={this.copyLong.bind(this,from)} title={from} style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
                         <p style={{textAlign: "center", left: "883px", width: "137px"}}>{to}</p>
                         <p style={{left: "1034px"}}>{amount} FIL</p>
                     </div>
