@@ -10,7 +10,6 @@ import {Line as LineChart} from "react-chartjs";
 import intl from "react-intl-universal";
 import DeviceIndex from "../device/Index";
 import Initialize from "../Initialize";
-import copy from 'copy-to-clipboard';
 
 const commonStateToProps = (state) => {
     return {value: state};
