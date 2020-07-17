@@ -391,6 +391,11 @@ class PowerTablePanel extends Component {
                 this.state.title[key] = `${add0(date.getHours())}:${add0(date.getMinutes())}`;
             }
         } else {
+            this.state = {
+                socket: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                title: ['','','','','','','','','','','','','','','','','','','','','','','',''],
+            }
+            this.setState(this.state);
             message.error(description);
         }
         this.setState(this.state);
@@ -474,6 +479,11 @@ class IncomeTablePanel extends Component {
                 this.state.title[key] = `${add0(date.getMonth() + 1)}-${add0(date.getDate())}`;
             }
         } else {
+            this.state = {
+                socket: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
+                title: ['','','','','','','','','','','','','',''],
+            }
+            this.setState(this.state);
             message.error(description);
         }
         this.setState(this.state);
