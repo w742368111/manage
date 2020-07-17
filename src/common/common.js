@@ -68,7 +68,8 @@ export const checkMobileNumber = (phone) => {
 
 // 检查邮箱的合法性
 export const checkEmailFormat = (email) => {
-    const reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;
+    // const reg = /^\w+@[a-z0-9]+\.[a-z]+$/i;
+    const reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
     return !reg.test(email);
 }
 
