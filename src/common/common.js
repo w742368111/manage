@@ -264,11 +264,9 @@ export const billNoChange = (id) => {
     return `GD_${id}`
 }
 
-
-
-
 // 盘位转换的函数
 export const get_disknum = (str, type) => {
+    return str;
     const json = {
         "list": [{
             "productid": "AMXH4U24SE1",
