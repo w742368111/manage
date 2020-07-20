@@ -352,7 +352,7 @@ class MessageCenter extends Component {
         const menu = (
             <Menu>
                 <Menu.Item key="0">
-                    <a onClick={this.changeType.bind(this, 1)}>掉线</a>
+                    <a onClick={this.changeType.bind(this, -1)}>全部</a>
                 </Menu.Item>
                 <Menu.Item key="1">
                     <a onClick={this.changeType.bind(this, 2)}>坏道</a>
@@ -361,10 +361,10 @@ class MessageCenter extends Component {
                     <a onClick={this.changeType.bind(this, 4)}>空间不足</a>
                 </Menu.Item>
                 <Menu.Item key="3">
-                    <a onClick={this.changeType.bind(this, 8)}>CPU温度</a>
+                    <a onClick={this.changeType.bind(this, 8)}>CPU温度过高</a>
                 </Menu.Item>
                 <Menu.Item key="4">
-                    <a onClick={this.changeType.bind(this, 16)}>磁盘温度</a>
+                    <a onClick={this.changeType.bind(this, 16)}>磁盘温度过高</a>
                 </Menu.Item>
             </Menu>
         );

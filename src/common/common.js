@@ -79,8 +79,8 @@ export const changeWarningType = (key) => {
         1: "掉线",
         2: "坏道",
         4: "空间不足",
-        8: "CPU温度",
-        16: "磁盘温度",
+        8: "CPU温度过高",
+        16: "磁盘温度过高",
     }
     return list[key];
 }
