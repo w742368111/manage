@@ -206,7 +206,7 @@ class WarningSet extends React.Component {
                             width: "662px",
                             height: "2px",
                             backgroundColor: "#EBF1F5"
-                        }}></div>
+                        }}/>
 
                     </ul>
                 </div>

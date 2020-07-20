@@ -20,7 +20,7 @@ const TableInto = (props) => {
         <React.Fragment>
             <h5>{props.name}</h5>
             <svg className="icon svg-icon svg-logo svg-inner" aria-hidden="true">
-                <use xlinkHref="#iconicon_more_norsvg"></use>
+                <use xlinkHref="#iconicon_more_norsvg"/>
             </svg>
         </React.Fragment>
     )
@@ -32,7 +32,7 @@ const TableBanner = (props) => {
             <div className={"table-banner"}>
                 <TableTitle title={props.title} icon={props.icon}/>
                 {props.name ?
-                    <TableInto name={props.name}/> : <React.Fragment></React.Fragment>
+                    <TableInto name={props.name}/> : <React.Fragment/>
                 }
             </div>
         </React.Fragment>
@@ -66,7 +66,7 @@ export const RowName = (props) => {
             </div>
         )
     } else {
-        return <React.Fragment></React.Fragment>
+        return <React.Fragment/>
     }
 }
 
@@ -143,14 +143,14 @@ export const TableCommon = (props) => {
             <RowName row={props.row} show={props.show}/>
             {(props.type == 'collapse') ?
                 <CollapsePanel row={props.row} text={props.text}/> :
-                <React.Fragment></React.Fragment>
+                <React.Fragment/>
             }
             {(props.type == 'table') ?
                 <TableInner row={props.row} text={props.text} emptyStyle={props.emptyStyle}/> :
-                <React.Fragment></React.Fragment>
+                <React.Fragment/>
             }
             {(props.type == 'other') ? <div className={"mix-common"}>{props.children}</div>
-                : <React.Fragment></React.Fragment>
+                : <React.Fragment/>
             }
             {props.more}
         </TableBg>

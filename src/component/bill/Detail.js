@@ -95,7 +95,7 @@ class BillFormat extends Component {
             <React.Fragment>
                 <div className="bill-detail-main-area">
                     <div className="info1">
-                        <div className="icon"></div>
+                        <div className="icon"/>
                         <p className="title">{intl.get("BASE_INFO")}</p>
                         <p style={{top: "62px",left: "15px"}}>{intl.get("BILL_NUMBER_SHORT")}</p><p
                         style={{top: "62px", left: "80px"}}>:</p>
@@ -123,21 +123,21 @@ class BillFormat extends Component {
 
                     </div>
                     <div className="info2">
-                        <div style={{top: "70px"}} className="icon"></div>
+                        <div style={{top: "70px"}} className="icon"/>
                         <p style={{top: "68px"}} className="title">{intl.get("BILL_CONTENT")}</p>
                         <div className="content">
                             <p className={"left"}>{intl.get("QUESTION_DESCRIPTION")}：</p>
                             <p className={"in"}>{text}</p>
-                            <div style={{clear: "both"}}></div>
+                            <div style={{clear: "both"}}/>
                         </div>
                     </div>
                     <div className={"info3"}>
                         <p className={"left"}>{intl.get("BILL_PICTURE")}：</p>
                         <div className={"picture-area"}>
                             {imgList}
-                            <div style={{clear: "both"}}></div>
+                            <div style={{clear: "both"}}/>
                         </div>
-                        <div style={{clear: "both"}}></div>
+                        <div style={{clear: "both"}}/>
                     </div>
                 </div>
                 <MyModal
