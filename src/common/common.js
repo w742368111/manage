@@ -76,7 +76,11 @@ export const checkEmailFormat = (email) => {
 // 改变告警类型
 export const changeWarningType = (key) => {
     const list = {
-        13: "CPU温度过高"
+        1: "掉线",
+        2: "坏道",
+        4: "空间不足",
+        8: "CPU温度",
+        16: "磁盘温度",
     }
     return list[key];
 }

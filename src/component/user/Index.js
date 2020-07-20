@@ -6,13 +6,15 @@ import store from "../../store/"
 import * as CommonAction from "../../action/common";
 import * as Key from "../../store/config/config";
 import * as Icon from "../common/Icon";
-import {Button, Pagination, Select, Switch, Input, message} from "antd";
+import {Button, Pagination, Select, Switch, Input, message, Menu, Dropdown} from "antd";
 import * as Func from "../../common/common";
 import * as Rows from "../common/RowSet";
 import MyModal from "../common/Modal";
 import cookie from "react-cookies";
 import Initialize from "../Initialize";
 import {connect} from "react-redux";
+import {DownOutlined} from '@ant-design/icons';
+
 
 const {Option} = Select;
 
@@ -286,6 +288,7 @@ class MessageCenter extends Component {
     state = {
         page: 1,
         total: 0,
+        type: -1,
         list: []
     }
 
@@ -308,7 +311,12 @@ class MessageCenter extends Component {
         this.state.total = 0;
         this.state.list = [];
         this.setState(this.state);
-        Func.axiosPost("/warning/warning/list", {user_id: uid, token: token, page: this.state.page}, this.warnCallBack)
+        Func.axiosPost("/warning/warning/list", {
+            user_id: uid,
+            token: token,
+            type: this.state.type,
+            page: this.state.page
+        }, this.warnCallBack)
     }
 
     warnCallBack = (data) => {
@@ -331,9 +339,35 @@ class MessageCenter extends Component {
         this.getWarningInfo();
     }
 
+    changeType = (type) => {
+        this.state.type = type;
+        this.state.page = 1;
+        this.setState(this.state)
+        this.getWarningInfo()
+    }
+
     render() {
         const text = this.state.list;
         const title = Func.changeName(Rows.MessageCenter());
+        const menu = (
+            <Menu>
+                <Menu.Item key="0">
+                    <a onClick={this.changeType.bind(this, 1)}>掉线</a>
+                </Menu.Item>
+                <Menu.Item key="1">
+                    <a onClick={this.changeType.bind(this, 2)}>坏道</a>
+                </Menu.Item>
+                <Menu.Item key="2">
+                    <a onClick={this.changeType.bind(this, 4)}>空间不足</a>
+                </Menu.Item>
+                <Menu.Item key="3">
+                    <a onClick={this.changeType.bind(this, 8)}>CPU温度</a>
+                </Menu.Item>
+                <Menu.Item key="4">
+                    <a onClick={this.changeType.bind(this, 16)}>磁盘温度</a>
+                </Menu.Item>
+            </Menu>
+        );
         return (
             <Table.TableCommon
                 style={{marginTop: "0px", width: "100%"}}
@@ -342,11 +376,27 @@ class MessageCenter extends Component {
                 type={"other"}
             >
                 <MessageTitle/>
-                <Table.RowName row={title} show={1}/>
+                <div className="table-row-name-area">
+                    <h6 style={{width: "198px"}}>时间</h6>
+                    <h6 style={{width: "171px"}}>
+                        <Dropdown overlay={menu} trigger={['click']}>
+                            <a style={{color: "#394565"}} className="ant-dropdown-link"
+                               onClick={e => e.preventDefault()}>
+                                类型
+                                <svg className="icon svg-icon detail-icon" aria-hidden="true"
+                                     style={{marginLeft: "10px"}}>
+                                    <use xlinkHref="#iconicon_pull"></use>
+                                </svg>
+                            </a>
+                        </Dropdown>
+                    </h6>
+                    <h6 style={{width: "436px"}}>内容</h6>
+                </div>
                 <Table.TableInner row={title} text={text}/>
                 <Pagination
                     hideOnSinglePage={true}
                     defaultCurrent={1}
+                    current={this.state.page}
                     pageSizeOptions={[10]}
                     total={this.state.total}
                     onChange={this.changePage.bind(this)}
