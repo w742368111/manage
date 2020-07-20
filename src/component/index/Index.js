@@ -46,8 +46,8 @@ class MainAreaList extends Component {
         Func.axiosPost("/pool/pool/list", {user_id: uid, token: token}, this.syncCallBack)
     }
 
-    gotoPool = (id) =>{
-        this.props.commonUpdateUser(id,Key.changeIndexPoolId)
+    gotoPool = (id) => {
+        this.props.commonUpdateUser(id, Key.changeIndexPoolId)
         this.props.history.push("/poolweb/index")
     }
 
@@ -69,11 +69,11 @@ class MainAreaList extends Component {
 
     render() {
         const inner = this.state.info.map((value, key) => {
-            const {id, name,owner_id:owner, mining_name: miner,peer_id:pid,miner_addtime:addTime, income, ars_mining_address: xhAddress,mining_id:mid ,ars_mining_id: xhKey, power, device_count: count, seal_count: sealCount, prove_count: proveCount, storage_count: storageCount} = value;
+            const {id, name, owner_id: owner, mining_name: miner, peer_id: pid, miner_addtime: addTime, income, ars_mining_address: xhAddress, mining_id: mid, ars_mining_id: xhKey, power, device_count: count, seal_count: sealCount, prove_count: proveCount, storage_count: storageCount} = value;
             const left = key % 3 + 1
-            const top = (key === 0)?74:18;
+            const top = (key === 0) ? 74 : 18;
             return (
-                <div className={"new-index-main"} key={key} style={{marginTop:`${top}px`}}>
+                <div className={"new-index-main"} key={key} style={{marginTop: `${top}px`}}>
                     <div className={`banner bg${left}`}>
                         <svg className="icon svg-icon oper-icon coin-top" aria-hidden="true">
                             <use xlinkHref="#iconnav_icon_logo"></use>
@@ -81,13 +81,18 @@ class MainAreaList extends Component {
                         <h3>{miner}</h3>
                     </div>
                     <div className={"text"}>
-                        <p style={{top: "40px"}} className={"bold"}>{intl.get('TOTAL_INCOME')}：{Func.coinExchange(income)}</p>
-                        <p style={{top: "84px"}} className={"bold"}>{intl.get('VALID_POWER')}：{Func.powerUnitChange(power)}</p>
-                        <p style={{top: "128px"}} className={"bold"}>{intl.get('MINER_TOTAL',{count:count})}</p>
-                        <p style={{top: "40px", left: "528px"}} className={"bold"}>{intl.get('SEAL_COUNT',{count:sealCount})}</p>
-                        <p style={{top: "84px", left: "528px"}} className={"bold"}>{intl.get('PROVE_COUNT',{count:proveCount})}</p>
-                        <p style={{top: "128px", left: "528px"}} className={"bold"}>{intl.get('STORAGE_COUNT',{count:storageCount})}</p>
-                        <a onClick={this.gotoPool.bind(this,id)}>
+                        <p style={{top: "40px"}}
+                           className={"bold"}>{intl.get('TOTAL_INCOME')}：{Func.coinExchange(income)}</p>
+                        <p style={{top: "84px"}}
+                           className={"bold"}>{intl.get('VALID_POWER')}：{Func.powerUnitChange(power)}</p>
+                        <p style={{top: "128px"}} className={"bold"}>{intl.get('MINER_TOTAL', {count: count})}</p>
+                        <p style={{top: "40px", left: "528px"}}
+                           className={"bold"}>{intl.get('SEAL_COUNT', {count: sealCount})}</p>
+                        <p style={{top: "84px", left: "528px"}}
+                           className={"bold"}>{intl.get('PROVE_COUNT', {count: proveCount})}</p>
+                        <p style={{top: "128px", left: "528px"}}
+                           className={"bold"}>{intl.get('STORAGE_COUNT', {count: storageCount})}</p>
+                        <a onClick={this.gotoPool.bind(this, id)}>
                             <div className={`but but${left}`}><p>{intl.get("INCOME_POOL")}</p></div>
                         </a>
                         <div className={`icon-go icon-go${left}`}></div>
@@ -96,7 +101,8 @@ class MainAreaList extends Component {
                         <p style={{top: "278px"}}
                            className={"thin"}>{intl.get("NODE_ID")}：{pid}</p>
                         <p style={{top: "239px", left: "839px"}} className={"thin"}>{intl.get("OWNER_ID")}：{owner}</p>
-                        <p style={{top: "278px", left: "839px"}} className={"thin"}>{intl.get("CREATE_TIME")}：{addTime}</p>
+                        <p style={{top: "278px", left: "839px"}}
+                           className={"thin"}>{intl.get("CREATE_TIME")}：{addTime}</p>
                     </div>
                 </div>
             )
@@ -162,7 +168,7 @@ class Index extends Component {
                 for (const val of info.data) {
                     const {device_name: name, info, add_time: addTime} = val;
                     const inner = `[${name}] ${addTime} ${info}`;
-                    this.state.warning.push([inner.substring(0, 80), inner, 1])
+                    this.state.warning.push([(inner.length > 80) ? `${inner.substring(0, 80)} ...` : inner, inner, 1])
                 }
                 this.setState(this.state);
             }

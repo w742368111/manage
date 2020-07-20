@@ -53,6 +53,7 @@ class Initialize extends Component {
             } else if (action === "heartbeat") {
 
             } else {
+                // console.log(`back:${info}`)
                 this.props.changeSocketBack(info, Key.changeGlobalsSocket);
             }
         };

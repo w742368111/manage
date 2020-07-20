@@ -171,7 +171,7 @@ class WarningSet extends React.Component {
                             <Switch className={"switch"} defaultChecked={switchArr[0]}
                                     onChange={this.changeSet.bind(this, pid, 1)}/></li>
                         <li>
-                            <p>{intl.get("DISK_SIZE_GOING_FULL")}</p>
+                            <p>{intl.get("ROOM_IS_LESS_THAN")}</p>
                             <Switch className={"switch"} defaultChecked={switchArr[1]}
                                     onChange={this.changeSet.bind(this, pid, 2)}/>
                         </li>

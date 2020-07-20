@@ -113,7 +113,7 @@ class SystemInfoMain extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_system_showinfo","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_system_showinfo","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_system_showinfo","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
@@ -262,7 +262,7 @@ class CPUPerformPanel extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
@@ -332,7 +332,7 @@ class MemoryPerformPanel extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
@@ -400,7 +400,7 @@ class DiskPerformPanel extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_disk_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_disk_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_disk_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
@@ -511,7 +511,7 @@ class NetSpeedPerformPanel extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_system_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
@@ -700,7 +700,7 @@ class DiskManageModel extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_disk_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_disk_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_disk_info","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
@@ -895,7 +895,7 @@ class NetSetModal extends Component {
                     </div>
                     <div className={"right"}>
                         <Select disabled onChange={this.changeSelect.bind(this, "ipv4_set")} className={"net-panel"}
-                                defaultValue={this.props.val.ipv4_set} style={{width: 280}}>
+                                value={this.props.val.ipv4_set} style={{width: 280}}>
                             <Option value="dhcp">{intl.get("USE_DHCP")}</Option>
                             <Option value="static">{intl.get("USE_STATIC")}</Option>
                         </Select>
@@ -1057,7 +1057,7 @@ class NetSetArea extends Component {
     }
 
     getSocketDeviceInfo = () => {
-        console.log(`{"from":"html","act":"get_net_baseinfo","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
+        // console.log(`{"from":"html","act":"get_net_baseinfo","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
         window.ws.send(`{"from":"html","act":"get_net_baseinfo","act_code":"ccccc","hardware_id":"${this.props.device}"}`)
     }
 
