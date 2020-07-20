@@ -69,7 +69,7 @@ class MainAreaList extends Component {
 
     render() {
         const inner = this.state.info.map((value, key) => {
-            const {id, name,owner_id:owner, mining_name: miner,miner_addtime:addTime, income, ars_mining_address: xhAddress, ars_mining_id: xhKey, power, device_count: count, seal_count: sealCount, prove_count: proveCount, storage_count: storageCount} = value;
+            const {id, name,owner_id:owner, mining_name: miner,peer_id:pid,miner_addtime:addTime, income, ars_mining_address: xhAddress,mining_id:mid ,ars_mining_id: xhKey, power, device_count: count, seal_count: sealCount, prove_count: proveCount, storage_count: storageCount} = value;
             const left = key % 3 + 1
             const top = (key === 0)?74:18;
             return (
@@ -92,9 +92,9 @@ class MainAreaList extends Component {
                         </a>
                         <div className={`icon-go icon-go${left}`}></div>
                         <div className={"hr"}></div>
-                        <p style={{top: "239px"}} className={"thin"}>{intl.get("ADDRESS")}：{xhAddress}</p>
+                        <p style={{top: "239px"}} className={"thin"}>{intl.get("ADDRESS")}：{mid}</p>
                         <p style={{top: "278px"}}
-                           className={"thin"}>{intl.get("NODE_ID")}：{xhKey}</p>
+                           className={"thin"}>{intl.get("NODE_ID")}：{pid}</p>
                         <p style={{top: "239px", left: "839px"}} className={"thin"}>{intl.get("OWNER_ID")}：{owner}</p>
                         <p style={{top: "278px", left: "839px"}} className={"thin"}>{intl.get("CREATE_TIME")}：{addTime}</p>
                     </div>

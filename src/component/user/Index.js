@@ -171,7 +171,7 @@ class WarningSet extends React.Component {
                             <Switch className={"switch"} defaultChecked={switchArr[0]}
                                     onChange={this.changeSet.bind(this, pid, 1)}/></li>
                         <li>
-                            <p>{intl.get("ROOM_IS_LESS_THAN")}</p>
+                            <p>{intl.get("DISK_SIZE_GOING_FULL")}</p>
                             <Switch className={"switch"} defaultChecked={switchArr[1]}
                                     onChange={this.changeSet.bind(this, pid, 2)}/>
                         </li>
@@ -185,11 +185,11 @@ class WarningSet extends React.Component {
                             <Switch className={"switch"} defaultChecked={switchArr[3]}
                                     onChange={this.changeSet.bind(this, pid, 8)}/>
                         </li>
-                        <li>
-                            <p>{intl.get("DISK_SIZE_GOING_FULL")}</p>
-                            <Switch className={"switch"} defaultChecked={switchArr[4]}
-                                    onChange={this.changeSet.bind(this, pid, 16)}/>
-                        </li>
+                        {/*<li>*/}
+                        {/*    <p>{intl.get("DISK_SIZE_GOING_FULL")}</p>*/}
+                        {/*    <Switch className={"switch"} defaultChecked={switchArr[4]}*/}
+                        {/*            onChange={this.changeSet.bind(this, pid, 16)}/>*/}
+                        {/*</li>*/}
                         <li>
                             <p>{intl.get("WARNING_RATE_SET")}</p>
                             {/*<Switch className={"switch"} defaultChecked={switchArr[4]}*/}
