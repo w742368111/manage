@@ -2452,6 +2452,20 @@ nav {
   }
 }
 
+.machine-list{
+  .ant-pagination{
+    margin-top: 20px;
+    text-align: center!important;
+  }
+  .ant-pagination-options-size-changer{
+    display: inline-block !important;
+  }
+  .ant-pagination-options-quick-jumper input {
+    width: 50px;
+    height: 32px;
+  }
+}
+
 .opert3:hover{
   color: #3aa9f1;
   cursor: pointer;

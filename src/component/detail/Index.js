@@ -968,7 +968,7 @@ class MinerManage extends Component {
                         </p>
                         <p style={{left: `${title[10]}px`}}>详情</p>
                     </div>
-                    <div className={"list"}>
+                    <div className={"list machine-list"}>
                         {info}
                         <div className={"box"}>
                             <p style={{left: "10px"}}>总数：{this.state.total}台</p>
