@@ -332,7 +332,7 @@ class PowerEditMain extends Component {
         const {code, data: info, description} = data.data;
         if (code === 0) {
             for (const val of info) {
-                const {id, name} = val;
+                const {id, mining_name:name} = val;
                 this.state.pool.push([name, this.state.power.includes(`POOL_${id}`), id])
             }
             this.state.show = true;
