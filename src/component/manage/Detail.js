@@ -39,6 +39,8 @@ const OperateButtonPanel = (props) => {
 const Item = (name, key, id, props, status) => {
     let val;
 
+    const manage = ["INCOME_VIEW", "USER_ADD", "USER_EDIT", "USER_DELETE","PERMISSION_EDIT", "ROLE_ADD", "ROLE_EDIT", "ROLE_DELETE", "WARNING_EDIT", "WORKORDER_ADD", "WORKORDER_EDIT", "WORKORDER_DELETE"];
+
     if (name === "check") {
         val = props[0]
     }
@@ -53,11 +55,15 @@ const Item = (name, key, id, props, status) => {
     }
 
     if (status === 9) {
-        if(key === 2 || key === 3){
+        if (key === 2 || key === 3) {
             key = 1;
         }
-    }else if(status === 5){
-        if((key === 2 || key === 3) && val !== 'INCOME_VIEW'){
+    } else if (status === 5) {
+        if ((key === 2 || key === 3) && val !== 'INCOME_VIEW') {
+            key = 1;
+        }
+    } else if (status === 3) {
+        if ((key === 2 || key === 3) && !manage.includes(val)) {
             key = 1;
         }
     }
