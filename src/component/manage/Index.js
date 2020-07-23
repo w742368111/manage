@@ -689,7 +689,7 @@ class PoolContent extends Component {
             for (const val of list) {
                 const {Id: id, Info: info, Name: name, Status: status} = val;
                 this.state.info.push([
-                    <SignRadio check={(!(status === 5 || status === 9))}/>,
+                    <SignRadio check={(!(status===3 ||status === 5 || status === 9))}/>,
                     name, <CheckButton id={id}/>, info, <OperateRole get={this.getRoleList} id={id}/>, 1
                 ])
             }
