@@ -898,7 +898,7 @@ class MinerManage extends Component {
                     }
                     <p style={{left: `${text[4]}px`, transform: "none"}}>{ipManage}</p>
                     <p style={{left: `${text[5]}px`, transform: "none"}}>{inIp}</p>
-                    <p style={{left: `${text[6]}px`, transform: "none"}}>{(diskRate).toFixed(2)}%</p>
+                    <p style={{left: `${text[6]}px`, transform: "none"}}>{parseInt(diskRate)}%</p>
                     <p style={{left: `${text[7]}px`, transform: "none"}}>{online.substring(5)}</p>
                     <p style={{left: `${text[8]}px`, transform: "none"}}>{offline.substring(5)}</p>
                     <p style={{left: `${text[9]}px`, transform: "none"}}>
