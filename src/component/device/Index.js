@@ -792,7 +792,6 @@ class DiskManageModel extends Component {
                 label: intl.get("USED_SPACE")
             },
         ];
-
         return (
             <React.Fragment>
                 <div className={"disk-manage-area"}>
@@ -822,13 +821,13 @@ class DiskManageModel extends Component {
                                         left: "82px",
                                         top: "52px",
                                         color: "#394565"
-                                    }}>{intl.get("NOW_LEFT")}：{((this.state.left / this.state.total) * 100).toFixed(2)} %</p>
+                                    }}>{intl.get("NOW_LEFT")}：{(this.state.total === 0)?0:((this.state.left / this.state.total) * 100).toFixed(2)} %</p>
                                     <p style={{
                                         position: "absolute",
                                         left: "82px",
                                         top: "82px",
                                         color: "#394565"
-                                    }}>{intl.get("ALREADY_USED")}：{((this.state.used / this.state.total) * 100).toFixed(2)} %</p>
+                                    }}>{intl.get("ALREADY_USED")}：{(this.state.total === 0)?0:((this.state.used / this.state.total) * 100).toFixed(2)} %</p>
                                 </React.Fragment> : <React.Fragment></React.Fragment>
 
                             }
