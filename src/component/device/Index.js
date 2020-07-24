@@ -709,7 +709,7 @@ class DiskManageModel extends Component {
         const {act} = JSON.parse(current);
         if (act === "get_disk_info") {
             const {disk_space_used: used, disk_space_all: all, disk_list: list} = JSON.parse(current);
-            this.state.count = list.length;
+            this.state.count = (list)?list.length:0;
             this.makeDiskList(list)
             this.state.total = all;
             this.state.used = used;
