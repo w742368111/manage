@@ -711,8 +711,8 @@ class DiskManageModel extends Component {
             const {disk_space_used: used, disk_space_all: all, disk_list: list} = JSON.parse(current);
             this.state.count = (list)?list.length:0;
             this.makeDiskList(list)
-            this.state.total = all;
-            this.state.used = used;
+            this.state.total = (all)?all:0;
+            this.state.used = (used)?used:0;
             this.state.show = 1;
             this.state.left = (all - used);
             this.setState(this.state)
@@ -721,6 +721,7 @@ class DiskManageModel extends Component {
 
     makeDiskList = (list) => {
         this.state.list = [];
+        list = (list)?list:[];
         for (const val of list) {
             const {bus_serial: serial, disk_name: name, disk_serial_number: number, disk_space_all: all, disk_space_used: used, disk_status: status} = val;
             this.state.list.push({
