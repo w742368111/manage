@@ -1,5 +1,6 @@
 import React, {Component} from "react";
-import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+// import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
+import {BrowserRouter, Switch, Route,HashRouter} from "react-router-dom";
 import intl from 'react-intl-universal';
 
 import ReconnectingWebSocket from 'reconnecting-websocket';
@@ -63,7 +64,7 @@ export default class Basic extends React.Component {
             <React.Fragment>
                 {this.state.wsDone === 0 ?
                     <React.Fragment></React.Fragment> :
-                    <Router>
+                    <HashRouter>
                         <Switch>
                             <Route path="/userweb/login" component={LoginIndex}/>
                             <Route path="/userweb/reset" component={ResetIndex}/>
@@ -78,7 +79,7 @@ export default class Basic extends React.Component {
                             <Route path="/manageweb/detail" component={ManageDetail}/>
                             <Route path="/" component={LoginIndex}/>
                         </Switch>
-                    </Router>
+                    </HashRouter>
                 }
             </React.Fragment>
         )
