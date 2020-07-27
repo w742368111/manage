@@ -34,7 +34,7 @@ const LogoArea = (props) => {
 }
 
 const MenuList = () => {
-    let path = window.location.pathname;
+    let path = window.location.hash.replace("#","");
     const above = [
         ["/index/index/"],
         ["/poolweb/index/", "/poolweb/wallet/", "/poolweb/miner/"],
