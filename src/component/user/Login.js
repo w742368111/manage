@@ -102,7 +102,7 @@ class Login extends Component {
                     this.state.isWait === 0 ?
                         <React.Fragment>
                             <svg className="icon svg-icon svg-logo" aria-hidden="true">
-                                <use xlinkHref="#iconnav_icon_logo"></use>
+                                <use xlinkHref="#iconnav_icon_logo"/>
                             </svg>
                             <h5 className={"system-title"}>{intl.get('SYSTEM_NAME')}</h5>
                             <Input
@@ -110,7 +110,7 @@ class Login extends Component {
                                 placeholder={intl.get('PLEASE_INPUT_ACCOUNT')}
                                 onChange={this.changeValue.bind(this, "account")}
                                 prefix={<svg className="icon svg-icon" aria-hidden="true">
-                                    <use xlinkHref="#iconicon_login_nor"></use>
+                                    <use xlinkHref="#iconicon_login_nor"/>
                                 </svg>}
                             />
                             <Input
@@ -119,7 +119,7 @@ class Login extends Component {
                                 placeholder={intl.get('PLEASE_INPUT_PASSWORD')}
                                 onChange={this.changeValue.bind(this, "password")}
                                 prefix={<svg className="icon svg-icon" aria-hidden="true">
-                                    <use xlinkHref="#iconicon_password_nor"></use>
+                                    <use xlinkHref="#iconicon_password_nor"/>
                                 </svg>}
                                 suffix={ForgetPassword()}
                             />
@@ -128,7 +128,7 @@ class Login extends Component {
                                 {intl.get('LOGIN_BUTTON')}
                             </Button>
                             <ErrorTip inner={this.state.errorTip}/>
-                        </React.Fragment> : <React.Fragment></React.Fragment>
+                        </React.Fragment> : <React.Fragment/>
                 }
                 {
                     this.state.isWait === 1 ? <img style={{
@@ -138,7 +138,7 @@ class Login extends Component {
                             position: "absolute",
                             transform: "translate(0,-50%)"
                         }} src={waitImg}/>
-                        : <React.Fragment></React.Fragment>
+                        : <React.Fragment/>
                 }
 
 

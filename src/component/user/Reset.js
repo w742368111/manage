@@ -156,7 +156,7 @@ class Login extends Component {
             <BackGround>
                 <React.Fragment>
                     <svg className="icon svg-icon svg-logo" aria-hidden="true">
-                        <use xlinkHref="#iconnav_icon_logo"></use>
+                        <use xlinkHref="#iconnav_icon_logo"/>
                     </svg>
                     <h5 className={"system-title"}>{intl.get('SYSTEM_NAME')}</h5>
                     {this.state.step === 1 ?
@@ -167,7 +167,7 @@ class Login extends Component {
                                 placeholder={intl.get('PLEASE_TYPE_MOBILE_NUMBER')}
                                 onChange={this.changeValue.bind(this, "account")}
                                 prefix={<svg className="icon svg-icon" aria-hidden="true">
-                                    <use xlinkHref="#iconicon_password_nor"></use>
+                                    <use xlinkHref="#iconicon_password_nor"/>
                                 </svg>}
                                 suffix={<SendMsg account={this.state.account}/>}
                             />
@@ -177,7 +177,7 @@ class Login extends Component {
                                 placeholder={intl.get('PLEASE_TYPE_MOBILE_VERIFY')}
                                 onChange={this.changeValue.bind(this, "verify")}
                                 prefix={<svg className="icon svg-icon" aria-hidden="true">
-                                    <use xlinkHref="#iconicon_password_nor"></use>
+                                    <use xlinkHref="#iconicon_password_nor"/>
                                 </svg>}
                             />
                             <Button type="primary" block className={"login-button"}
@@ -193,7 +193,7 @@ class Login extends Component {
                                 onChange={this.changeValue.bind(this, "newPassword")}
                                 iconRender={visible => (visible ? <EyeTwoTone/> : <EyeInvisibleOutlined/>)}
                                 prefix={<svg className="icon svg-icon" aria-hidden="true">
-                                    <use xlinkHref="#iconicon_password_nor"></use>
+                                    <use xlinkHref="#iconicon_password_nor"/>
                                 </svg>}
                             />
                             <Button type="primary" block className={"login-button"}

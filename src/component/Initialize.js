@@ -78,7 +78,7 @@ class Initialize extends Component {
         return (
             <React.Fragment>
                 {this.state.on == 0 ?
-                    <React.Fragment></React.Fragment> :
+                    <React.Fragment/> :
                     this.props.children
                 }
             </React.Fragment>

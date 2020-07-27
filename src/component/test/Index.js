@@ -117,7 +117,7 @@ const ConfigAdvice = () => {
 const OperatePanel = () => {
     const icon = <svg className="icon svg-icon oper-icon coin2" aria-hidden="true"
                       style={{width: "36px", height: "36px", marginTop: "-2px"}}>
-        <use xlinkHref="#iconicon_and"></use>
+        <use xlinkHref="#iconicon_and"/>
     </svg>
     return (
         <div className={"common"}>
@@ -191,7 +191,7 @@ class TestMinerResult extends Component{
                     <div className={"result-show"}>
                         <div className={cname}>
                             <svg className="icon svg-icon oper-icon" aria-hidden="true">
-                                <use xlinkHref={icon}></use></svg>
+                                <use xlinkHref={icon}/></svg>
                             <h6>{intl.get(tip)}</h6>
                         </div>
                     </div>
@@ -228,10 +228,10 @@ const TestContent = () => {
     return (
         <React.Fragment>
             {current === 1 ?
-                <TestMainArea/> : <React.Fragment></React.Fragment>
+                <TestMainArea/> : <React.Fragment/>
             }
             {current === 2 ?
-                <LicenseDetail/> : <React.Fragment></React.Fragment>
+                <LicenseDetail/> : <React.Fragment/>
             }
         </React.Fragment>
     );

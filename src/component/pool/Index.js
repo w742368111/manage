@@ -343,10 +343,10 @@ class GroupList extends Component {
                             <React.Fragment>
                                 <svg className="icon svg-icon oper-icon coin1" aria-hidden="true"
                                      onClick={this.openEditName.bind(this, status)}>
-                                    <use xlinkHref="#icongroup_icon_edit_nor"></use>
+                                    <use xlinkHref="#icongroup_icon_edit_nor"/>
                                 </svg>
                                 <svg className="icon svg-icon oper-icon coin2" aria-hidden="true" onClick={this.showModal}>
-                                    <use xlinkHref="#icongroup_icon_del_nor"></use>
+                                    <use xlinkHref="#icongroup_icon_del_nor"/>
                                 </svg>
                             </React.Fragment>:
                             <p className={"count"}>{count}</p>
@@ -359,7 +359,7 @@ class GroupList extends Component {
         return (
             <div className={"current-group-list"}>
                 {current === 1 ?
-                    <CreateNewGroupApp/> : <React.Fragment></React.Fragment>
+                    <CreateNewGroupApp/> : <React.Fragment/>
                 }
                 <Scrollbar.PoolList style={{left: 0, height: "446px", width: "100%"}}>
                     {info}
@@ -373,7 +373,7 @@ class GroupList extends Component {
                     okText={intl.get('CONFIRM')}
                     cancelText={intl.get('CANCEL')}
                     icon={<svg className="icon svg-icon modal-icon" aria-hidden="true">
-                        <use xlinkHref="#iconpop_icon_warning"></use>
+                        <use xlinkHref="#iconpop_icon_warning"/>
                     </svg>}
                 >
                 </MyModal>
@@ -591,16 +591,16 @@ class MinerOperation extends React.Component {
         const modalSet = [
             [<MoveGroup/>, ""],
             [<h6>{intl.get("YOU_SURE_DELETE_MINER")}</h6>, <svg className="icon svg-icon modal-icon" aria-hidden="true">
-                <use xlinkHref="#iconpop_icon_warning"></use>
+                <use xlinkHref="#iconpop_icon_warning"/>
             </svg>],
             [<RoleList/>, ""],
             [<h6>{intl.get("YOU_SURE_RESTART_MINER")}</h6>,
                 <svg className="icon svg-icon modal-icon" aria-hidden="true">
-                    <use xlinkHref="#iconmsg_icon_restart_nor"></use>
+                    <use xlinkHref="#iconmsg_icon_restart_nor"/>
                 </svg>],
             [<h6>{intl.get("YOU_SURE_SHUTDOWN_MINER")}</h6>,
                 <svg className="icon svg-icon modal-icon" aria-hidden="true">
-                    <use xlinkHref="#iconmsg_icon_off_nor"></use>
+                    <use xlinkHref="#iconmsg_icon_off_nor"/>
                 </svg>]
         ];
         const [inner, icon] = modalSet[this.state.choose]
@@ -808,7 +808,7 @@ class MinerListAppend extends Component {
         return (
             <React.Fragment>
                 {current === 0 ?
-                    <React.Fragment></React.Fragment> :
+                    <React.Fragment/> :
                     <MinerOperation list={this.props.list} choose={this.props.choose}/>
                 }
                 <PagingInfoApp total={this.props.total} current={this.props.page} onRef={this.onRef}/>
@@ -831,7 +831,7 @@ let IconOpen = (props) => {
     return (
         <svg onClick={props.open.bind(props.point, props.id , props.device)} className="icon svg-icon detail-icon"
              aria-hidden="true">
-            <use xlinkHref="#iconicon_more_norsvg"></use>
+            <use xlinkHref="#iconicon_more_norsvg"/>
         </svg>
     )
 }
@@ -988,7 +988,7 @@ class Index extends Component {
                         >
                             <GroupPanel onclick={Action.changePoolIndexGroupMenu}/>
                             <GroupListApp/>
-                        </Table.TableCommon> : <React.Fragment></React.Fragment>
+                        </Table.TableCommon> : <React.Fragment/>
                     }
 
                     <Table.TableCommon

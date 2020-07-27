@@ -511,13 +511,13 @@ class AccountBaseInfo extends Component {
                             <div className={"name"}>
                                 <input onChange={this.changeValue.bind(this, "name")} defaultValue={name}
                                        maxLength={15}/>
-                            </div> : <React.Fragment></React.Fragment>
+                            </div> : <React.Fragment/>
                         }
                         {this.state.showEmail ?
                             <div className={"name"} style={{top: "230px", width: "365px"}}>
                                 <input onChange={this.changeValue.bind(this, "email")} style={{width: "255px"}}
                                        defaultValue={email}/>
-                            </div> : <React.Fragment></React.Fragment>
+                            </div> : <React.Fragment/>
                         }
                         {this.state.showName ?
                             <Button onClick={this.safeState.bind(this, "showName")}
@@ -662,15 +662,15 @@ class ResetPassword extends Component {
                     <p className={style[0]} style={{backgroundColor: "white"}}>{intl.get('SAFE_CHECK')}</p>
                     <p className={style[1]} style={{backgroundColor: "white"}}>{intl.get('SET_NEW_PASSWORD')}</p>
                     <p className={style[2]} style={{backgroundColor: "white"}}>{intl.get('MODIFY_COMPLETE')}</p>
-                    <div className={"hr1"}></div>
-                    <div className={"hr2"}></div>
+                    <div className={"hr1"}/>
+                    <div className={"hr2"}/>
                 </div>
                 <div className={"modify-input-area"}>
                     {this.props.step === 5 ?
                         <Select style={{width: "100%", marginTop: "50px"}}
                                 placeholder={intl.get("PLEASE_CHOOSE_A_MEMBER")} onChange={this.onChange.bind(this)}>
                             {list}
-                        </Select> : <React.Fragment></React.Fragment>
+                        </Select> : <React.Fragment/>
                     }
                     {this.props.step === 1 ?
                         <React.Fragment>
@@ -682,7 +682,7 @@ class ResetPassword extends Component {
                             <Input maxLength={6} style={{marginTop: "50px"}}
                                    onChange={this.changeValue.bind(this, "verify")}
                                    placeholder={intl.get("PLEASE_INPUT_MOBILE_VERIFY")}/></React.Fragment> :
-                        <React.Fragment></React.Fragment>
+                        <React.Fragment/>
                     }
                     {this.props.step === 2 ?
                         <React.Fragment>
@@ -690,11 +690,11 @@ class ResetPassword extends Component {
                                    placeholder={intl.get("PLEASE_TYPE_NEW_PASSWORD")}/>
                             <Input type={"password"} onChange={this.changeValue.bind(this, "rePassword")}
                                    placeholder={intl.get("PLEASE_RETYPE_NEW_PASSWORD")}/>
-                        </React.Fragment> : <React.Fragment></React.Fragment>
+                        </React.Fragment> : <React.Fragment/>
                     }
                     {this.props.step === 3 ?
                         <p style={{lineHeight: "100px", textAlign: "center"}}>修改完成</p> :
-                        <React.Fragment></React.Fragment>
+                        <React.Fragment/>
                     }
                 </div>
             </React.Fragment>
@@ -918,16 +918,16 @@ const ContainMain = (props) => {
     return (
         <div className={"user-index-contain-main"}>
             {current === 1 ?
-                <AccountSet/> : <React.Fragment></React.Fragment>
+                <AccountSet/> : <React.Fragment/>
             }
             {current === 2 ?
-                <WarningSet/> : <React.Fragment></React.Fragment>
+                <WarningSet/> : <React.Fragment/>
             }
             {current === 3 ?
-                <MessageCenter/> : <React.Fragment></React.Fragment>
+                <MessageCenter/> : <React.Fragment/>
             }
             {current === 4 ?
-                <AboutUs/> : <React.Fragment></React.Fragment>
+                <AboutUs/> : <React.Fragment/>
             }
         </div>
     )
@@ -957,10 +957,10 @@ const SetTitle = (props) => {
             <p>{intl.get("USER_SET_CENTER")}</p>
             {props.step === 2 ?
                 <svg className="icon svg-icon detail-icon" aria-hidden="true">
-                    <use xlinkHref="#iconicon_more_norsvg"></use>
+                    <use xlinkHref="#iconicon_more_norsvg"/>
                 </svg> :
                 <svg className="icon svg-icon detail-icon" aria-hidden="true">
-                    <use xlinkHref="#iconico_arrow-down"></use>
+                    <use xlinkHref="#iconico_arrow-down"/>
                 </svg>
             }
         </React.Fragment>
