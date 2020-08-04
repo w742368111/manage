@@ -101,7 +101,7 @@ class Login extends Component {
                 {
                     this.state.isWait === 0 ?
                         <React.Fragment>
-                            <svg className="icon svg-icon svg-logo" aria-hidden="true">
+                            <svg className="icon svg-icon svg-logo" aria-hidden="true" style={{marginLeft:"24%"}}>
                                 <use xlinkHref="#iconnav_icon_logo"/>
                             </svg>
                             <h5 className={"system-title"}>{intl.get('SYSTEM_NAME')}</h5>
