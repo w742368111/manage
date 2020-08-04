@@ -1,4 +1,4 @@
-// 矿机首页矿机列表
+// 机器首页机器列表
 export const PoolIndexList = () => ([
     ["EMPTY", "88px"],
     ["MINER_NAME", "158px"],

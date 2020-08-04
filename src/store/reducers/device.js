@@ -1,10 +1,10 @@
 import {combineReducers} from 'redux'
 import * as Config from "../config/config"
 
-// 当前操作的矿机ID
+// 当前操作的机器ID
 const currentOperateDevice = (state, action) =>
     (action.type === Config.currentOperateDevice) ? {"current": action.info} : state ? state : {"current": ""};
-// 当前操作的矿机Hardware id
+// 当前操作的机器Hardware id
 const currentOperateHardware = (state, action) =>
     (action.type === Config.currentOperateHardware) ? {"current": action.info} : state ? state : {"current": ""};
 

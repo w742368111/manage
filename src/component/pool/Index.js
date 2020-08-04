@@ -508,7 +508,7 @@ class MoveGroup extends React.Component {
     }
 }
 
-// 这个是矿工列表的操作面板
+// 这个是机器列表的操作面板
 class MinerOperation extends React.Component {
     constructor(props) {
         super(props);

@@ -108,9 +108,9 @@ class TopBanner extends Component {
                     </Dropdown>
                 </div>
                 <Button onClick={this.changeTitle.bind(this, 1)} className={style[0]}
-                        style={{left: "238px"}}>矿池面板</Button>
+                        style={{left: "238px"}}>集群面板</Button>
                 <Button onClick={this.changeTitle.bind(this, 2)} className={style[1]}
-                        style={{left: "353px"}}>矿机管理</Button>
+                        style={{left: "353px"}}>机器管理</Button>
             </div>
         )
     }
@@ -169,7 +169,7 @@ class PanelMiner extends Component {
         const [allOnline, allOffline, sealOnline, sealOffline, proveOnline, proveOffline, storageOnline, storageOffline] = this.props.data;
         return (
             <div className={"right"}>
-                <h3>矿机</h3>
+                <h3>机器</h3>
                 <div className={"table"}>
                     <ul>
                         <li>
@@ -178,7 +178,7 @@ class PanelMiner extends Component {
                             <p style={{fontSize: "15px"}}>离线</p>
                         </li>
                         <li>
-                            <p style={{fontWeight: 600}}>矿机数：{(allOnline + allOffline) ? (allOnline + allOffline) : 0}</p>
+                            <p style={{fontWeight: 600}}>机器数：{(allOnline + allOffline) ? (allOnline + allOffline) : 0}</p>
                             <p>{allOnline ? allOnline : 0}</p>
                             {(allOffline > 0) ?
                                 <p onClick={this.getMinerList.bind(this, -1)}
@@ -920,13 +920,13 @@ class MinerManage extends Component {
         return (
             <div className={"income-new-table"} style={{overflow: "hidden"}}>
                 <div className={"coin"}></div>
-                <h3 style={{left: "91px", top: "21px"}}>矿机管理</h3>
+                <h3 style={{left: "91px", top: "21px"}}>机器管理</h3>
                 {(this.state.edit === 0) ?
                     <Button onClick={this.changeEdit.bind(this, 1)} className={"edit"}>机位编辑</Button> :
                     <Button onClick={this.changeEdit.bind(this, 0)} className={"edit"}>退出编辑</Button>
                 }
                 <Input value={this.state.keyword} onChange={this.changeValue.bind(this)}
-                       onPressEnter={this.changeKeyWord.bind(this)} className={"key"} placeholder={"矿机名称/机柜"} suffix={
+                       onPressEnter={this.changeKeyWord.bind(this)} className={"key"} placeholder={"机器名称/机柜"} suffix={
                     <svg onClick={this.changeKeyWord.bind(this)} className="icon svg-icon oper-icon coin1"
                          aria-hidden="true"
                          style={{height: "25px", width: "25px", marginTop: "3px"}}>
@@ -936,7 +936,7 @@ class MinerManage extends Component {
                 <Button onClick={this.clearKeyword.bind(this, "")} className={"clear"}>清除</Button>
                 <div className={"table"} style={{marginTop: "50px", marginBottom: "0px"}}>
                     <div className={"title"}>
-                        <p style={{left: `${title[0]}px`}}>矿机名称</p>
+                        <p style={{left: `${title[0]}px`}}>机器名称</p>
                         <p style={{left: `${title[1]}px`}}>
                             <Dropdown overlay={role} trigger={['click']}>
                                 <a style={{color: "#394565"}} className="ant-dropdown-link"
@@ -959,7 +959,7 @@ class MinerManage extends Component {
                             <Dropdown overlay={online} trigger={['click']}>
                                 <a style={{color: "#394565"}} className="ant-dropdown-link"
                                    onClick={e => e.preventDefault()}>
-                                    矿机状态
+                                    机器状态
                                     <svg className="icon svg-icon oper-icon coin1" aria-hidden="true">
                                         <use xlinkHref="#iconico_arrow_pull2"></use>
                                     </svg>
