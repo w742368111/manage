@@ -75,12 +75,14 @@ class TopBanner extends Component {
 
         const info = this.state.info.map((value, key) => {
             const {mining_name: miner, id} = value;
+            let style = {paddingLeft:"33px",paddingRight:"33px",fontSize:"14px"};
             if (id === current) {
                 mName = miner
+                style = {paddingLeft:"33px",paddingRight:"33px",fontSize:"14px",color:"#1E87F0"};
             }
             return (
                 <Menu.Item key={key}>
-                    <a onClick={this.changePid.bind(this, id)} style={{paddingLeft:"33px",paddingRight:"33px"}}>
+                    <a onClick={this.changePid.bind(this, id)} style={style}>
                         {miner}
                     </a>
                 </Menu.Item>
