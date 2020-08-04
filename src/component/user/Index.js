@@ -508,14 +508,14 @@ class AccountBaseInfo extends Component {
                         <p>{intl.get("USER_EMAIL")}</p>
                         <p>{email}</p>
                         {this.state.showName ?
-                            <div className={"name"}>
+                            <div className={"name"} style={{left:"150px",top:"39px"}}>
                                 <input onChange={this.changeValue.bind(this, "name")} defaultValue={name}
                                        maxLength={15}/>
                             </div> : <React.Fragment/>
                         }
                         {this.state.showEmail ?
-                            <div className={"name"} style={{top: "230px", width: "365px"}}>
-                                <input onChange={this.changeValue.bind(this, "email")} style={{width: "255px"}}
+                            <div className={"name"} style={{top: "159px", left:"150px", width: "200px"}}>
+                                <input onChange={this.changeValue.bind(this, "email")} style={{width: "193px"}}
                                        defaultValue={email}/>
                             </div> : <React.Fragment/>
                         }
