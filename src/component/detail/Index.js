@@ -80,7 +80,7 @@ class TopBanner extends Component {
             }
             return (
                 <Menu.Item key={key}>
-                    <a onClick={this.changePid.bind(this, id)}>
+                    <a onClick={this.changePid.bind(this, id)} style={{paddingLeft:"33px",paddingRight:"33px"}}>
                         {miner}
                     </a>
                 </Menu.Item>
@@ -98,7 +98,7 @@ class TopBanner extends Component {
             <div className={"new-pool-banner"}>
                 <div className={"coin"}></div>
                 <div className={"check"}>
-                    <Dropdown overlay={menu} trigger={['click']}>
+                    <Dropdown overlay={menu} trigger={['click']} placement={"bottomCenter"}>
                         <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                             <span className={"title"}>{mName} &nbsp;</span>
                             <svg className="icon svg-icon oper-icon coin-top" aria-hidden="true">
