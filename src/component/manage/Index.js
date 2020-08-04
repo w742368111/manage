@@ -764,6 +764,10 @@ class ManageContent extends Component {
                 {this.props.current === 2 ?
                     <PoolContent onRef={this.onRole}/> : <React.Fragment></React.Fragment>
                 }
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </div>
         )
     }

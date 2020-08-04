@@ -906,7 +906,7 @@ class MinerManage extends Component {
                             <React.Fragment>在线</React.Fragment> : <span style={{color: "#F02C1E"}}>离线</span>
                         }
                     </p>
-                    <p style={{left: `${text[10]}px`, transform: "none"}}>
+                    <p style={{left: `${text[10]}px`, transform: "none",paddingLeft:"6px"}}>
                         <svg onClick={this.openPanel.bind(this, id, hardwareId)}
                              className="icon svg-icon oper-icon coin1"
                              aria-hidden="true">

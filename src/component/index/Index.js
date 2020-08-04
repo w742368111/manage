@@ -48,7 +48,7 @@ class MainAreaList extends Component {
 
     gotoPool = (id) => {
         this.props.commonUpdateUser(id, Key.changeIndexPoolId)
-        this.props.history.push("/poolweb/index")
+        this.props.history.push("/poolweb/index/")
     }
 
     syncCallBack = (data) => {
@@ -234,8 +234,12 @@ const IndexApp = connect(
 
 const SeeMore = (props) => {
     return (
-        <p onClick={props.click}
-           style={{margin: "10px auto 0", textAlign: "center", cursor: "pointer", fontSize: "12px", color: "#A7B1CA"}}>
+        <p onClick={props.click} className={"index-more-p"}
+           style={{
+               margin: "20px auto 0", textAlign: "center",
+               width: "60px", borderRadius: "3px", cursor: "pointer",
+               fontSize: "12px", color: "#A7B1CA"
+           }}>
             {intl.get("SEE_MORE")}
         </p>
     )

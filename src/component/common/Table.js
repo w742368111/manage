@@ -18,10 +18,7 @@ const TableTitle = (props) => {
 const TableInto = (props) => {
     return (
         <React.Fragment>
-            <h5>{props.name}</h5>
-            <svg className="icon svg-icon svg-logo svg-inner" aria-hidden="true">
-                <use xlinkHref="#iconicon_more_norsvg"/>
-            </svg>
+            {props.name}
         </React.Fragment>
     )
 }

@@ -929,6 +929,10 @@ const ContainMain = (props) => {
             {current === 4 ?
                 <AboutUs/> : <React.Fragment/>
             }
+            <br/>
+            <br/>
+            <br/>
+            <br/>
         </div>
     )
 }
