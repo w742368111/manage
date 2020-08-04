@@ -87,8 +87,9 @@ export const changeWarningType = (key) => {
 
 // 获取URL参数
 export const getQueryVariable = (variable) => {
-    const query = window.location.search.substring(1);
-    const vars = query.split("&");
+    const query = window.location.hash.substring(1);
+    const all = query.split("?");
+    const vars = all[1].split("&");
     for (let i = 0; i < vars.length; i++) {
         let pair = vars[i].split("=");
         if (pair[0] === variable) {
