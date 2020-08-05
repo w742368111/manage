@@ -312,7 +312,7 @@ class NewEditStaff extends Component {
             token: token,
             username: phone,
             name: name,
-            password: (password === '' && !old) ? "ars12345" : password,
+            password: (password === '' && !old) ? "client123456" : password,
             email: email,
             role_id: rid
         }
