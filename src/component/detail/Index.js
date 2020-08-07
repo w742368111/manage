@@ -603,9 +603,9 @@ class IncomeIntoDetail extends Component {
                 const {pay_id: pid, from_mining_address: from, to_mining_address: to, add_time: time, amount} = value;
                 return (
                     <div className={"single"} key={key}>
-                        <p onClick={this.copyLong.bind(this,pid)} title={pid} style={{left: "60px", width: "260px"}}>{pid}</p>
+                        <p onDoubleClick={this.copyLong.bind(this,pid)} title={`双击复制：${pid}`} style={{left: "60px", width: "260px"}}>{pid}</p>
                         <p style={{left: "439px"}}>{time}</p>
-                        <p onClick={this.copyLong.bind(this,from)} title={from} style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
+                        <p onDoubleClick={this.copyLong.bind(this,from)} title={`双击复制：${from}`} style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
                         <p style={{textAlign: "center", left: "883px", width: "137px"}}>{to}</p>
                         <p style={{left: "1034px"}}>{amount} FIL</p>
                     </div>
@@ -614,9 +614,9 @@ class IncomeIntoDetail extends Component {
                 const {pay_id: pid, from_mining_id: from, to_mining_id: to, add_time: time, real_amount: amount} = value;
                 return (
                     <div className={"single"} key={key}>
-                        <p onClick={this.copyLong.bind(this,pid)} title={pid} style={{left: "60px", width: "260px"}}>{pid}</p>
+                        <p onDoubleClick={this.copyLong.bind(this,pid)} title={`双击复制：${pid}`} style={{left: "60px", width: "260px"}}>{pid}</p>
                         <p style={{left: "439px"}}>{time}</p>
-                        <p onClick={this.copyLong.bind(this,from)} title={from} style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
+                        <p onDoubleClick={this.copyLong.bind(this,from)} title={`双击复制：${from}`} style={{textAlign: "center", left: "671px", width: "270px"}}>{from}</p>
                         <p style={{textAlign: "center", left: "883px", width: "137px"}}>{to}</p>
                         <p style={{left: "1034px"}}>{amount} FIL</p>
                     </div>
