@@ -633,7 +633,10 @@ class IncomeIntoDetail extends Component {
 
                 <div className={"table"}>
                     <div className={"title"}>
-                        <p style={{left: "60px"}}>区块ID</p>
+                        {this.state.menu === 1?
+                            <p style={{left: "60px"}}>区块ID</p>:
+                            <p style={{left: "60px"}}>消息ID</p>
+                        }
                         <p style={{left: "425px"}}>时间</p>
                         <p style={{left: "649px"}}>发送者</p>
                         <p style={{left: "862px"}}>收款者</p>
