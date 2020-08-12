@@ -746,6 +746,8 @@ class MinerManage extends Component {
 
     changeKeyWord = (e) => {
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
+        this.state.page = 1;
+        this.setState(this.state);
         this.getPoolDevice(current)
     }
 
@@ -756,13 +758,14 @@ class MinerManage extends Component {
 
     clearKeyword = () => {
         this.state.keyword = "";
+        this.state.page = 1;
         let {detail: {poolIDCurrent: {current}}} = this.props.value;
         this.setState(this.state);
         this.getPoolDevice(current)
     }
 
     changeState = (key, value) => {
-        if(key === 'role'){
+        if(key === 'role' || key === 'online'){
             this.state.page = 1;
         }
         this.state[key] = value;
@@ -982,6 +985,7 @@ class MinerManage extends Component {
                         </div>
 
                         <Pagination showQuickJumper defaultCurrent={1} total={this.state.total}
+                                    current={this.state.page}
                                     onShowSizeChange={this.onChangePage.bind(this)}
                                     onChange={this.onChangePage.bind(this)}/>
                     </div>
