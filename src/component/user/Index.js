@@ -501,7 +501,7 @@ class AccountBaseInfo extends Component {
                     type={"other"}
                 >
                     <div className={"base-info-area"}>
-                        <p>{intl.get("USER_NAME")}</p>
+                        <p>姓名</p>
                         <p>{name}</p>
                         <p>{intl.get("USER_PHONE_NUMBER")}</p>
                         <p>{phone}</p>

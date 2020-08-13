@@ -39,7 +39,7 @@ const OperateButtonPanel = (props) => {
 const Item = (name, key, id, props, status) => {
     let val;
 
-    const manage = ["INCOME_VIEW", "USER_ADD", "USER_EDIT", "USER_DELETE","PERMISSION_EDIT", "ROLE_ADD", "ROLE_EDIT", "ROLE_DELETE", "WARNING_EDIT", "WORKORDER_ADD", "WORKORDER_EDIT", "WORKORDER_DELETE"];
+    const manage = ["INCOME_VIEW", "USER_ADD", "USER_EDIT", "USER_DELETE","PERMISSION_EDIT", "ROLE_ADD", "ROLE_EDIT", "ROLE_DELETE", "WARNING_EDIT"];
 
     if (name === "check") {
         val = props[0]
