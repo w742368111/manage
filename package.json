@@ -9,7 +9,7 @@
     "@testing-library/user-event": "^7.1.2",
     "antd": "^4.1.0",
     "axios": "^0.19.2",
-    "chart.js": "^1.1.1",
+    "chart.js": "^2.9.4",
     "copy-to-clipboard": "^3.3.1",
     "history": "^4.10.1",
     "http-proxy-middleware": "^1.0.3",
